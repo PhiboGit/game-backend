@@ -1,23 +1,15 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-import { z } from 'zod';
+import { registerUserSchema } from '../validation/authValidation';
 import User from '../models/user';
 import Character from '../../game/models/character';
 import { validateData } from '../middleware/validationMiddleware';
 
 const router = express.Router();
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{1,23}$/;
-const CHARACTER_REGEX = /^[A-z][A-z0-9-_]{1,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])*(?=.*[A-Z])*(?=.*[0-9])*(?=.*[!@#$%])*.{8,24}$/;
 
-const createUserSchema = z.object({
-  username: z.string().regex(USER_REGEX, 'Invalid username'),
-  password: z.string().regex(PWD_REGEX, 'Invalid password'),
-  characterName: z.string().regex(CHARACTER_REGEX, 'Invalid character name'),
-});
 
-router.post('/', validateData(createUserSchema), hashPassword, insertUser, (_req: Request, res: Response) => {
+router.post('/', validateData(registerUserSchema), hashPassword, insertUser, (_req: Request, res: Response) => {
   res.status(201).send('Your account was created successfully');
 });
 
