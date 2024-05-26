@@ -18,10 +18,8 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			required: true
 		},
-		email: String,
-        tokens: [],
-		createdAt: Date,
-		updatedAt: Date,
+		createdAt: {type: Date, default: Date.now},
+		updatedAt: {type: Date, default: Date.now},
 	},
 	{ collection: 'users' }
 )
