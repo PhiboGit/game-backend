@@ -1,6 +1,8 @@
 import { IncomingMessage } from 'http';
 import jwt from 'jsonwebtoken';
 import { JwtPayload } from '../types';
+import User from '../models/user';
+import Character from '../../game/models/character';
 
 const JWT_SECRET = process.env.JWT_SECRET as jwt.Secret
 
@@ -18,12 +20,24 @@ export function authenticate(request: IncomingMessage): Promise<JwtPayload> {
       return reject(new Error('No token provided'));
     }
 
-    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    jwt.verify(token, JWT_SECRET, async (err, decoded) => {
       if (err) {
         return reject(new Error('Failed to authenticate token'));
       }
       // Ensure the decoded token is of type JwtPayload
       const payload = decoded as JwtPayload;
+      const { username, characterName } = payload;
+
+      // Perform user and character lookup
+      const [user, character] = await Promise.all([
+        User.findOne({ username }), // Assuming User model has been defined
+        Character.findOne({ characterName }) // Assuming Character model has been defined
+      ]);
+
+      if (!user || !character) {
+        return reject(new Error('User or character not found!'));
+      }
+
       // Attach the decoded token to the promise
       resolve(payload);
     });
