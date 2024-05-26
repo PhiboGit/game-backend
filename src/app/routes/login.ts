@@ -1,9 +1,10 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { loginUserSchema } from '../validation/authValidation';
+import { loginUserSchema } from './authValidation';
 import { validateData } from '../middleware/validationMiddleware';
 import User from '../models/user';
+import { JwtPayload } from '../types';
 
 const router = express.Router();
 
@@ -18,6 +19,9 @@ async function authUser(req: Request, res: Response, next: NextFunction) {
       res.status(401).send('Invalid username or password');
       return 
     }
+    // attach characterName of the user to the request to be used be the next middleware
+    req.body.characterName = user.characterName
+
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) {
       res.status(401).send('Invalid username or password');
@@ -32,8 +36,8 @@ async function authUser(req: Request, res: Response, next: NextFunction) {
 
 async function createJWT(req: Request, res: Response, next: NextFunction) {
   try {
-    const payload = { username: req.body.username, character: req.body.character}
-    const SECRET = process.env.ACCESS_TOKEN_SECRET as jwt.Secret
+    const payload: JwtPayload = { username: req.body.username, characterName: req.body.characterName}
+    const SECRET = process.env.JWT_SECRET as jwt.Secret
     const options = {
         expiresIn: '14y'
     }

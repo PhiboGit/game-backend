@@ -1,6 +1,7 @@
 import connectDB from './db';
 import app from './app/app';
 import dotenv from 'dotenv';
+import { createWebSocketServer } from './app/websocket/websocket';
 
 dotenv.config();
 
@@ -9,6 +10,10 @@ connectDB();
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+// Start HTTP server
+const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+// Initialize WebSocket server
+createWebSocketServer(server);

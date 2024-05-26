@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-import { registerUserSchema } from '../validation/authValidation';
+import { registerUserSchema } from './authValidation';
 import User from '../models/user';
 import Character from '../../game/models/character';
 import { validateData } from '../middleware/validationMiddleware';
