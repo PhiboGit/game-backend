@@ -7,8 +7,8 @@ import { validateData } from '../middleware/validationMiddleware';
 
 const router = express.Router();
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const CHARACTER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const USER_REGEX = /^[A-z][A-z0-9-_]{1,23}$/;
+const CHARACTER_REGEX = /^[A-z][A-z0-9-_]{1,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])*(?=.*[A-Z])*(?=.*[0-9])*(?=.*[!@#$%])*.{8,24}$/;
 
 const createUserSchema = z.object({
