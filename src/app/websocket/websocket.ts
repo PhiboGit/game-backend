@@ -4,6 +4,7 @@ import { authenticate } from './authWebsocket.js';
 import { JwtPayload } from '../types.js';
 import { connectionManager } from './WsConnectionManager.js';
 import { initConnection } from '../../game/connection/initConnection.js';
+import { incomingMessages } from '../../game/connection/incoming/incomingMesseges.js';
 
 export function createWebSocketServer(server: Server) {
   const wss = new WebSocketServer( { noServer: true } );
@@ -33,14 +34,16 @@ export function createWebSocketServer(server: Server) {
     initConnection(characterName)
 
     ws.on('message', (message) => {
+      const msg = message.toString() 
+
       const characterName = connectionManager.getCharacterName(ws)
       if (!characterName) {
         console.log('Character not found for ws! Cannot process further. Closing ws! ', ws);
         ws.close();
+      } else {  
+        // validate and route message
+        incomingMessages(characterName, msg);
       }
-      console.log('received from %s: %s', characterName, message);
-
-      //TODO: process incoming message
     });
 
     ws.on('close', () => {
