@@ -1,7 +1,7 @@
-import connectDB from './db';
-import app from './app/app';
+import connectDB from './db.js';
+import app from './app/app.js';
 import dotenv from 'dotenv';
-import { createWebSocketServer } from './app/websocket/websocket';
+import { createWebSocketServer } from './app/websocket/websocket.js';
 
 dotenv.config();
 

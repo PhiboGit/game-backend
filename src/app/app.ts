@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
-import register from './routes/register';
-import login from './routes/login';
+import register from './routes/register.js';
+import login from './routes/login.js';
 
 const app: Express = express();
 

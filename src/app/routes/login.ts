@@ -1,10 +1,10 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { loginUserSchema } from './authValidation';
-import { validateData } from '../middleware/validationMiddleware';
-import User from '../models/user';
-import { JwtPayload } from '../types';
+import { loginUserSchema } from './authValidation.js';
+import { validateData } from '../middleware/validationMiddleware.js';
+import User from '../models/user.js';
+import { JwtPayload } from '../types.js';
 
 const router = express.Router();
 

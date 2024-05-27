@@ -1,8 +1,9 @@
 import { Server } from 'http';
 import WebSocket from 'ws';
-import { authenticate } from './authWebsocket';
-import { JwtPayload } from '../types';
-import { connectionManager } from './WsConnectionManager';
+import { authenticate } from './authWebsocket.js';
+import { JwtPayload } from '../types.js';
+import { connectionManager } from './WsConnectionManager.js';
+import { initConnection } from '../../game/connection/initConnection.js';
 
 export function createWebSocketServer(server: Server) {
   const wss = new WebSocket.Server({ noServer: true });
@@ -24,14 +25,12 @@ export function createWebSocketServer(server: Server) {
   });
 
   // Connection handler. Has the same parameter as the wss.emit on upgrade
-  wss.on('connection', (ws: WebSocket, payload: JwtPayload) => {
-    console.log('WebSocket connection established');
-
-    const { characterName, username } = payload;
+  wss.on('connection', (ws: WebSocket, { characterName, username }: JwtPayload) => {
     // the manager is responsible for adding and removing connections and also for outgoing messages
     connectionManager.addConnection(characterName, ws);
-
     console.log(`User connected: ${username}, Character: ${characterName}`);
+
+    initConnection(characterName)
 
     ws.on('message', (message) => {
       const characterName = connectionManager.getCharacterName(ws)
@@ -49,7 +48,5 @@ export function createWebSocketServer(server: Server) {
       connectionManager.removeConnection(characterName, ws);
       console.log(`User disconnected: ${username}, Character: ${characterName}`);
     });
-
-    ws.send('Welcome to the WebSocket server');
   });
 }

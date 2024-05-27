@@ -1,9 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-import { registerUserSchema } from './authValidation';
-import User from '../models/user';
-import Character from '../../game/models/character';
-import { validateData } from '../middleware/validationMiddleware';
+import { registerUserSchema } from './authValidation.js';
+import User from '../models/user.js';
+import Character from '../../game/models/character.js';
+import { validateData } from '../middleware/validationMiddleware.js';
 
 const router = express.Router();
 
