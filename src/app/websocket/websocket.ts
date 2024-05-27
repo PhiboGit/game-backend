@@ -1,12 +1,12 @@
 import { Server } from 'http';
-import WebSocket from 'ws';
+import  { WebSocket, WebSocketServer } from 'ws';
 import { authenticate } from './authWebsocket.js';
 import { JwtPayload } from '../types.js';
 import { connectionManager } from './WsConnectionManager.js';
 import { initConnection } from '../../game/connection/initConnection.js';
 
 export function createWebSocketServer(server: Server) {
-  const wss = new WebSocket.Server({ noServer: true });
+  const wss = new WebSocketServer( { noServer: true } );
 
   server.on('upgrade', (request, socket, head) => {
     // authenticate the connection with JWT

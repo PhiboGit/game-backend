@@ -1,8 +1,9 @@
 import { connectionManager } from "../../app/websocket/WsConnectionManager.js";
 import Character, { ICharacter } from "../models/character.js";
-import { InitCharacterMessage } from "./messageTypes.js";
+import { InitCharacterMessage, InitGameMessage } from "./messageTypes.js";
 export function initConnection(characterName: string){
   sendInitCharacter(characterName)
+  sendInitGame(characterName)
 }
 
 
@@ -18,6 +19,22 @@ async function sendInitCharacter(characterName: string){
       type: 'init_character',
   
       character: character
+    }
+  
+    connectionManager.sendMessage(characterName, JSON.stringify(message));
+    
+  } catch (error) {
+    console.error('Error initializing connection message:', error);
+  }
+}
+
+
+async function sendInitGame(characterName: string){
+  try {
+    const message: InitGameMessage = {
+      type: 'init_game',
+
+      active_players: connectionManager.getActivePlayers()
     }
   
     connectionManager.sendMessage(characterName, JSON.stringify(message));

@@ -54,6 +54,10 @@ class WsConnectionManager {
       });
     });
   }
+
+  getActivePlayers() {
+    return this.connections.size;
+  }
 }
 
 // Export a singleton instance of ConnectionManager

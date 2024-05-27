@@ -5,3 +5,9 @@ export type InitCharacterMessage = {
 
   character: ICharacter
 }
+
+export type InitGameMessage = {
+  type: 'init_game',
+
+  active_players: number
+}
