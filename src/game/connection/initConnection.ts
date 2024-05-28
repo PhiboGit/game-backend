@@ -10,7 +10,6 @@ export function initConnection(characterName: string){
 async function sendInitCharacter(characterName: string){
   try {
     const character = await Character.findOne({ characterName }).lean<ICharacter>()
-    console.log(character)
     if (!character) {
       throw new Error('Character not found');
     }
