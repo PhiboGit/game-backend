@@ -18,6 +18,8 @@ class ActionManager {
     const cancel = this.activeActionTimeoutCancellers.get(characterName)
     if (cancel) {
       cancel()
+      this.activeActionTimeoutCancellers.delete(characterName)
+      console.log('%s: Canceled active action', characterName)
     }
   }
   
@@ -28,13 +30,16 @@ class ActionManager {
     }
     
     if(!this.actionQueue.has(characterName)) {
+      console.log('%s: Action queue does not exist', characterName)
       return
     }
     if (index >= this.actionQueue.get(characterName)!.length) {
+      console.log('%s: Invalid index', characterName)
       return
     }
 
     this.actionQueue.get(characterName)!.splice(index, 1)
+    console.log('%s: Removed action at index %d', characterName, index)
   }
 
   addAction(characterName: string, actionMsg: GatheringMsg | CraftingMsg) {
@@ -44,7 +49,6 @@ class ActionManager {
       actionMsg
     }
     this.enqueueAction(characterName, action)
-    console.log('Added action')
   }
 
   private enqueueAction(characterName: string, action: ActionObject) {
@@ -52,10 +56,11 @@ class ActionManager {
       this.actionQueue.set(characterName, [])
     }
     if (this.actionQueue.get(characterName)!.length >= this.MAX_QUEUE_LENGTH) {
-      console.log('Queue is full!')
+      console.log('%s: Queue is full!', characterName)
 		  return
     }
     this.actionQueue.get(characterName)!.push(action)
+    console.log('%s: Added to queue. Queue length:', characterName, this.actionQueue.get(characterName)!.length)
 
     this.processQueue(characterName)
   }
@@ -63,39 +68,35 @@ class ActionManager {
   private dequeueAction(characterName: string): ActionObject | undefined {
 
     if(!this.actionQueue.get(characterName)) {
-      console.log('No actions in queue')
+      console.log('%s: No actions in queue', characterName)
       return undefined
     }
 
     const action = this.actionQueue.get(characterName)!.shift()
-    if(!action) {
-      console.log('No actions in queue')
-      this.actionQueue.delete(characterName)
-      return undefined
-    }
-    if( this.actionQueue.get(characterName)!.length === 0) {
-      console.log('Queue is now empty!')
+    // clean up
+    if(!action || this.actionQueue.get(characterName)!.length === 0) {
       this.actionQueue.delete(characterName)
     }
-
+    
     return action
   }
-
+  
   private processQueue(characterName: string) {
-    console.log('Processing queue...')
     if(this.activeActionTimeoutCancellers.has(characterName)) {
-      console.log('Action already in progress')
+      console.log('%s: Action already in progress', characterName)
       return
     }
-
+    
     const action = this.dequeueAction(characterName)
     if(!action) {
       return
     }
-
+    console.log('%s: Removed from queue to process. Queue length:', characterName, this.actionQueue.get(characterName)?.length || 0)
+    
+    console.log('%s: Processing queue...', characterName)
     this.startSquentialAction(action)
       .then(() => {
-        console.log('Squential action done')
+        console.log('%s: Squential action done', characterName)
         this.activeActionTimeoutCancellers.delete(characterName)
 
         // recursive call to process the queue / next action in queue
@@ -109,7 +110,7 @@ class ActionManager {
 
   private startSquentialAction(action: ActionObject): Promise<void> {
     return new Promise(async (resolve) => {
-      console.log('Squential action started')
+      console.log('%s: Squential action started', action.characterName)
 
       while( action.actionMsg.iterations > 0 || !action.actionMsg.limit) {
         // start the action
@@ -119,7 +120,7 @@ class ActionManager {
             //TODO: start action
             await new Promise<void>((res) => {
               const timeout = setTimeout(() => {
-                console.log('Action timed out')
+                console.log('%s: Action timed out', action.characterName)
                 res()
               }, 5000)
               this.activeActionTimeoutCancellers.set(action.characterName, () => {
@@ -132,7 +133,7 @@ class ActionManager {
             console.log(action.actionMsg.args.recipe)
             break
           default:
-            console.error('unknown task. should not happen!', action)
+            console.error('%s: unknown task. should not happen!', action.characterName, action)
             resolve()
             return
         }
