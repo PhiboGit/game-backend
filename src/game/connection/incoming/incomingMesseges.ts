@@ -1,5 +1,5 @@
 import { actionManager } from "../../actions/actionManager.js";
-import { validateActionMsg } from "../../jsonValidators/messageValidator/validateActionMsg.js";
+import { validateCancelActionMsg } from "../../jsonValidators/messageValidator/cancelActionMsg.js";
 import { validateCraftingMsg } from "../../jsonValidators/messageValidator/validateCraftingMsg.js";
 import { validateGatheringMsg } from "../../jsonValidators/messageValidator/validateGatheringMsg.js";
 import { IMessage } from "../messageTypes.js";
@@ -37,6 +37,12 @@ function routeMessage(characterName: string, msg: IMessage) {
       }
       if (validateCraftingMsg(msg)) {
         console.log('Valid! %s msg: %o', characterName, msg)
+        return
+      }
+    case 'cancelAction':
+      if(validateCancelActionMsg(msg)) {
+        console.log('Valid! %s msg: %o', characterName, msg)
+        actionManager.cancelAction(characterName, msg.index)
         return
       }
     default:

@@ -1,26 +1,32 @@
-import { CraftingMsg } from "../jsonValidators/messageValidator/validateCraftingMsg.js"
-import { GatheringMsg } from "../jsonValidators/messageValidator/validateGatheringMsg.js"
+import ITaskAction from "./ITaskAction.js";
+import GatheringAction from "./gatheringAction/gatheringAction.js";
+import { ActionMsg, ActionObject } from "./types.js"
 
-type ActionObject = {
-  counter: number
-  characterName: string
-  actionMsg: GatheringMsg | CraftingMsg
-}
 
 class ActionManager {
+  private taskMap: Map<string, ITaskAction> = new Map([
+    ["gathering", new GatheringAction()],
+  ]);
+
   private MAX_QUEUE_LENGTH = 4 
 
   private actionQueue: Map<string, ActionObject[]> = new Map()
 
   private activeActionTimeoutCancellers: Map<string, () => void> = new Map()
 
+  private isActionActive(characterName: string): boolean {
+    return this.activeActionTimeoutCancellers.has(characterName)
+  }
+
   private cancelActiveAction(characterName: string) {
     const cancel = this.activeActionTimeoutCancellers.get(characterName)
     if (cancel) {
       cancel()
-      this.activeActionTimeoutCancellers.delete(characterName)
       console.log('%s: Canceled active action', characterName)
+    } else {
+      console.log('%s: No active action to cancel', characterName)
     }
+    this.activeActionTimeoutCancellers.delete(characterName)
   }
   
   cancelAction(characterName: string, index: number) {
@@ -42,7 +48,7 @@ class ActionManager {
     console.log('%s: Removed action at index %d', characterName, index)
   }
 
-  addAction(characterName: string, actionMsg: GatheringMsg | CraftingMsg) {
+  addAction(characterName: string, actionMsg: ActionMsg) {
     const action: ActionObject = {
       characterName,
       counter: 0,
@@ -82,7 +88,7 @@ class ActionManager {
   }
   
   private processQueue(characterName: string) {
-    if(this.activeActionTimeoutCancellers.has(characterName)) {
+    if(this.isActionActive(characterName)) {
       console.log('%s: Action already in progress', characterName)
       return
     }
@@ -97,48 +103,37 @@ class ActionManager {
     this.startSquentialAction(action)
       .then(() => {
         console.log('%s: Squential action done', characterName)
-        this.activeActionTimeoutCancellers.delete(characterName)
+        this.cancelActiveAction(characterName)
 
         // recursive call to process the queue / next action in queue
         this.processQueue(characterName)
       })
       .catch((error) => {
-        console.log(error)
+        console.log('%s: Squential action interrupted:', characterName, error)
+        this.cancelActiveAction(characterName)
       })
 
   }
 
   private startSquentialAction(action: ActionObject): Promise<void> {
-    return new Promise(async (resolve) => {
-      console.log('%s: Squential action started', action.characterName)
+    return new Promise(async (resolve, reject) => {
+      const taskAction = this.taskMap.get(action.actionMsg.task)
+      if(!taskAction) {
+        console.error('%s: unknown task. should not happen!', action.characterName, action)
+        return reject('unknown task. should not happen!')
+      }
 
-      while( action.actionMsg.iterations > 0 || !action.actionMsg.limit) {
-        // start the action
-        switch (action.actionMsg.task) {
-          case 'gathering':
-            //TODO: validate action
-            //TODO: start action
-            await new Promise<void>((res) => {
-              const timeout = setTimeout(() => {
-                console.log('%s: Action timed out', action.characterName)
-                res()
-              }, 5000)
-              this.activeActionTimeoutCancellers.set(action.characterName, () => {
-                clearTimeout(timeout)
-                res()
-              })
-            })
-            break
-          case 'crafting':
-            console.log(action.actionMsg.args.recipe)
-            break
-          default:
-            console.error('%s: unknown task. should not happen!', action.characterName, action)
-            resolve()
-            return
-        }
-        action.counter++
-        action.actionMsg.iterations--     
+      console.log('%s: Squential action started', action.characterName)
+      while(action.actionMsg.iterations > 0 || !action.actionMsg.limit) {
+        try {
+          console.log('%s: Counter: %d %s Iterations left: %d', action.characterName, action.counter, action.actionMsg.limit, action.actionMsg.iterations)
+          await taskAction.validateAction(action.characterName, action.actionMsg)
+          await taskAction.startAction(action.characterName, action.actionMsg, this.activeActionTimeoutCancellers)
+          action.counter++
+          action.actionMsg.iterations--
+        } catch(error) {
+          return reject(error)
+        }     
       }
       resolve()
     })
