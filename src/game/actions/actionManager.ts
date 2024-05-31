@@ -115,34 +115,45 @@ class ActionManager {
     return action
   }
   
-  private processQueue(characterName: string) {
-    if(this.isActionActive(characterName)) {
-      console.log('%s: Action already in progress', characterName)
-      return
+  /**
+   * Starts a process that will manage the queue of actions for this specific character.
+   * 
+   * Manages the queue of actions and executes them in order of the Queue.
+   */
+  private async processQueue(characterName: string) {
+    while(this.actionQueue.get(characterName)?.length) {
+      if(this.isActionActive(characterName)) {
+        console.log('%s: Action already in progress', characterName)
+        return
+      }
+      
+      const action = this.dequeueAction(characterName)
+      if(!action) {
+        return
+      }
+      console.log('%s: Removed from queue to process. Queue length:', characterName, this.actionQueue.get(characterName)?.length || 0)
+      
+      console.log('%s: Processing queue...', characterName)
+      try {
+        await this.startSquentialAction(action);
+        console.log('%s: Squential action done', characterName);
+      } catch (error) {
+        console.log('%s: Squential action interrupted:', characterName, error);
+      } finally {
+        // Clear active action to be able to start next one.
+        this.cancelActiveAction(characterName);
+      }
     }
-    
-    const action = this.dequeueAction(characterName)
-    if(!action) {
-      return
-    }
-    console.log('%s: Removed from queue to process. Queue length:', characterName, this.actionQueue.get(characterName)?.length || 0)
-    
-    console.log('%s: Processing queue...', characterName)
-    this.startSquentialAction(action)
-      .then(() => {
-        console.log('%s: Squential action done', characterName)
-        this.cancelActiveAction(characterName)
-
-        // recursive call to process the queue / next action in queue
-        this.processQueue(characterName)
-      })
-      .catch((error) => {
-        console.log('%s: Squential action interrupted:', characterName, error)
-        this.cancelActiveAction(characterName)
-      })
-
   }
 
+  /**
+   * Start a sequential action. Performs the same action repeatedly.
+   * 
+   * The action will be executed in a loop until it is done (limit/ interations reached) or it is interrupted.
+   * 
+   * @param action the action to execute
+   * @returns A promise that resolves when the action is done. Or rejects if the action fails.
+   */
   private startSquentialAction(action: ActionObject): Promise<void> {
     return new Promise(async (resolve, reject) => {
       const taskAction = this.taskMap.get(action.actionMsg.task)
@@ -162,6 +173,9 @@ class ActionManager {
           action.counter++
           action.actionMsg.iterations--
         } catch(error) {
+          // Any error will reject the promise. 
+          // Can be an interrupted action by cancel, or an invalid action by resource limit.
+          // The action cannnot be performed if the requirements are not met.
           return reject(error)
         }     
       }
