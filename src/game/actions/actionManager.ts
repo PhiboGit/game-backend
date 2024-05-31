@@ -2,7 +2,17 @@ import ITaskAction from "./ITaskAction.js";
 import GatheringAction from "./gatheringAction/gatheringAction.js";
 import { ActionMsg, ActionObject } from "./types.js"
 
-
+/**
+ * Manages the task actions for all character.
+ * 
+ * Executes actions in order of the queue and 
+ * repeates the action depending on the limit and iterations properties.
+ * 
+ * 
+ * Has only two public functions:
+ * - addAction: adds an action to the queue
+ * - cancelAction: removes an action from the queue 
+ */
 class ActionManager {
   private taskMap: Map<string, ITaskAction> = new Map([
     ["gathering", new GatheringAction()],
@@ -45,6 +55,7 @@ class ActionManager {
     this.activeActionTimeoutCancellers.delete(characterName)
   }
   
+  // public functions to cancel an action
   cancelAction(characterName: string, index: number) {
     if (index < 0) {
       this.cancelActiveAction(characterName)
@@ -64,6 +75,7 @@ class ActionManager {
     console.log('%s: Removed action at index %d', characterName, index)
   }
 
+  // public functions to add an action
   addAction(characterName: string, actionMsg: ActionMsg) {
     const action: ActionObject = {
       characterName,
