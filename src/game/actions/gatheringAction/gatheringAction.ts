@@ -12,14 +12,14 @@ export default class GatheringAction implements ITaskAction {
     })
   }
 
-  async startAction(characterName: string, action: GatheringMsg, activeActionMap: Map<string, () => void>): Promise<void> {
+  async startAction(characterName: string, action: GatheringMsg, onCancel: ( callback: () => void) => void): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       const timeout = setTimeout(() => {
         console.log('%s: timeout complete %s!', characterName, action.args.node);
         resolve();
       }, 5000);
 
-      activeActionMap.set(characterName, () => {
+      onCancel( () => {
         clearTimeout(timeout);
         console.log('%s: clearTimeout GatheringAction', characterName);
         return reject('Action canceled!');

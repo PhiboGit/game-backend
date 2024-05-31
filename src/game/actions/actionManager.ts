@@ -18,11 +18,27 @@ class ActionManager {
     return this.activeActionTimeoutCancellers.has(characterName)
   }
 
+  // Create a callback to contain the logic here.
+  // registers the callback in the activeActionTimeoutCancellers map
+  // the action should then define the callback what should happen when a cancel is invoked.
+  // for example: the action should then clearTimeout to interrupt the action.
+  private createCancelCallback(characterName: string): (callback: () => void) => void {
+    const cancel = (callback: () => void) => {
+      callback();
+    };
+    
+    // if the callback is not implemented yet
+    this.activeActionTimeoutCancellers.set(characterName, () => cancel(() => {throw new Error('Dev did not implement a callback for cancel!')} ));
+    return (callback: () => void) => {
+      this.activeActionTimeoutCancellers.set(characterName, () => cancel(callback));
+    };
+  }
+  
   private cancelActiveAction(characterName: string) {
     const cancel = this.activeActionTimeoutCancellers.get(characterName)
     if (cancel) {
       cancel()
-      console.log('%s: Canceled active action', characterName)
+      console.log('%s: Callback to cancel was called', characterName)
     } else {
       console.log('%s: No active action to cancel', characterName)
     }
@@ -128,7 +144,9 @@ class ActionManager {
         try {
           console.log('%s: Counter: %d %s Iterations left: %d', action.characterName, action.counter, action.actionMsg.limit, action.actionMsg.iterations)
           await taskAction.validateAction(action.characterName, action.actionMsg)
-          await taskAction.startAction(action.characterName, action.actionMsg, this.activeActionTimeoutCancellers)
+
+          const  cancelCallback = this.createCancelCallback(action.characterName) 
+          await taskAction.startAction(action.characterName, action.actionMsg, cancelCallback )
           action.counter++
           action.actionMsg.iterations--
         } catch(error) {
