@@ -1,5 +1,6 @@
 import { connectionManager } from "../../app/websocket/WsConnectionManager.js";
-import Character, { ICharacter } from "../models/character.js";
+import { getCharacter } from "../services/characterService.js";
+
 import { InitCharacterMessage, InitGameMessage } from "./messageTypes.js";
 export function initConnection(characterName: string){
   sendInitCharacter(characterName)
@@ -9,7 +10,7 @@ export function initConnection(characterName: string){
 
 async function sendInitCharacter(characterName: string){
   try {
-    const character = await Character.findOne({ characterName }).lean<ICharacter>()
+    const character = await getCharacter(characterName)
     if (!character) {
       throw new Error('Character not found');
     }

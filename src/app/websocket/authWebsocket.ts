@@ -2,7 +2,7 @@ import { IncomingMessage } from 'http';
 import jwt from 'jsonwebtoken';
 import { JwtPayload } from '../types.js';
 import User from '../models/user.js';
-import Character from '../../game/models/character.js';
+import Character from '../../game/models/character/character.js';
 
 const JWT_SECRET = process.env.JWT_SECRET as jwt.Secret
 

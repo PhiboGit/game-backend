@@ -2,8 +2,8 @@ import express, { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
 import { registerUserSchema } from './authValidation.js';
 import User from '../models/user.js';
-import Character from '../../game/models/character.js';
 import { validateData } from '../middleware/validationMiddleware.js';
+import { createCharacter } from '../../game/services/characterService.js';
 
 const router = express.Router();
 
@@ -33,9 +33,7 @@ async function insertUser(req: Request, res: Response, next: NextFunction) {
       password: req.body.password
     });
     console.log('User created successfully: ', responseUser.username);
-    const responseCharacter = await Character.create({
-      characterName: req.body.characterName
-    });
+    const responseCharacter = await createCharacter(req.body.characterName);
     console.log('Character created successfully: ', responseCharacter.characterName);
     next();
   } catch (error: any) {

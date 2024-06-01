@@ -1,4 +1,4 @@
-import {ICharacter} from "../models/character.js"
+
 
 export interface IMessage{
   type: string
@@ -6,7 +6,7 @@ export interface IMessage{
 export interface InitCharacterMessage extends IMessage {
   type: 'init_character',
 
-  character: ICharacter
+  character: any
 }
 
 export interface InitGameMessage extends IMessage {
