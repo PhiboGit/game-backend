@@ -1,0 +1,61 @@
+{
+  "woodT1": { "id": "woodT1", "displayName": "Birch Wood", "description": "", "rarity": "none", "tier": 1 },
+  "woodT2": { "id": "woodT2", "displayName": "Oak Wood", "description": "", "rarity": "none", "tier": 2 },
+  "woodT3": { "id": "woodT3", "displayName": "Elderwood", "description": "", "rarity": "none", "tier": 3 },
+  "woodT4": { "id": "woodT4", "displayName": "Cypress Wood", "description": "", "rarity": "none", "tier": 4 },
+  "woodT5": { "id": "woodT5", "displayName": "Willow Wood", "description": "", "rarity": "none", "tier": 5 },
+
+  "oreT1": { "id": "oreT1", "displayName": "Copper Ore", "description": "", "rarity": "none", "tier": 1 },
+  "oreT2": { "id": "oreT2", "displayName": "Iron Ore", "description": "", "rarity": "none", "tier": 2 },
+  "oreT3": { "id": "oreT3", "displayName": "Gold Ore", "description": "", "rarity": "rare", "tier": 3 },
+  "oreT4": { "id": "oreT4", "displayName": "Mithril Ore", "description": "", "rarity": "none", "tier": 4 },
+  "oreT5": { "id": "oreT4", "displayName": "Platinum Ore", "description": "", "rarity": "none", "tier": 5 },
+
+  "fiberT1": { "id": "fiberT1", "displayName": "Hemp Fiber", "description": "", "rarity": "none", "tier": 1 },
+  "fiberT2": { "id": "fiberT2", "displayName": "Cotton Fiber", "description": "", "rarity": "none", "tier": 2 },
+  "fiberT3": { "id": "fiberT3", "displayName": "Jute Fiber", "description": "", "rarity": "none", "tier": 3 },
+  "fiberT4": { "id": "fiberT4", "displayName": "Bamboo Fiber", "description": "", "rarity": "none", "tier": 4 },
+  "fiberT5": { "id": "fiberT4", "displayName": "Flax Fiber", "description": "", "rarity": "none" , "tier": 5 },
+
+
+  "coal": { "id": "coal", "displayName": "Coal", "description": "", "rarity": "none", "tier": 1 },
+
+  "ingotT1": { "id": "ingotT1", "displayName": "Copper Ingot", "description": "", "rarity": "none", "tier": 1 },
+  "ingotT2": { "id": "ingotT2", "displayName": "Iron Ingot", "description": "", "rarity": "none", "tier": 2 },
+  "ingotT3": { "id": "ingotT3", "displayName": "Gold Ingot", "description": "", "rarity": "rare", "tier": 3 },
+  "ingotT4": { "id": "ingotT4", "displayName": "Mithril Ingot", "description": "", "rarity": "none", "tier": 4 },
+  "ingotT5": { "id": "ingotT4", "displayName": "Platinum Ingot", "description": "", "rarity": "none", "tier": 5 },
+
+  "plankT1": { "id": "plankT1", "displayName": "Birch Plank", "description": "", "rarity": "none", "tier": 1 },
+  "plankT2": { "id": "plankT2", "displayName": "Oak Plank", "description": "", "rarity": "none", "tier": 2 },
+  "plankT3": { "id": "plankT3", "displayName": "Elderwood Plank", "description": "", "rarity": "none", "tier": 3 },
+  "plankT4": { "id": "plankT4", "displayName": "Cypress Plank", "description": "", "rarity": "none", "tier": 4 },
+  "plankT5": { "id": "plankT4", "displayName": "Willow Plank", "description": "", "rarity": "none", "tier": 5 },
+
+  "textileT1": { "id": "textileT1", "displayName": "Hemp Textile", "description": "", "rarity": "none", "tier": 1 },
+  "textileT2": { "id": "textileT2", "displayName": "Cotton Textile", "description": "", "rarity": "none", "tier": 2 },
+  "textileT3": { "id": "textileT3", "displayName": "Jute Textile", "description": "", "rarity": "none", "tier": 3 },
+  "textileT4": { "id": "textileT4", "displayName": "Bamboo Textile", "description": "", "rarity": "none", "tier": 4 },
+  "textileT5": { "id": "textileT4", "displayName": "Flax Textile", "description": "", "rarity": "none", "tier": 5 },
+
+
+  "sapT1": { "id": "sapT1", "displayName": "Birch Sap", "description": "", "rarity": "uncommon", "tier": 1 },
+  "sapT2": { "id": "sapT2", "displayName": "Oak Sap", "description": "", "rarity": "uncommon", "tier": 2 },
+  "sapT3": { "id": "sapT3", "displayName": "Elderwood Sap", "description": "", "rarity": "uncommon", "tier": 3 },
+  "sapT4": { "id": "sapT4", "displayName": "Cypress Sap", "description": "", "rarity": "uncommon", "tier": 4 },
+  "sapT5": { "id": "sapT4", "displayName": "Willow Sap", "description": "", "rarity": "uncommon", "tier": 5 },
+
+  "stickT1": { "id": "stickT1", "displayName": "Mossy Stick", "description": "", "rarity": "none", "tier": 1 },
+  "stickT2": { "id": "stickT2", "displayName": "Glimmering Stick", "description": "", "rarity": "none", "tier": 2 },
+  "stickT3": { "id": "stickT3", "displayName": "Petrified Branch", "description": "", "rarity": "none", "tier": 3 },
+  "stickT4": { "id": "stickT4", "displayName": "Ancient Hardwood", "description": "", "rarity": "none", "tier": 4 },
+  "stickT5": { "id": "stickT4", "displayName": "Ancient Branch", "description": "", "rarity": "none", "tier": 5 },
+
+  "metal_chunkT1": { "id": "chunkT1", "displayName": "Copper Chunk", "description": "", "rarity": "none", "tier": 1 },
+  "metal_chunkT2": { "id": "chunkT2", "displayName": "Iron Chunk", "description": "", "rarity": "none", "tier": 2 },
+  "metal_chunkT3": { "id": "chunkT3", "displayName": "Gold Chunk", "description": "", "rarity": "rare", "tier": 3 },
+  "metal_chunkT4": { "id": "chunkT4", "displayName": "Mithril Chunk", "description": "", "rarity": "none", "tier": 4 },
+  "metal_chunkT5": { "id": "chunkT4", "displayName": "Platinum Chunk", "description": "", "rarity": "none", "tier": 5 }
+
+  
+}
