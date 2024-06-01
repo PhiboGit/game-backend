@@ -78,7 +78,6 @@ class ActionManager {
   // public functions to add an action
   addAction(characterName: string, actionMsg: ActionMsg) {
     const action: ActionObject = {
-      characterName,
       counter: 0,
       actionMsg
     }
@@ -135,7 +134,7 @@ class ActionManager {
       
       console.log('%s: Processing queue...', characterName)
       try {
-        await this.startSquentialAction(action);
+        await this.startSquentialAction(characterName , action);
         console.log('%s: Squential action done', characterName);
       } catch (error) {
         console.log('%s: Squential action interrupted:', characterName, error);
@@ -154,22 +153,22 @@ class ActionManager {
    * @param action the action to execute
    * @returns A promise that resolves when the action is done. Or rejects if the action fails.
    */
-  private startSquentialAction(action: ActionObject): Promise<void> {
+  private startSquentialAction(characterName: string, action: ActionObject): Promise<void> {
     return new Promise(async (resolve, reject) => {
       const taskAction = this.taskMap.get(action.actionMsg.task)
       if(!taskAction) {
-        console.error('%s: unknown task. should not happen!', action.characterName, action)
+        console.error('%s: unknown task. should not happen!', characterName, action)
         return reject('unknown task. should not happen!')
       }
 
-      console.log('%s: Squential action started', action.characterName)
+      console.log('%s: Squential action started', characterName)
       while(action.actionMsg.iterations > 0 || !action.actionMsg.limit) {
         try {
-          console.log('%s: Counter: %d %s Iterations left: %d', action.characterName, action.counter, action.actionMsg.limit, action.actionMsg.iterations)
-          await taskAction.validateAction(action.characterName, action.actionMsg)
+          console.log('%s: Counter: %d %s Iterations left: %d', characterName, action.counter, action.actionMsg.limit, action.actionMsg.iterations)
+          await taskAction.validateAction(characterName, action.actionMsg)
 
-          const  cancelCallback = this.createCancelCallback(action.characterName) 
-          await taskAction.startAction(action.characterName, action.actionMsg, cancelCallback )
+          const  cancelCallback = this.createCancelCallback(characterName) 
+          await taskAction.startAction(characterName, action.actionMsg, cancelCallback )
           action.counter++
           action.actionMsg.iterations--
         } catch(error) {
