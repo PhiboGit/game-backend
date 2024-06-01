@@ -18,7 +18,6 @@ export async function getCharacter(characterName: string): Promise<CharacterClas
 
   const character = new CharacterClass(characterDatabase)
 
-  console.log(character)
   return character
 }
 
