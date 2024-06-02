@@ -15,6 +15,7 @@ const schemaGatheringNode = {
         "level": { "type": "int32" },
         "time": { "type": "int32" },
         "exp": { "type": "int32" },
+        "expChar": { "type": "int32" },
         "resource": { "type": "string" },
         "minAmount": { "type": "int32" },
         "maxAmount": { "type": "int32" }
