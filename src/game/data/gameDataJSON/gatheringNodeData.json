@@ -1,19 +1,19 @@
 {
-  "TreeT1": { "id": "TreeT1", "displayName": "Oak Tree", "description": "", "profession": "Woodcutting", "tier": 1, "level": 0, "time": 10000, "exp": 10, "resource": "woodT1", "minAmount": 1, "maxAmount": 5 },
-  "TreeT2": { "id": "TreeT2", "displayName": "Birch Tree", "description": "", "profession": "Woodcutting", "tier": 2, "level": 0, "time": 10000, "exp": 10, "resource": "woodT2", "minAmount": 1, "maxAmount": 5 },
-  "TreeT3": { "id": "TreeT3", "displayName": "Elder Tree", "description": "", "profession": "Woodcutting", "tier": 3, "level": 0, "time": 10000, "exp": 10, "resource": "woodT3", "minAmount": 1, "maxAmount": 5 },
-  "TreeT4": { "id": "TreeT4", "displayName": "Giant Tree", "description": "", "profession": "Woodcutting", "tier": 4, "level": 0, "time": 10000, "exp": 10, "resource": "woodT4", "minAmount": 1, "maxAmount": 5 },
-  "TreeT5": { "id": "TreeT5", "displayName": "Willow Tree", "description": "", "profession": "Woodcutting", "tier": 5, "level": 0, "time": 10000, "exp": 10, "resource": "woodT5", "minAmount": 1, "maxAmount": 5 },
+  "TreeT1": { "id": "TreeT1", "displayName": "Oak Tree", "description": "", "profession": "woodcutting", "tier": 1, "level": 0, "time": 10000, "exp": 10, "resource": "woodT1", "minAmount": 1, "maxAmount": 5 },
+  "TreeT2": { "id": "TreeT2", "displayName": "Birch Tree", "description": "", "profession": "woodcutting", "tier": 2, "level": 0, "time": 10000, "exp": 10, "resource": "woodT2", "minAmount": 1, "maxAmount": 5 },
+  "TreeT3": { "id": "TreeT3", "displayName": "Elder Tree", "description": "", "profession": "woodcutting", "tier": 3, "level": 0, "time": 10000, "exp": 10, "resource": "woodT3", "minAmount": 1, "maxAmount": 5 },
+  "TreeT4": { "id": "TreeT4", "displayName": "Giant Tree", "description": "", "profession": "woodcutting", "tier": 4, "level": 0, "time": 10000, "exp": 10, "resource": "woodT4", "minAmount": 1, "maxAmount": 5 },
+  "TreeT5": { "id": "TreeT5", "displayName": "Willow Tree", "description": "", "profession": "woodcutting", "tier": 5, "level": 0, "time": 10000, "exp": 10, "resource": "woodT5", "minAmount": 1, "maxAmount": 5 },
 
-  "VeinT1": { "id": "VeinT1", "displayName": "Copper Vein", "description": "", "profession": "Mining", "tier": 1, "level": 0, "time": 10000, "exp": 10, "resource": "oreT1", "minAmount": 1, "maxAmount": 5 },
-  "VeinT2": { "id": "VeinT2", "displayName": "Iron Vein", "description": "", "profession": "Mining", "tier": 2, "level": 0, "time": 10000, "exp": 10, "resource": "oreT2", "minAmount": 1, "maxAmount": 5 },
-  "VeinT3": { "id": "VeinT3", "displayName": "Gold Vein", "description": "", "profession": "Mining", "tier": 3, "level": 0, "time": 10000, "exp": 10, "resource": "oreT3", "minAmount": 1, "maxAmount": 5 },
-  "VeinT4": { "id": "VeinT4", "displayName": "Mithril Vein", "description": "", "profession": "Mining", "tier": 4, "level": 0, "time": 10000, "exp": 10, "resource": "oreT4", "minAmount": 1, "maxAmount": 5 },
-  "VeinT5": { "id": "VeinT5", "displayName": "Platinum Vein", "description": "", "profession": "Mining", "tier": 5, "level": 0, "time": 10000, "exp": 10, "resource": "oreT5", "minAmount": 1, "maxAmount": 5 },
+  "VeinT1": { "id": "VeinT1", "displayName": "Copper Vein", "description": "", "profession": "mining", "tier": 1, "level": 0, "time": 10000, "exp": 10, "resource": "oreT1", "minAmount": 1, "maxAmount": 5 },
+  "VeinT2": { "id": "VeinT2", "displayName": "Iron Vein", "description": "", "profession": "mining", "tier": 2, "level": 0, "time": 10000, "exp": 10, "resource": "oreT2", "minAmount": 1, "maxAmount": 5 },
+  "VeinT3": { "id": "VeinT3", "displayName": "Gold Vein", "description": "", "profession": "mining", "tier": 3, "level": 0, "time": 10000, "exp": 10, "resource": "oreT3", "minAmount": 1, "maxAmount": 5 },
+  "VeinT4": { "id": "VeinT4", "displayName": "Mithril Vein", "description": "", "profession": "mining", "tier": 4, "level": 0, "time": 10000, "exp": 10, "resource": "oreT4", "minAmount": 1, "maxAmount": 5 },
+  "VeinT5": { "id": "VeinT5", "displayName": "Platinum Vein", "description": "", "profession": "mining", "tier": 5, "level": 0, "time": 10000, "exp": 10, "resource": "oreT5", "minAmount": 1, "maxAmount": 5 },
 
-  "PlantT1": { "id": "PlantT1", "displayName": "Hemp Plant", "description": "", "profession": "Harvesting", "tier": 1, "level": 0, "time": 10000, "exp": 10, "resource": "fiberT1", "minAmount": 1, "maxAmount": 5  },
-  "PlantT2": { "id": "PlantT2", "displayName": "Cotton Plant", "description": "", "profession": "Harvesting", "tier": 2, "level": 0, "time": 10000, "exp": 10, "resource": "fiberT2", "minAmount": 1, "maxAmount": 5  },
-  "PlantT3": { "id": "PlantT3", "displayName": "Flower Plant", "description": "", "profession": "Harvesting", "tier": 3, "level": 0, "time": 10000, "exp": 10, "resource": "fiberT3", "minAmount": 1, "maxAmount": 5  },
-  "PlantT4": { "id": "PlantT4", "displayName": "Bamboo Plant", "description": "", "profession": "Harvesting", "tier": 4, "level": 0, "time": 10000, "exp": 10, "resource": "fiberT4", "minAmount": 1, "maxAmount": 5  },
-  "PlantT5": { "id": "PlantT5", "displayName": "Flax Plant", "description": "", "profession": "Harvesting", "tier": 5, "level": 0, "time": 10000, "exp": 10, "resource": "fiberT5", "minAmount": 1, "maxAmount": 5  }
+  "PlantT1": { "id": "PlantT1", "displayName": "Hemp Plant", "description": "", "profession": "harvesting", "tier": 1, "level": 0, "time": 10000, "exp": 10, "resource": "fiberT1", "minAmount": 1, "maxAmount": 5  },
+  "PlantT2": { "id": "PlantT2", "displayName": "Cotton Plant", "description": "", "profession": "harvesting", "tier": 2, "level": 0, "time": 10000, "exp": 10, "resource": "fiberT2", "minAmount": 1, "maxAmount": 5  },
+  "PlantT3": { "id": "PlantT3", "displayName": "Flower Plant", "description": "", "profession": "harvesting", "tier": 3, "level": 0, "time": 10000, "exp": 10, "resource": "fiberT3", "minAmount": 1, "maxAmount": 5  },
+  "PlantT4": { "id": "PlantT4", "displayName": "Bamboo Plant", "description": "", "profession": "harvesting", "tier": 4, "level": 0, "time": 10000, "exp": 10, "resource": "fiberT4", "minAmount": 1, "maxAmount": 5  },
+  "PlantT5": { "id": "PlantT5", "displayName": "Flax Plant", "description": "", "profession": "harvesting", "tier": 5, "level": 0, "time": 10000, "exp": 10, "resource": "fiberT5", "minAmount": 1, "maxAmount": 5  }
 }

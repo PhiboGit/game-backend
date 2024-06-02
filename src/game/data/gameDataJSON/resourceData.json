@@ -51,11 +51,34 @@
   "stickT4": { "id": "stickT4", "displayName": "Ancient Hardwood", "description": "", "rarity": "none", "tier": 4 },
   "stickT5": { "id": "stickT4", "displayName": "Ancient Branch", "description": "", "rarity": "none", "tier": 5 },
 
-  "metal_chunkT1": { "id": "chunkT1", "displayName": "Copper Chunk", "description": "", "rarity": "none", "tier": 1 },
-  "metal_chunkT2": { "id": "chunkT2", "displayName": "Iron Chunk", "description": "", "rarity": "none", "tier": 2 },
-  "metal_chunkT3": { "id": "chunkT3", "displayName": "Gold Chunk", "description": "", "rarity": "rare", "tier": 3 },
-  "metal_chunkT4": { "id": "chunkT4", "displayName": "Mithril Chunk", "description": "", "rarity": "none", "tier": 4 },
-  "metal_chunkT5": { "id": "chunkT4", "displayName": "Platinum Chunk", "description": "", "rarity": "none", "tier": 5 }
+  "chunkT1": { "id": "chunkT1", "displayName": "Copper Chunk", "description": "", "rarity": "none", "tier": 1 },
+  "chunkT2": { "id": "chunkT2", "displayName": "Iron Chunk", "description": "", "rarity": "none", "tier": 2 },
+  "chunkT3": { "id": "chunkT3", "displayName": "Gold Chunk", "description": "", "rarity": "rare", "tier": 3 },
+  "chunkT4": { "id": "chunkT4", "displayName": "Mithril Chunk", "description": "", "rarity": "none", "tier": 4 },
+  "chunkT5": { "id": "chunkT4", "displayName": "Platinum Chunk", "description": "", "rarity": "none", "tier": 5 },
 
-  
+
+  "con_charm": { "id": "con_charm", "displayName": "Conjurer's Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "con"  },
+  "str_charm": { "id": "str_charm", "displayName": "Strider's Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "str"  },
+  "int_charm": { "id": "int_charm", "displayName": "Sorcerer's Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "int"  },
+  "dex_charm": { "id": "dex_charm", "displayName": "Diplomat's Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "dex"  },
+  "foc_charm": { "id": "foc_charm", "displayName": "Fencer's Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "foc"  },
+
+  "speed_mining_charm": { "id": "speed_mining_charm", "displayName": "Speed Mining Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "speed_mining"  },
+  "exp_mining_charm": { "id": "exp_mining_charm", "displayName": "Experience Mining Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "exp_mining"  },
+  "luck_mining_charm": { "id": "luck_mining_charm", "displayName": "Luck Mining Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "luck_mining"  },
+  "yieldMin_mining_charm": { "id": "yield_mining_charm", "displayName": "Fine Yield Mining Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "yieldMin_mining"  },
+  "yieldMax_mining_charm": { "id": "yield_mining_charm", "displayName": "Rough Yield Mining Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "yieldMax_mining"  },
+
+  "speed_harvesting_charm": { "id": "speed_harvesting_charm", "displayName": "Speed Harvesting Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "speed_harvesting"  },
+  "exp_harvesting_charm": { "id": "exp_harvesting_charm", "displayName": "Experience Harvesting Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "exp_harvesting"  },
+  "luck_harvesting_charm": { "id": "luck_harvesting_charm", "displayName": "Luck Harvesting Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "luck_harvesting"  },
+  "yieldMin_harvesting_charm": { "id": "yield_harvesting_charm", "displayName": "Fine Yield Harvesting Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "yieldMin_harvesting"  },
+  "yieldMax_harvesting_charm": { "id": "yield_harvesting_charm", "displayName": "Rough Yield Harvesting Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "yieldMax_harvesting"  },
+ 
+  "speed_woodcutting_charm": { "id": "speed_woodcutting_charm", "displayName": "Speed Woodcutting Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "speed_woodcutting"  },
+  "exp_woodcutting_charm": { "id": "exp_woodcutting_charm", "displayName": "Experience Woodcutting Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "exp_woodcutting"  },
+  "luck_woodcutting_charm": { "id": "luck_woodcutting_charm", "displayName": "Luck Woodcutting Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "luck_woodcutting"  },
+  "yieldMin_woodcutting_charm": { "id": "yield_woodcutting_charm", "displayName": "Fine Yield Woodcutting Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "yieldMin_woodcutting"  },
+  "yieldMax_woodcutting_charm": { "id": "yield_woodcutting_charm", "displayName": "Rough Yield Woodcutting Charm", "description": "", "rarity": "none", "tier": 0, "bonusType": "yieldMax_woodcutting"  }
 }

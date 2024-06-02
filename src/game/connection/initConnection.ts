@@ -1,10 +1,12 @@
 import { connectionManager } from "../../app/websocket/WsConnectionManager.js";
+import { gatheringNodeData, resourceData } from "../data/dataLoader.js";
 import { getCharacter } from "../services/characterService.js";
 
-import { InitCharacterMessage, InitGameMessage } from "./messageTypes.js";
+import { InitCharacterMessage } from "./messageTypes.js";
 export function initConnection(characterName: string){
   sendInitCharacter(characterName)
-  sendInitGame(characterName)
+  sendInitGameData(characterName)
+  sendInitStatus(characterName)
 }
 
 
@@ -29,16 +31,32 @@ async function sendInitCharacter(characterName: string){
 }
 
 
-async function sendInitGame(characterName: string){
+async function sendInitStatus(characterName: string){
   try {
-    const message: InitGameMessage = {
-      type: 'init_game',
+    const message ={
+      type: 'init_status',
 
-      active_players: connectionManager.getActivePlayers()
+      active_players: connectionManager.getActivePlayers(),
+      time: new Date()
     }
   
     connectionManager.sendMessage(characterName, JSON.stringify(message));
     
+  } catch (error) {
+    console.error('Error initializing connection message:', error);
+  }
+}
+
+async function sendInitGameData(characterName: string) {
+  try {
+    const message = {
+      type: 'init_game_data',
+
+      gatheringNodeData: gatheringNodeData,
+      resourceData: resourceData
+    };
+
+    connectionManager.sendMessage(characterName, JSON.stringify(message));
   } catch (error) {
     console.error('Error initializing connection message:', error);
   }
