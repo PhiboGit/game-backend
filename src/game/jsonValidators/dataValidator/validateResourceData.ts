@@ -12,6 +12,7 @@ const schemaResource = {
         "description": { "type": "string" },
         "rarity": { enum: ["none", "common", "uncommon", "rare", "epic", "legendary"] },
         "tier": { "type": "int32" },
+        "sellValue": { "type": "int32" },
       },
       "optionalProperties": {
         "bonusType": { enum: ["con", "int", "str", "dex", "foc",
