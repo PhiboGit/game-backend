@@ -79,6 +79,7 @@ class ActionManager {
   addAction(characterName: string, actionMsg: ActionMsg) {
     const action: ActionObject = {
       counter: 0,
+      actionTime: null,
       actionMsg
     }
     this.enqueueAction(characterName, action)
@@ -150,27 +151,27 @@ class ActionManager {
    * 
    * The action will be executed in a loop until it is done (limit/ interations reached) or it is interrupted.
    * 
-   * @param action the action to execute
+   * @param actionObject the action to execute
    * @returns A promise that resolves when the action is done. Or rejects if the action fails.
    */
-  private startSquentialAction(characterName: string, action: ActionObject): Promise<void> {
+  private startSquentialAction(characterName: string, actionObject: ActionObject): Promise<void> {
     return new Promise(async (resolve, reject) => {
-      const taskAction = this.taskMap.get(action.actionMsg.task)
+      const taskAction = this.taskMap.get(actionObject.actionMsg.task)
       if(!taskAction) {
-        console.error('%s: unknown task. should not happen!', characterName, action)
+        console.error('%s: unknown task. should not happen!', characterName, actionObject)
         return reject('unknown task. should not happen!')
       }
 
       console.log('%s: Squential action started', characterName)
-      while(action.actionMsg.iterations > 0 || !action.actionMsg.limit) {
+      while(actionObject.actionMsg.iterations > 0 || !actionObject.actionMsg.limit) {
         try {
-          console.log('%s: Counter: %d %s Iterations left: %d', characterName, action.counter, action.actionMsg.limit, action.actionMsg.iterations)
-          await taskAction.validateAction(characterName, action.actionMsg)
+          console.log('%s: Counter: %d %s Iterations left: %d', characterName, actionObject.counter, actionObject.actionMsg.limit, actionObject.actionMsg.iterations)
+          await taskAction.validateAction(characterName, actionObject)
 
           const  cancelCallback = this.createCancelCallback(characterName) 
-          await taskAction.startAction(characterName, action.actionMsg, cancelCallback )
-          action.counter++
-          action.actionMsg.iterations--
+          await taskAction.startAction(characterName, actionObject, cancelCallback )
+          actionObject.counter++
+          actionObject.actionMsg.iterations--
         } catch(error) {
           // Any error will reject the promise. 
           // Can be an interrupted action by cancel, or an invalid action by resource limit.

@@ -3,7 +3,7 @@ import { lootTableData } from '../data/dataLoader.js'
 import { LootTable, LootTableRoll, LootTableWeight } from '../jsonValidators/dataValidator/validateLootTableData.js'
 
 export type LootFromTable = {
-  item: string
+  resource: string
   amount: number
 }
 
@@ -16,7 +16,7 @@ function rollTable(table: LootTableRoll, luck: number): LootFromTable[] {
   for (const loot of table.loot){
     console.log('rollTable: you need a: ', loot.value)
     if (roll >= loot.value){
-      re.push({"item": loot.item, "amount": rollRange(loot.min, loot.max)})
+      re.push({"resource": loot.resource, "amount": rollRange(loot.min, loot.max)})
     }
   } 
   return re
@@ -37,8 +37,8 @@ function weightTable(table: LootTableWeight, size: number){
 
   const re = []
   for (const x of results) {
-    if (x.item == null) continue
-    re.push({"item": x.item, "amount": rollRange(x.min, x.max)})
+    if (x.resource == null) continue
+    re.push({"resource": x.resource, "amount": rollRange(x.min, x.max)})
   }
   return re
 }
@@ -58,14 +58,14 @@ export function parseLootTable(tableName: string, size: number = 1, luck: number
       // parse sub tables recursively
       for (const roll of rolls) {
         // if it is another table, start recursion
-        if (roll.item.startsWith("[LTID]")) {
-          const subTable = lootTableData[roll.item.substring(6)];
+        if (roll.resource.startsWith("[LTID]")) {
+          const subTable = lootTableData[roll.resource.substring(6)];
           if (subTable) {
             parseTable(subTable, roll.amount, luck);
           }
           // if not a table, just add the loot
         } else {
-          results.push({ item: roll.item, amount: roll.amount });
+          results.push({ resource: roll.resource, amount: roll.amount });
         }
       }
 
@@ -75,14 +75,14 @@ export function parseLootTable(tableName: string, size: number = 1, luck: number
       const rolls = weightTable(table, size);
       for (const roll of rolls) {
         // if it is another table, start recursion
-        if (roll.item.startsWith("[LTID]")) {
-          const subTable = lootTableData[roll.item.substring(6)];
+        if (roll.resource.startsWith("[LTID]")) {
+          const subTable = lootTableData[roll.resource.substring(6)];
           if (subTable) {
             parseTable(subTable, roll.amount, luck);
           }
           // if not a table, just add the loot
         } else {
-          results.push({ item: roll.item, amount: roll.amount });
+          results.push({ resource: roll.resource, amount: roll.amount });
         }
       }
     }

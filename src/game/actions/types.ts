@@ -3,7 +3,8 @@ import { GatheringMsg } from "../jsonValidators/messageValidator/validateGatheri
 
 export type ActionObject = {
   counter: number
-  actionMsg: GatheringMsg | CraftingMsg
+  actionTime: number | null
+  actionMsg: ActionMsg
 }
 
 export type ActionMsg = GatheringMsg | CraftingMsg

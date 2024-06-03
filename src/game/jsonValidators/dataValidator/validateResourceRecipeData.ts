@@ -11,7 +11,7 @@ const schemaResourceRecipe = {
         "displayName": { "type": "string" },
         "description": { "type": "string" },
 
-        "profession": { "enum": ["weaving", "smelting", "woodworking", "toolsmith", "weaponsmith", "armorsmith"] },
+        "profession": { "enum": ["weaving", "smelting", "woodworking"] },
 
         "resource": { "type": "string" },
         "amount": { "type": "int32" },

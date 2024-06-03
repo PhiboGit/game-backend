@@ -1,9 +1,9 @@
 import { Types } from "mongoose";
-import { Character } from "./character.js";
+import { Character, Professions } from "./character.js";
 import { Currency } from "./currency.js";
-import { Profession } from "./profession.js";
 import { Resources } from "./resources.js";
 import { Item } from "../item/item.js";
+import { getLevel } from "../../utils/expTable.js";
 
 export default class CharacterClass implements Character {
   _id: Types.ObjectId;
@@ -13,7 +13,7 @@ export default class CharacterClass implements Character {
   items: Types.ObjectId[]
   activeAction: object | null
   actionQueue: object[]
-  professions: { woodcutting: Profession; mining: Profession; harvesting: Profession }
+  professions: Professions
   resources: Resources
   itemMap: Map<Types.ObjectId, Item> = new Map()
   
@@ -36,5 +36,17 @@ export default class CharacterClass implements Character {
 
   // TODO: add function: 
   // getProfessionStats(profession: string): {luck: number, speed: number, yieldMin: number, yieldMax: number, expBonus: number} ...
+  getProfessionStats(profession: keyof Professions) {
+    const stats = {
+      level: getLevel(this.professions[profession].exp),
 
+      luck: 0,
+      speed: 0,
+      yieldMin: 0,
+      yieldMax: 0,
+      expBonus: 0
+    }
+
+    return stats
+  }
 }

@@ -1,9 +1,10 @@
 import mongoose, { Types } from "mongoose";
+import { Professions } from "../character/character.js";
 
 export interface Item {
   _id: Types.ObjectId;
   name: string;
-  equipmentProfessions: string[];
+  equipmentProfessions: keyof Professions[];
   equipmentType: string;
   level: number;
   tier: number;

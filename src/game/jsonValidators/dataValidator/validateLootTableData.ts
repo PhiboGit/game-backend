@@ -16,7 +16,7 @@ const schemaLootTable = {
             "loot": {"elements": {
               "properties": {
                 "value": {type: "int32"},
-                "item": {type: "string"},
+                "resource": {type: "string"},
                 "min": {type: "int32"},
                 "max": {type: "int32"}
               }
@@ -30,7 +30,7 @@ const schemaLootTable = {
             "loot": {"elements": {
               "properties": {
                 "value": {type: "int32"},
-                "item": {type: "string"},
+                "resource": {type: "string"},
                 "min": {type: "int32"},
                 "max": {type: "int32"}
               }

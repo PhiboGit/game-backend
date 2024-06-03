@@ -3,6 +3,8 @@ import { Currency, currencySchema } from './currency.js';
 import { Profession, professionSchema } from './profession.js';
 import { Resources, resourcesSchema } from './resources.js';
 
+export type ProfessionId = "woodcutting" | "mining" | "harvesting" | "weaving" | "smelting" | "woodworking";
+export type Professions = Record<ProfessionId, Profession>;
 
 export interface Character {
   _id: Types.ObjectId;
@@ -12,11 +14,7 @@ export interface Character {
   items: Types.ObjectId[];
   activeAction: object | null;
   actionQueue: object[];
-  professions: {
-    woodcutting: Profession;
-    mining: Profession;
-    harvesting: Profession;
-  };
+  professions: Professions;
   resources: Resources;
 }
 
@@ -42,6 +40,9 @@ const characterSchema = new Schema<Character>({
     woodcutting: { type: professionSchema, default: { exp: 0, equipment: {} } },
     mining: { type: professionSchema, default: { exp: 0, equipment: {} } },
     harvesting: { type: professionSchema, default: { exp: 0, equipment: {} } },
+    weaving: { type: professionSchema, default: { exp: 0, equipment: {} } },
+    smelting: { type: professionSchema, default: { exp: 0, equipment: {} } },
+    woodworking: { type: professionSchema, default: { exp: 0, equipment: {} } },
   },
   resources: { type: resourcesSchema, default: {} },
 }, {

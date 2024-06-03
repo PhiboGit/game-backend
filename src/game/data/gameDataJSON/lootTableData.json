@@ -5,9 +5,9 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value":  999500, "item": "[LTID]Sap", "min" : 1, "max": 1 },
-      {"value":  999800, "item": "[LTID]Charm", "min" : 1, "max": 1 },
-      {"value": 1001000, "item": "[LTID]Stick", "min" : 1, "max": 1 }
+      {"value":  999500, "resource": "[LTID]Sap", "min" : 1, "max": 1 },
+      {"value":  999800, "resource": "[LTID]Charm", "min" : 1, "max": 1 },
+      {"value": 1001000, "resource": "[LTID]Stick", "min" : 1, "max": 1 }
     ]
   },
   "TreeT2" : {
@@ -16,9 +16,9 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value":  999500 ,"item": "[LTID]Sap", "min" : 1, "max": 1 },
-      {"value":  999800 ,"item": "[LTID]Charm", "min" : 1, "max": 1 },
-      {"value": 1001000 ,"item": "[LTID]Stick", "min" : 1, "max": 1 }
+      {"value":  999500 ,"resource": "[LTID]Sap", "min" : 1, "max": 1 },
+      {"value":  999800 ,"resource": "[LTID]Charm", "min" : 1, "max": 1 },
+      {"value": 1001000 ,"resource": "[LTID]Stick", "min" : 1, "max": 1 }
     ]
   },
   "TreeT3" : {
@@ -27,9 +27,9 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 999500 ,"item": "[LTID]Sap", "min" : 1, "max": 1 },
-      {"value": 999800 ,"item": "[LTID]Charm", "min" : 1, "max": 1 },
-      {"value": 1001000 ,"item": "[LTID]Stick", "min" : 1, "max": 1 }
+      {"value": 999500 ,"resource": "[LTID]Sap", "min" : 1, "max": 1 },
+      {"value": 999800 ,"resource": "[LTID]Charm", "min" : 1, "max": 1 },
+      {"value": 1001000 ,"resource": "[LTID]Stick", "min" : 1, "max": 1 }
     ]
   },
   "TreeT4" : {
@@ -38,9 +38,9 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 999500 ,"item": "[LTID]Sap", "min" : 1, "max": 1 },
-      {"value": 999800 ,"item": "[LTID]Charm", "min" : 1, "max": 1 },
-      {"value": 1001000 ,"item": "[LTID]Stick", "min" : 1, "max": 1 }
+      {"value": 999500 ,"resource": "[LTID]Sap", "min" : 1, "max": 1 },
+      {"value": 999800 ,"resource": "[LTID]Charm", "min" : 1, "max": 1 },
+      {"value": 1001000 ,"resource": "[LTID]Stick", "min" : 1, "max": 1 }
     ]
   },
   "TreeT5" : {
@@ -49,9 +49,9 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 999500 ,"item": "[LTID]Sap", "min" : 1, "max": 1 },
-      {"value": 999800 ,"item": "[LTID]Charm", "min" : 1, "max": 1 },
-      {"value": 1001000 ,"item": "[LTID]Stick", "min" : 1, "max": 1 }
+      {"value": 999500 ,"resource": "[LTID]Sap", "min" : 1, "max": 1 },
+      {"value": 999800 ,"resource": "[LTID]Charm", "min" : 1, "max": 1 },
+      {"value": 1001000 ,"resource": "[LTID]Stick", "min" : 1, "max": 1 }
     ]
   },
 
@@ -61,7 +61,7 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 1001000 ,"item": "[LTID]Chunk", "min" : 1, "max": 1 }
+      {"value": 1001000 ,"resource": "[LTID]Chunk", "min" : 1, "max": 1 }
     ]
   },
   "VeinT2" : {
@@ -70,7 +70,7 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 1001000 ,"item": "[LTID]Chunk", "min" : 1, "max": 1 }
+      {"value": 1001000 ,"resource": "[LTID]Chunk", "min" : 1, "max": 1 }
     ]
   },
   "VeinT3" : {
@@ -79,7 +79,7 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 1001000 ,"item": "[LTID]Chunk", "min" : 1, "max": 1 }
+      {"value": 1001000 ,"resource": "[LTID]Chunk", "min" : 1, "max": 1 }
     ]
   },
   "VeinT4" : {
@@ -88,7 +88,7 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 1001000 ,"item": "[LTID]Chunk", "min" : 1, "max": 1 }
+      {"value": 1001000 ,"resource": "[LTID]Chunk", "min" : 1, "max": 1 }
     ]
   },
   "VeinT5" : {
@@ -97,7 +97,7 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 1001000 ,"item": "[LTID]Chunk", "min" : 1, "max": 1 }
+      {"value": 1001000 ,"resource": "[LTID]Chunk", "min" : 1, "max": 1 }
     ]
   },
 
@@ -107,7 +107,7 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 1001000 ,"item": "[LTID]Charm", "min" : 1, "max": 1 }
+      {"value": 1001000 ,"resource": "[LTID]Charm", "min" : 1, "max": 1 }
     ]
   },
   "PlantT2" : {
@@ -116,7 +116,7 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 1001000 ,"item": "[LTID]Charm", "min" : 1, "max": 1 }
+      {"value": 1001000 ,"resource": "[LTID]Charm", "min" : 1, "max": 1 }
     ]
   },
   "PlantT3" : {
@@ -125,7 +125,7 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 1001000 ,"item": "[LTID]Charm", "min" : 1, "max": 1 }
+      {"value": 1001000 ,"resource": "[LTID]Charm", "min" : 1, "max": 1 }
     ]
   },
   "PlantT4" : {
@@ -134,7 +134,7 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 1001000 ,"item": "[LTID]Charm", "min" : 1, "max": 1 }
+      {"value": 1001000 ,"resource": "[LTID]Charm", "min" : 1, "max": 1 }
     ]
   },
   "PlantT5" : {
@@ -143,7 +143,7 @@
     "maxRoll": 1000000,
     "luck": true,
     "loot": [
-      {"value": 1001000 ,"item": "[LTID]Charm", "min" : 1, "max": 1 }
+      {"value": 1001000 ,"resource": "[LTID]Charm", "min" : 1, "max": 1 }
     ]
   },
 
@@ -151,29 +151,29 @@
   "Charm":{
     "ROLL/WEIGHT": "WEIGHT",
     "loot": [
-      {"value": 1, "item": "speed_mining_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "exp_mining_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "luck_mining_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "yieldMin_mining_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "yieldMax_mining_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "speed_mining_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "exp_mining_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "luck_mining_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "yieldMin_mining_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "yieldMax_mining_charm", "min" : 1, "max" :1},
 
-      {"value": 1, "item": "speed_woodcutting_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "exp_woodcutting_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "luck_woodcutting_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "yieldMin_woodcutting_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "yieldMax_woodcutting_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "speed_woodcutting_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "exp_woodcutting_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "luck_woodcutting_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "yieldMin_woodcutting_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "yieldMax_woodcutting_charm", "min" : 1, "max" :1},
 
-      {"value": 1, "item": "speed_harvesting_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "exp_harvesting_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "luck_harvesting_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "yieldMin_harvesting_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "yieldMax_harvesting_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "speed_harvesting_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "exp_harvesting_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "luck_harvesting_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "yieldMin_harvesting_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "yieldMax_harvesting_charm", "min" : 1, "max" :1},
 
-      {"value": 1, "item": "con_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "str_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "int_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "dex_charm", "min" : 1, "max" :1},
-      {"value": 1, "item": "foc_charm", "min" : 1, "max" :1}
+      {"value": 1, "resource": "con_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "str_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "int_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "dex_charm", "min" : 1, "max" :1},
+      {"value": 1, "resource": "foc_charm", "min" : 1, "max" :1}
       
     ]
   },
@@ -181,33 +181,33 @@
   "Sap":{
     "ROLL/WEIGHT": "WEIGHT",
     "loot": [
-      {"value": 49, "item": "sapT1", "min" : 1, "max" :1},
-      {"value": 30, "item": "sapT2", "min" : 1, "max" :1},
-      {"value": 15, "item": "sapT3", "min" : 1, "max" :1},
-      {"value": 5, "item": "sapT4", "min" : 1, "max" :1},
-      {"value": 1, "item": "sapT5", "min" : 1, "max" :1}
+      {"value": 49, "resource": "sapT1", "min" : 1, "max" :1},
+      {"value": 30, "resource": "sapT2", "min" : 1, "max" :1},
+      {"value": 15, "resource": "sapT3", "min" : 1, "max" :1},
+      {"value": 5, "resource": "sapT4", "min" : 1, "max" :1},
+      {"value": 1, "resource": "sapT5", "min" : 1, "max" :1}
     ]
   },
   
   "Stick":{
     "ROLL/WEIGHT": "WEIGHT",
     "loot": [
-      {"value": 49, "item": "stickT1", "min" : 1, "max" :1},
-      {"value": 30, "item": "stickT2", "min" : 1, "max" :1},
-      {"value": 15, "item": "stickT3", "min" : 1, "max" :1},
-      {"value": 5, "item": "stickT4", "min" : 1, "max" :1},
-      {"value": 1, "item": "stickT5", "min" : 1, "max" :1}
+      {"value": 49, "resource": "stickT1", "min" : 1, "max" :1},
+      {"value": 30, "resource": "stickT2", "min" : 1, "max" :1},
+      {"value": 15, "resource": "stickT3", "min" : 1, "max" :1},
+      {"value": 5, "resource": "stickT4", "min" : 1, "max" :1},
+      {"value": 1, "resource": "stickT5", "min" : 1, "max" :1}
     ]
   },
 
   "Chunk":{
     "ROLL/WEIGHT": "WEIGHT",
     "loot": [
-      {"value": 49, "item": "chunkT1", "min" : 1, "max" :1},
-      {"value": 30, "item": "chunkT2", "min" : 1, "max" :1},
-      {"value": 15, "item": "chunkT3", "min" : 1, "max" :1},
-      {"value": 5, "item": "chunkT4", "min" : 1, "max" :1},
-      {"value": 1, "item": "chunkT5", "min" : 1, "max" :1}
+      {"value": 49, "resource": "chunkT1", "min" : 1, "max" :1},
+      {"value": 30, "resource": "chunkT2", "min" : 1, "max" :1},
+      {"value": 15, "resource": "chunkT3", "min" : 1, "max" :1},
+      {"value": 5, "resource": "chunkT4", "min" : 1, "max" :1},
+      {"value": 1, "resource": "chunkT5", "min" : 1, "max" :1}
     ]
   }
 
