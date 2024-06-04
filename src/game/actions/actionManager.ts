@@ -75,6 +75,7 @@ class ActionManager {
 
     this.actionQueue.get(characterName)!.splice(index, 1)
     console.log('%s: Removed action at index %d', characterName, index)
+    updateCharacter({ characterName, actionQueue: this.actionQueue.get(characterName)! })
   }
 
   // public functions to add an action
