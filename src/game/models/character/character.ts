@@ -1,15 +1,12 @@
 import mongoose, { Schema, model, Types } from 'mongoose';
 import { Currency, currencySchema } from './currency.js';
-import { Profession, professionSchema } from './profession.js';
+import { Professions, professionSchema } from './profession.js';
 import { Resources, resourcesSchema } from './resources.js';
-
-export type ProfessionId = "woodcutting" | "mining" | "harvesting" | "weaving" | "smelting" | "woodworking";
-export type Professions = Record<ProfessionId, Profession>;
 
 export interface Character {
   _id: Types.ObjectId;
   characterName: string;
-  exp: number;
+  expChar: number;
   currency: Currency;
   items: Types.ObjectId[];
   activeAction: object | null;
@@ -25,7 +22,7 @@ const characterSchema = new Schema<Character>({
     unique: true,
     index: true,
   },
-  exp: { 
+  expChar: { 
     type: Number,
     default: 0,
   },

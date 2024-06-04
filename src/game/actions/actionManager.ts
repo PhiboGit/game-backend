@@ -1,3 +1,4 @@
+import { updateCharacter } from "../services/characterService.js";
 import ITaskAction from "./ITaskAction.js";
 import GatheringAction from "./gatheringAction/gatheringAction.js";
 import { ActionMsg, ActionObject } from "./types.js"
@@ -49,6 +50,7 @@ class ActionManager {
     if (cancel) {
       cancel()
       console.log('%s: Callback to cancel was called', characterName)
+      updateCharacter({ characterName, activeAction: null })
     } else {
       console.log('%s: No active action to cancel', characterName)
     }
@@ -95,6 +97,7 @@ class ActionManager {
     }
     this.actionQueue.get(characterName)!.push(action)
     console.log('%s: Added to queue. Queue length:', characterName, this.actionQueue.get(characterName)!.length)
+    updateCharacter({ characterName, actionQueue: this.actionQueue.get(characterName)! })
 
     this.processQueue(characterName)
   }
@@ -107,6 +110,7 @@ class ActionManager {
     }
 
     const action = this.actionQueue.get(characterName)!.shift()
+    updateCharacter({ characterName, actionQueue: this.actionQueue.get(characterName)! })
     // clean up
     if(!action || this.actionQueue.get(characterName)!.length === 0) {
       this.actionQueue.delete(characterName)
@@ -167,6 +171,8 @@ class ActionManager {
         try {
           console.log('%s: Counter: %d %s Iterations left: %d', characterName, actionObject.counter, actionObject.actionMsg.limit, actionObject.actionMsg.iterations)
           await taskAction.validateAction(characterName, actionObject)
+
+          updateCharacter({ characterName, activeAction: actionObject })
 
           const  cancelCallback = this.createCancelCallback(characterName) 
           await taskAction.startAction(characterName, actionObject, cancelCallback )

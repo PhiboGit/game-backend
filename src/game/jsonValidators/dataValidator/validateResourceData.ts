@@ -1,5 +1,6 @@
 import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
+import { resourceIds } from "../../models/character/resources.js";
 
 const schemaResource = {
   "values": { "ref": "Resource" },
@@ -7,7 +8,7 @@ const schemaResource = {
   "definitions": {
     "Resource": {
       "properties": {
-        "id": { "type": "string" },
+        "id": { "enum": resourceIds },
         "displayName": { "type": "string" },
         "description": { "type": "string" },
         "rarity": { enum: ["none", "common", "uncommon", "rare", "epic", "legendary"] },

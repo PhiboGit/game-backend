@@ -1,54 +1,27 @@
 import { Schema } from "mongoose";
 
-export interface Resources {
-  woodT1: number;
-  woodT2: number;
-  woodT3: number;
-  woodT4: number;
-  woodT5: number;
-  fiberT1: number;
-  fiberT2: number;
-  fiberT3: number;
-  fiberT4: number;
-  fiberT5: number;
-  oreT1: number;
-  oreT2: number;
-  oreT3: number;
-  oreT4: number;
-  oreT5: number;
-  coal: number;
-  ingotT1: number;
-  ingotT2: number;
-  ingotT3: number;
-  ingotT4: number;
-  ingotT5: number;
-  plankT1: number;
-  plankT2: number;
-  plankT3: number;
-  plankT4: number;
-  plankT5: number;
-  textileT1: number;
-  textileT2: number;
-  textileT3: number;
-  textileT4: number;
-  textileT5: number;
-  sapT1: number;
-  sapT2: number;
-  sapT3: number;
-  sapT4: number;
-  sapT5: number;
-  stickT1: number;
-  stickT2: number;
-  stickT3: number;
-  stickT4: number;
-  stickT5: number;
-  chunkT1: number;
-  chunkT2: number;
-  chunkT3: number;
-  chunkT4: number;
-  chunkT5: number;
-}
+export const resourceIds = [
+  "woodT1", "woodT2", "woodT3", "woodT4", "woodT5",
+  "fiberT1", "fiberT2", "fiberT3", "fiberT4", "fiberT5",
+  "oreT1", "oreT2", "oreT3", "oreT4", "oreT5",
+  "coal",
+  "ingotT1", "ingotT2", "ingotT3", "ingotT4", "ingotT5",
+  "plankT1", "plankT2", "plankT3", "plankT4", "plankT5",
+  "textileT1", "textileT2", "textileT3", "textileT4", "textileT5",
+  "sapT1", "sapT2", "sapT3", "sapT4", "sapT5",
+  "stickT1", "stickT2", "stickT3", "stickT4", "stickT5",
+  "chunkT1", "chunkT2", "chunkT3", "chunkT4", "chunkT5",
+  "speed_mining_charm", "exp_mining_charm", "luck_mining_charm", "yieldMin_mining_charm", "yieldMax_mining_charm",
+  "speed_woodcutting_charm", "exp_woodcutting_charm", "luck_woodcutting_charm", "yieldMin_woodcutting_charm", "yieldMax_woodcutting_charm",
+  "speed_harvesting_charm", "exp_harvesting_charm", "luck_harvesting_charm", "yieldMin_harvesting_charm", "yieldMax_harvesting_charm",
+  "con_charm", "int_charm", "str_charm", "foc_charm", "dex_charm",
+] as const
 
+export type ResourceId = typeof resourceIds[number];
+export const isResourceId = (resource: string): resource is ResourceId => resourceIds.includes(resource as ResourceId)
+export type Resources = Record<ResourceId, number>;
+
+  
 export const resourcesSchema = new Schema<Resources>({
   woodT1: { type: Number, default: 0 },
   woodT2: { type: Number, default: 0 },

@@ -10,8 +10,8 @@ import ResourceRecipeDataJSON from '../data/gameDataJSON/resourceRecipeData.json
 import ExpTableDataJSON from '../data/gameDataJSON/expTableData.json'
 import LootTableDataJSON from '../data/gameDataJSON/lootTableData.json'
 
-export const gatheringNodeData = validate(validateGatheringNodeData , GatheringNodeDataJSON);
 export const resourceData = validate(validateResourceData, ResourceDataJSON);
+export const gatheringNodeData = validate(validateGatheringNodeData , GatheringNodeDataJSON);
 export const resourceRecipeData = validate(validateResourceRecipeData, ResourceRecipeDataJSON);
 export const expTableData = validate(validateExpTableData, ExpTableDataJSON);
 export const lootTableData = validate(validateLootTableData, LootTableDataJSON);

@@ -1,5 +1,6 @@
 import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
+import { resourceIds } from "../../models/character/resources.js";
 
 const schemaGatheringNode = {
   "values": { "ref": "GatheringNode" },
@@ -16,7 +17,7 @@ const schemaGatheringNode = {
         "time": { "type": "int32" },
         "exp": { "type": "int32" },
         "expChar": { "type": "int32" },
-        "resource": { "type": "string" },
+        "resource": { "enum": resourceIds },
         "minAmount": { "type": "int32" },
         "maxAmount": { "type": "int32" }
       },

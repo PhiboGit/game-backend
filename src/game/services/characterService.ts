@@ -1,5 +1,9 @@
+import { connectionManager } from "../../app/websocket/WsConnectionManager.js"
+import { ActionObject } from "../actions/types.js"
 import CharacterClass from "../models/character/CharacterClass.js"
 import CharacterModel from "../models/character/character.js"
+import { ProfessionId } from "../models/character/profession.js"
+import { ResourceId, Resources } from "../models/character/resources.js"
 import ItemModel from "../models/item/item.js"
 
 
@@ -17,4 +21,64 @@ export async function getCharacter(characterName: string): Promise<CharacterClas
   const character = new CharacterClass(characterDatabase, itemDatabase)
 
   return character
+}
+
+type UpdateParameters = {
+  characterName: string,
+  resources?: Partial<Resources>,
+  experiences?: Partial<Record<ProfessionId, number>>,
+  expChar?: number,
+  activeAction?: ActionObject | null,
+  actionQueue?: ActionObject[]
+  
+}
+export async function updateCharacter(
+  updateParameters: UpdateParameters
+): Promise<void> {
+  const {characterName, resources, experiences, expChar, activeAction, actionQueue} = updateParameters
+
+  // increments
+  const $inc: any = {}
+  if(expChar) $inc['expChar'] = updateParameters.expChar
+  if(resources){
+    Object.entries(resources).forEach(([resource, amount]) => {
+      $inc[`resources.${resource as ResourceId}`] = amount
+    })
+  } 
+
+  if(experiences) {
+    Object.entries(experiences).forEach(([profession, amount]) => {
+      $inc[`professions.${profession as ProfessionId}.exp`] = amount
+    })
+  }
+
+  // sets
+  const $set: any  = {}
+  if(activeAction || activeAction === null) $set['activeAction'] = activeAction
+  if(actionQueue) $set['actionQueue'] = actionQueue
+
+
+  // push
+  const $push: any = {}
+
+  // pull
+  const $pull: any = {}
+
+
+  const update = {
+    $inc,
+    $set,
+    $push,
+    $pull
+  }
+  console.log('%s: updates: ', characterName, update)
+  
+  try {
+    await CharacterModel.updateOne({ characterName }, {
+      update
+    })
+    connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_character', update}))
+  } catch (error) {
+    
+  }
 }

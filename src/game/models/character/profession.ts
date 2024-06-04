@@ -1,10 +1,7 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-export interface Profession {
-  exp: number;
-  equipment: Equipment;
-}
-
+export const professionIds = ["woodcutting", "mining", "harvesting", "weaving", "smelting", "woodworking"]
+export type ProfessionId = typeof professionIds[number]
 export interface Equipment {
   tool: Types.ObjectId | null;
   head: Types.ObjectId | null;
@@ -13,6 +10,12 @@ export interface Equipment {
   feet: Types.ObjectId | null;
   hands: Types.ObjectId | null;
 }
+export interface Profession {
+  exp: number;
+  equipment: Equipment;
+}
+
+export type Professions = Record<ProfessionId, Profession>;
 
 // Define Equipment schema
 export const equipmentSchema = new Schema<Equipment>({
