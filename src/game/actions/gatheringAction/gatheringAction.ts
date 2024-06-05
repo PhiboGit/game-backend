@@ -50,7 +50,7 @@ export default class GatheringAction implements IAction {
   }
 
   // Use the same character the action was started with. This would prevent hot swapping item/stats
-  async finishedAction(character: CharacterClass, actionObject: GatheringActionObject) {
+  private async finishedAction(character: CharacterClass, actionObject: GatheringActionObject) {
     const nodeData = gatheringNodeData[actionObject.actionMsg.args.node];
     const professionStats = character!.getProfessionStats(nodeData.profession)
 

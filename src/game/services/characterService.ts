@@ -74,9 +74,10 @@ export async function updateCharacter(
   console.log('%s: updates: ', characterName, update)
   
   try {
-    await CharacterModel.updateOne({ characterName }, {
-      update
-    })
+    await CharacterModel.updateOne(
+      { characterName },
+      update 
+      )
     connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_character', update}))
   } catch (error) {
     

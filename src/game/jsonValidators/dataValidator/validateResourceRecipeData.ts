@@ -1,5 +1,6 @@
 import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
+import { resourceIds } from "../../models/character/resources.js";
 
 const schemaResourceRecipe = {
   "values": { "ref": "ResourceRecipe" },
@@ -13,7 +14,7 @@ const schemaResourceRecipe = {
 
         "profession": { "enum": ["weaving", "smelting", "woodworking"] },
 
-        "resource": { "type": "string" },
+        "resource": { enum: resourceIds },
         "amount": { "type": "int32" },
         "level": { "type": "int32" },
         "time": { "type": "int32" },
@@ -27,7 +28,7 @@ const schemaResourceRecipe = {
               "slot": {
                 "elements": {
                   "properties": {
-                    "resource": { "type": "string" },
+                    "resource": { enum: resourceIds },
                     "amount": { "type": "int32" }
                   },
                   "additionalProperties": false

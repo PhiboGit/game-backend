@@ -16,10 +16,17 @@ import { ActionMsg, ActionObject } from "./types.js"
  * - cancelAction: removes an action from the queue 
  */
 class ActionManager {
-  private actionMap: Map<string, IAction> = new Map([
-    ["gathering", new GatheringAction()],
-    ["crafting", new CraftingAction()],
-  ]);
+  getAction(type: string): IAction | null {
+    switch(type) {
+      case 'crafting':
+        return new CraftingAction();
+      case 'gathering':
+        return new GatheringAction();
+      default:
+        console.log(`Invalid action type: ${type}`)
+        return null
+    }
+  }
 
   private MAX_QUEUE_LENGTH = 4 
 
@@ -82,15 +89,15 @@ class ActionManager {
 
   // public functions to add an action
   addAction(characterName: string, actionMsg: ActionMsg) {
-    const action: ActionObject = {
+    const actionObject: ActionObject = {
       counter: 0,
       actionTime: null,
       actionMsg
     }
-    this.enqueueAction(characterName, action)
+    this.enqueueAction(characterName, actionObject)
   }
 
-  private enqueueAction(characterName: string, action: ActionObject) {
+  private enqueueAction(characterName: string, actionObject: ActionObject) {
     if (!this.actionQueue.has(characterName)) {
       this.actionQueue.set(characterName, [])
     }
@@ -98,7 +105,7 @@ class ActionManager {
       console.log('%s: Queue is full!', characterName)
 		  return
     }
-    this.actionQueue.get(characterName)!.push(action)
+    this.actionQueue.get(characterName)!.push(actionObject)
     console.log('%s: Added to queue. Queue length:', characterName, this.actionQueue.get(characterName)!.length)
     updateCharacter({ characterName, actionQueue: this.actionQueue.get(characterName)! })
 
@@ -134,15 +141,15 @@ class ActionManager {
         return
       }
       
-      const action = this.dequeueAction(characterName)
-      if(!action) {
+      const actionObject = this.dequeueAction(characterName)
+      if(!actionObject) {
         return
       }
       console.log('%s: Removed from queue to process. Queue length:', characterName, this.actionQueue.get(characterName)?.length || 0)
       
       console.log('%s: Processing queue...', characterName)
       try {
-        await this.startSquentialAction(characterName , action);
+        await this.startSquentialAction(characterName , actionObject);
         console.log('%s: Squential action done', characterName);
       } catch (error) {
         console.log('%s: Squential action interrupted:', characterName, error);
@@ -163,21 +170,21 @@ class ActionManager {
    */
   private startSquentialAction(characterName: string, actionObject: ActionObject): Promise<void> {
     return new Promise(async (resolve, reject) => {
-      const actionType = this.actionMap.get(actionObject.actionMsg.type)
-      if(!actionType) {
+      const action = this.getAction(actionObject.actionMsg.type)
+      if(!action) {
         console.error('%s: unknown action. should not happen!', characterName, actionObject)
         return reject('unknown action. should not happen!')
       }
 
       while(actionObject.actionMsg.iterations > 0 || !actionObject.actionMsg.limit) {
         try {
-          await actionType.validateAction(characterName, actionObject)
+          await action.validateAction(characterName, actionObject)
           
           updateCharacter({ characterName, activeAction: actionObject })
           
           const  cancelCallback = this.createCancelCallback(characterName) 
           console.log('%s: Counter: %d %s Iterations left: %d', characterName, actionObject.counter, actionObject.actionMsg.limit, actionObject.actionMsg.iterations)
-          await actionType.startAction(characterName, actionObject, cancelCallback )
+          await action.startAction(characterName, actionObject, cancelCallback )
           actionObject.counter++
           actionObject.actionMsg.iterations--
         } catch(error) {
