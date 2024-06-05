@@ -1,5 +1,4 @@
 import { resourceRecipeData } from "../../data/dataLoader.js";
-import { ResourceRecipeData } from "../../jsonValidators/dataValidator/validateResourceRecipeData.js";
 import { CraftingMsg } from "../../jsonValidators/messageValidator/validateCraftingMsg.js";
 import CharacterClass from "../../models/character/CharacterClass.js";
 import { ResourceId, Resources } from "../../models/character/resources.js";
