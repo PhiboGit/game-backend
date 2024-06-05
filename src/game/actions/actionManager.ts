@@ -1,5 +1,6 @@
 import { updateCharacter } from "../services/characterService.js";
-import IAction from "./ITaskAction.js";
+import IAction from "./IAction.js";
+import CraftingAction from "./crafting/craftingAction.js";
 import GatheringAction from "./gatheringAction/gatheringAction.js";
 import { ActionMsg, ActionObject } from "./types.js"
 
@@ -17,6 +18,7 @@ import { ActionMsg, ActionObject } from "./types.js"
 class ActionManager {
   private actionMap: Map<string, IAction> = new Map([
     ["gathering", new GatheringAction()],
+    ["crafting", new CraftingAction()],
   ]);
 
   private MAX_QUEUE_LENGTH = 4 
@@ -163,19 +165,18 @@ class ActionManager {
     return new Promise(async (resolve, reject) => {
       const actionType = this.actionMap.get(actionObject.actionMsg.type)
       if(!actionType) {
-        console.error('%s: unknown task. should not happen!', characterName, actionObject)
-        return reject('unknown task. should not happen!')
+        console.error('%s: unknown action. should not happen!', characterName, actionObject)
+        return reject('unknown action. should not happen!')
       }
 
-      console.log('%s: Squential action started', characterName)
       while(actionObject.actionMsg.iterations > 0 || !actionObject.actionMsg.limit) {
         try {
-          console.log('%s: Counter: %d %s Iterations left: %d', characterName, actionObject.counter, actionObject.actionMsg.limit, actionObject.actionMsg.iterations)
           await actionType.validateAction(characterName, actionObject)
-
+          
           updateCharacter({ characterName, activeAction: actionObject })
-
+          
           const  cancelCallback = this.createCancelCallback(characterName) 
+          console.log('%s: Counter: %d %s Iterations left: %d', characterName, actionObject.counter, actionObject.actionMsg.limit, actionObject.actionMsg.iterations)
           await actionType.startAction(characterName, actionObject, cancelCallback )
           actionObject.counter++
           actionObject.actionMsg.iterations--
