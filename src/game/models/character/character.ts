@@ -2,6 +2,7 @@ import mongoose, { Schema, model, Types } from 'mongoose';
 import { Currency, currencySchema } from './currency.js';
 import { Professions, professionSchema } from './profession.js';
 import { Resources, resourcesSchema } from './resources.js';
+import { ActionObject } from '../../actions/types.js';
 
 export interface Character {
   _id: Types.ObjectId;
@@ -9,8 +10,8 @@ export interface Character {
   expChar: number;
   currency: Currency;
   items: Types.ObjectId[];
-  activeAction: object | null;
-  actionQueue: object[];
+  activeAction: ActionObject | null;
+  actionQueue: ActionObject[];
   professions: Professions;
   resources: Resources;
 }

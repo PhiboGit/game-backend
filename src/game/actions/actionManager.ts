@@ -1,4 +1,4 @@
-import { updateCharacter } from "../services/characterService.js";
+import { getAllCharacters, updateCharacter } from "../services/characterService.js";
 import IAction from "./IAction.js";
 import CraftingAction from "./crafting/craftingAction.js";
 import GatheringAction from "./gatheringAction/gatheringAction.js";
@@ -16,6 +16,32 @@ import { ActionMsg, ActionObject } from "./types.js"
  * - cancelAction: removes an action from the queue 
  */
 class ActionManager {
+  
+  private MAX_QUEUE_LENGTH = 4 
+  
+  private actionQueue: Map<string, ActionObject[]> = new Map()
+  
+  private activeActionTimeoutCancellers: Map<string, () => void> = new Map()
+
+  async init(){
+    console.log('ActionManager: init starting')
+	  const characters = await getAllCharacters()
+    for (const character of characters){
+      // set the Queue
+      this.actionQueue.set(character.characterName, character.actionQueue)
+      console.log('ActionManager init: actionQueue added for: ', character.characterName)
+      if (character.activeAction){
+        // set the current action as the first in Queue
+        this.actionQueue.get(character.characterName)?.unshift(character.activeAction)
+        
+        console.log('ActionManager init: currentAction added for: ', character.characterName)
+      }
+      // start the Queue
+      this.processQueue(character.characterName)
+	}
+	console.log('ActionManager: init finished')
+  }
+  
   getAction(type: string): IAction | null {
     switch(type) {
       case 'crafting':
@@ -27,12 +53,6 @@ class ActionManager {
         return null
     }
   }
-
-  private MAX_QUEUE_LENGTH = 4 
-
-  private actionQueue: Map<string, ActionObject[]> = new Map()
-
-  private activeActionTimeoutCancellers: Map<string, () => void> = new Map()
 
   private isActionActive(characterName: string): boolean {
     return this.activeActionTimeoutCancellers.has(characterName)
@@ -200,3 +220,5 @@ class ActionManager {
 }
 
 export const actionManager = new ActionManager()
+// Call the init method on the singleton instance
+actionManager.init();

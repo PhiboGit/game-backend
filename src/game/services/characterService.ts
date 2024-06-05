@@ -23,6 +23,18 @@ export async function getCharacter(characterName: string): Promise<CharacterClas
   return character
 }
 
+export async function getAllCharacters(): Promise<CharacterClass[]> {
+  const characterDatabases = await CharacterModel.find()
+  const characters: CharacterClass[] = []
+
+  await Promise.all(characterDatabases.map(async(characterDatabase) => {
+    const itemDatabase = await ItemModel.find({ _id: { $in: characterDatabase.items } })
+    const character = new CharacterClass(characterDatabase, itemDatabase)
+    characters.push(character)
+  }))
+  return characters
+}
+
 type UpdateParameters = {
   characterName: string,
   resources?: Partial<Resources>,

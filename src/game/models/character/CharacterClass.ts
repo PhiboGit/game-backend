@@ -5,6 +5,7 @@ import { Resources } from "./resources.js";
 import { Item } from "../item/item.js";
 import { getLevel } from "../../utils/expTable.js";
 import { Professions } from "./profession.js";
+import { ActionObject } from "../../actions/types.js";
 
 export default class CharacterClass implements Character {
   _id: Types.ObjectId;
@@ -12,8 +13,8 @@ export default class CharacterClass implements Character {
   expChar: number
   currency: Currency
   items: Types.ObjectId[]
-  activeAction: object | null
-  actionQueue: object[]
+  activeAction: ActionObject | null
+  actionQueue: ActionObject[]
   professions: Professions
   resources: Resources
   itemMap: Map<Types.ObjectId, Item> = new Map()
