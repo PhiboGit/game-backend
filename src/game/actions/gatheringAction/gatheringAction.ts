@@ -5,13 +5,13 @@ import { ResourceId, Resources } from "../../models/character/resources.js";
 import { getCharacter, updateCharacter } from "../../services/characterService.js";
 import { parseLootTable } from "../../utils/lootTable.js";
 import { rollRange } from "../../utils/randomDice.js";
-import ITaskAction from "../ITaskAction.js";
+import IAction from "../ITaskAction.js";
 import { getActionTime } from "../actionUtils.js";
 import { ActionObject } from "../types.js";
 
 export type GatheringActionObject = Omit<ActionObject, 'actionMsg'> & { actionMsg: GatheringMsg };
 
-export default class GatheringAction implements ITaskAction {
+export default class GatheringAction implements IAction {
   async validateAction(characterName: string, actionObject: GatheringActionObject): Promise<void> {
     return new Promise(async (resolve, reject) => {
       // Validate inputs

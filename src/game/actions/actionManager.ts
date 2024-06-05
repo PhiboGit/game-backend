@@ -1,5 +1,5 @@
 import { updateCharacter } from "../services/characterService.js";
-import ITaskAction from "./ITaskAction.js";
+import IAction from "./ITaskAction.js";
 import GatheringAction from "./gatheringAction/gatheringAction.js";
 import { ActionMsg, ActionObject } from "./types.js"
 
@@ -15,7 +15,7 @@ import { ActionMsg, ActionObject } from "./types.js"
  * - cancelAction: removes an action from the queue 
  */
 class ActionManager {
-  private taskMap: Map<string, ITaskAction> = new Map([
+  private actionMap: Map<string, IAction> = new Map([
     ["gathering", new GatheringAction()],
   ]);
 
@@ -161,8 +161,8 @@ class ActionManager {
    */
   private startSquentialAction(characterName: string, actionObject: ActionObject): Promise<void> {
     return new Promise(async (resolve, reject) => {
-      const taskAction = this.taskMap.get(actionObject.actionMsg.task)
-      if(!taskAction) {
+      const actionType = this.actionMap.get(actionObject.actionMsg.type)
+      if(!actionType) {
         console.error('%s: unknown task. should not happen!', characterName, actionObject)
         return reject('unknown task. should not happen!')
       }
@@ -171,12 +171,12 @@ class ActionManager {
       while(actionObject.actionMsg.iterations > 0 || !actionObject.actionMsg.limit) {
         try {
           console.log('%s: Counter: %d %s Iterations left: %d', characterName, actionObject.counter, actionObject.actionMsg.limit, actionObject.actionMsg.iterations)
-          await taskAction.validateAction(characterName, actionObject)
+          await actionType.validateAction(characterName, actionObject)
 
           updateCharacter({ characterName, activeAction: actionObject })
 
           const  cancelCallback = this.createCancelCallback(characterName) 
-          await taskAction.startAction(characterName, actionObject, cancelCallback )
+          await actionType.startAction(characterName, actionObject, cancelCallback )
           actionObject.counter++
           actionObject.actionMsg.iterations--
         } catch(error) {

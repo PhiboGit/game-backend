@@ -21,52 +21,11 @@ export type ResourceId = typeof resourceIds[number];
 export const isResourceId = (resource: string): resource is ResourceId => resourceIds.includes(resource as ResourceId)
 export type Resources = Record<ResourceId, number>;
 
-  
+const resourcesSchemaDefinition = resourceIds.reduce((acc, resourceId) => {
+  acc[resourceId] = { type: Number, default: 0 };
+  return acc;
+}, {} as Record<ResourceId, { type: NumberConstructor, default: number }>);
+
 export const resourcesSchema = new Schema<Resources>({
-  woodT1: { type: Number, default: 0 },
-  woodT2: { type: Number, default: 0 },
-  woodT3: { type: Number, default: 0 },
-  woodT4: { type: Number, default: 0 },
-  woodT5: { type: Number, default: 0 },
-  fiberT1: { type: Number, default: 0 },
-  fiberT2: { type: Number, default: 0 },
-  fiberT3: { type: Number, default: 0 },
-  fiberT4: { type: Number, default: 0 },
-  fiberT5: { type: Number, default: 0 },
-  oreT1: { type: Number, default: 0 },
-  oreT2: { type: Number, default: 0 },
-  oreT3: { type: Number, default: 0 },
-  oreT4: { type: Number, default: 0 },
-  oreT5: { type: Number, default: 0 },
-  coal: { type: Number, default: 0 },
-  ingotT1: { type: Number, default: 0 },
-  ingotT2: { type: Number, default: 0 },
-  ingotT3: { type: Number, default: 0 },
-  ingotT4: { type: Number, default: 0 },
-  ingotT5: { type: Number, default: 0 },
-  plankT1: { type: Number, default: 0 },
-  plankT2: { type: Number, default: 0 },
-  plankT3: { type: Number, default: 0 },
-  plankT4: { type: Number, default: 0 },
-  plankT5: { type: Number, default: 0 },
-  textileT1: { type: Number, default: 0 },
-  textileT2: { type: Number, default: 0 },
-  textileT3: { type: Number, default: 0 },
-  textileT4: { type: Number, default: 0 },
-  textileT5: { type: Number, default: 0 },
-  sapT1: { type: Number, default: 0 },
-  sapT2: { type: Number, default: 0 },
-  sapT3: { type: Number, default: 0 },
-  sapT4: { type: Number, default: 0 },
-  sapT5: { type: Number, default: 0 },
-  stickT1: { type: Number, default: 0 },
-  stickT2: { type: Number, default: 0 },
-  stickT3: { type: Number, default: 0 },
-  stickT4: { type: Number, default: 0 },
-  stickT5: { type: Number, default: 0 },
-  chunkT1: { type: Number, default: 0 },
-  chunkT2: { type: Number, default: 0 },
-  chunkT3: { type: Number, default: 0 },
-  chunkT4: { type: Number, default: 0 },
-  chunkT5: { type: Number, default: 0 },
+  ...resourcesSchemaDefinition
 }, {_id: false});

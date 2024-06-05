@@ -26,25 +26,25 @@ export function incomingMessages(characterName: string, msg: string) {
 function routeMessage(characterName: string, msg: IMessage) {
     
   switch (msg.type) {
-    case 'test':
-      console.log('%s: test', characterName)
+    case 'gathering':
+      const gatheringMsg = validateGatheringMsg(msg)
+      if (gatheringMsg) {
+        console.log('Valid! %s msg: %o', characterName, gatheringMsg)
+        actionManager.addAction(characterName, gatheringMsg)
+      }
       break
-    case 'action':
-      if (validateGatheringMsg(msg)) {
-        console.log('Valid! %s msg: %o', characterName, msg)
-        actionManager.addAction(characterName, msg)
-        return
+    case 'crafting':
+      const craftingMsg = validateCraftingMsg(msg)
+      if (craftingMsg) {
+        console.log('Valid! %s msg: %o', characterName, craftingMsg)
       }
-      if (validateCraftingMsg(msg)) {
-        console.log('Valid! %s msg: %o', characterName, msg)
-        return
-      }
+      break
     case 'cancelAction':
       if(validateCancelActionMsg(msg)) {
         console.log('Valid! %s msg: %o', characterName, msg)
         actionManager.cancelAction(characterName, msg.index)
-        return
       }
+      break
     default:
       console.log('unknown message')
   }
