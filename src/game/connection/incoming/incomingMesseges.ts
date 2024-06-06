@@ -1,7 +1,9 @@
 import { actionManager } from "../../actions/actionManager.js";
 import { validateCancelActionMsg } from "../../jsonValidators/messageValidator/cancelActionMsg.js";
+import { validateSellResourceMsg } from "../../jsonValidators/messageValidator/sellResource.js";
 import { validateCraftingMsg } from "../../jsonValidators/messageValidator/validateCraftingMsg.js";
 import { validateGatheringMsg } from "../../jsonValidators/messageValidator/validateGatheringMsg.js";
+import sellResources from "../../marketplace/sellResources.js";
 import { IMessage } from "../messageTypes.js";
 
 
@@ -44,6 +46,13 @@ function routeMessage(characterName: string, msg: IMessage) {
       if(validateCancelActionMsg(msg)) {
         console.log('Valid! %s msg: %o', characterName, msg)
         actionManager.cancelAction(characterName, msg.index)
+      }
+      break
+    case 'sell_resource':
+      const sellResourceMsg = validateSellResourceMsg(msg)
+      if(sellResourceMsg) {
+        console.log('Valid! %s msg: %o', characterName, msg)
+        sellResources(characterName, sellResourceMsg.resource, sellResourceMsg.amount)
       }
       break
     default:

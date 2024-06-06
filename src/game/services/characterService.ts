@@ -2,6 +2,7 @@ import { connectionManager } from "../../app/websocket/WsConnectionManager.js"
 import { ActionObject } from "../actions/types.js"
 import CharacterClass from "../models/character/CharacterClass.js"
 import CharacterModel from "../models/character/character.js"
+import { Currency, CurrencyId } from "../models/character/currency.js"
 import { ProfessionId } from "../models/character/profession.js"
 import { ResourceId, Resources } from "../models/character/resources.js"
 import ItemModel from "../models/item/item.js"
@@ -40,6 +41,7 @@ type UpdateParameters = {
   resources?: Partial<Resources>,
   experiences?: Partial<Record<ProfessionId, number>>,
   expChar?: number,
+  currency?: Partial<Currency>
   activeAction?: ActionObject | null,
   actionQueue?: ActionObject[]
   
@@ -47,7 +49,7 @@ type UpdateParameters = {
 export async function updateCharacter(
   updateParameters: UpdateParameters
 ): Promise<void> {
-  const {characterName, resources, experiences, expChar, activeAction, actionQueue} = updateParameters
+  const {characterName, resources, experiences, expChar, currency, activeAction, actionQueue} = updateParameters
 
   // increments
   const $inc: any = {}
@@ -61,6 +63,12 @@ export async function updateCharacter(
   if(experiences) {
     Object.entries(experiences).forEach(([profession, amount]) => {
       $inc[`professions.${profession as ProfessionId}.exp`] = amount
+    })
+  }
+
+  if(currency) {
+    Object.entries(currency).forEach(([currency, amount]) => {
+      $inc[`currency.${currency as CurrencyId}`] = amount
     })
   }
 
