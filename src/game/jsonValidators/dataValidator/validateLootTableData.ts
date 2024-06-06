@@ -11,14 +11,14 @@ const schemaLootTable = {
         "ROLL": {
           "properties": {
             "AND/OR": {enum: ["AND", "OR"]},
-            "maxRoll": {type: "int32"},
+            "maxRoll": {type: "uint32"},
             "luck": {type: "boolean"},
             "loot": {"elements": {
               "properties": {
-                "value": {type: "int32"},
+                "value": {type: "uint32"},
                 "resource": {type: "string"},
-                "min": {type: "int32"},
-                "max": {type: "int32"}
+                "min": {type: "uint32"},
+                "max": {type: "uint32"}
               }
             }}
           },
@@ -29,10 +29,10 @@ const schemaLootTable = {
           "properties": {
             "loot": {"elements": {
               "properties": {
-                "value": {type: "int32"},
+                "value": {type: "uint32"},
                 "resource": {type: "string"},
-                "min": {type: "int32"},
-                "max": {type: "int32"}
+                "min": {type: "uint32"},
+                "max": {type: "uint32"}
               }
             }}
           },

@@ -12,14 +12,14 @@ const schemaGatheringNode = {
         "displayName": { "type": "string" },
         "description": { "type": "string" },
         "profession": { "enum": ["woodcutting", "mining", "harvesting"] },
-        "tier": { "type": "int32" },
-        "level": { "type": "int32" },
-        "time": { "type": "int32" },
-        "exp": { "type": "int32" },
-        "expChar": { "type": "int32" },
+        "tier": { "type": "uint32" },
+        "level": { "type": "uint32" },
+        "time": { "type": "uint32" },
+        "exp": { "type": "uint32" },
+        "expChar": { "type": "uint32" },
         "resource": { "enum": resourceIds },
-        "minAmount": { "type": "int32" },
-        "maxAmount": { "type": "int32" }
+        "minAmount": { "type": "uint32" },
+        "maxAmount": { "type": "uint32" }
       },
       "optionalProperties": {},
       "additionalProperties": false

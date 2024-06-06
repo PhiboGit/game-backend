@@ -15,11 +15,11 @@ const schemaResourceRecipe = {
         "profession": { "enum": ["weaving", "smelting", "woodworking"] },
 
         "resource": { enum: resourceIds },
-        "amount": { "type": "int32" },
-        "level": { "type": "int32" },
-        "time": { "type": "int32" },
-        "exp": { "type": "int32" },
-        "expChar": { "type": "int32" },
+        "amount": { "type": "uint32" },
+        "level": { "type": "uint32" },
+        "time": { "type": "uint32" },
+        "exp": { "type": "uint32" },
+        "expChar": { "type": "uint32" },
 
         "ingredients": {
           "elements": {
@@ -29,7 +29,7 @@ const schemaResourceRecipe = {
                 "elements": {
                   "properties": {
                     "resource": { enum: resourceIds },
-                    "amount": { "type": "int32" }
+                    "amount": { "type": "uint32" }
                   },
                   "additionalProperties": false
                 }

@@ -3,7 +3,7 @@ import { ajv } from "../ajvInstance.js";
 
 const schemaExpTable = {
   "properties": {
-    "exp": {"values": { "type": "int32" }},
+    "exp": {"values": { "type": "uint32" }},
   },
 
   "optionalProperties": {},
