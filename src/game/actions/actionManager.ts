@@ -117,7 +117,7 @@ class ActionManager {
     this.enqueueAction(characterName, actionObject)
   }
 
-  private enqueueAction(characterName: string, actionObject: ActionObject) {
+  private async enqueueAction(characterName: string, actionObject: ActionObject) {
     if (!this.actionQueue.has(characterName)) {
       this.actionQueue.set(characterName, [])
     }
@@ -127,7 +127,7 @@ class ActionManager {
     }
     this.actionQueue.get(characterName)!.push(actionObject)
     console.log('%s: Added to queue. Queue length:', characterName, this.actionQueue.get(characterName)!.length)
-    updateCharacter({ characterName, actionQueue: this.actionQueue.get(characterName)! })
+    await updateCharacter({ characterName, actionQueue: this.actionQueue.get(characterName)! })
 
     this.processQueue(characterName)
   }
