@@ -238,11 +238,11 @@
     "ingredients": [
       {"required": true,
         "slot": [
-          {"resource": "woodT1", "amount": 5},
-          {"resource": "woodT2", "amount": 7},
+          {"resource": "woodT1", "amount": 20},
+          {"resource": "woodT2", "amount": 15},
           {"resource": "woodT3", "amount": 10},
-          {"resource": "woodT4", "amount": 15},
-          {"resource": "woodT5", "amount": 20}
+          {"resource": "woodT4", "amount": 7},
+          {"resource": "woodT5", "amount": 5}
         ]}
     
     ]
