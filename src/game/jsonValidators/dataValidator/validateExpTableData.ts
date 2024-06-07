@@ -1,5 +1,6 @@
 import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
+import ExpTableDataJSON from "../../data/gameDataJSON/expTableData.json";
 
 const schemaExpTable = {
   "properties": {
@@ -14,7 +15,7 @@ const schemaExpTable = {
 export type ExpTableData = JTDDataType<typeof schemaExpTable>
 const validate = ajv.compile<ExpTableData>(schemaExpTable)
 
-export function validateExpTableData (data: any): ExpTableData {
+function validateExpTableData (data: any): ExpTableData {
 
   if (validate(data)) {
     console.log("ExpTableData is valid")
@@ -24,3 +25,5 @@ export function validateExpTableData (data: any): ExpTableData {
     throw new Error("Error validating ExpTableData");
   }
 }
+
+export const expTableData = validateExpTableData(ExpTableDataJSON)

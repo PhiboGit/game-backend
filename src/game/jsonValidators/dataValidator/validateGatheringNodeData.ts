@@ -1,6 +1,7 @@
 import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
-import { resourceIds } from "../../models/character/resources.js";
+import { resourceIds } from "./validateResourceData.js";
+import GatheringNodeDataJSON from "../../data/gameDataJSON/gatheringNodeData.json";
 
 const schemaGatheringNode = {
   "values": { "ref": "GatheringNode" },
@@ -30,7 +31,7 @@ const schemaGatheringNode = {
 export type GatheringNodeData = JTDDataType<typeof schemaGatheringNode>
 const validate = ajv.compile<GatheringNodeData>(schemaGatheringNode)
 
-export function validateGatheringNodeData (data: any): GatheringNodeData {
+function validateGatheringNodeData (data: any): GatheringNodeData {
 
   if (validate(data)) {
     console.log("GatheringNodeData is valid")
@@ -40,3 +41,5 @@ export function validateGatheringNodeData (data: any): GatheringNodeData {
     throw new Error("Error validating GatheringNodeData");
   }
 }
+
+export const gatheringNodeData = validateGatheringNodeData(GatheringNodeDataJSON)

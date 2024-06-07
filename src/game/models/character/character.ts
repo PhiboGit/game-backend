@@ -1,8 +1,9 @@
 import mongoose, { Schema, model, Types } from 'mongoose';
 import { Currency, currencySchema } from './currency.js';
 import { Professions, professionSchema } from './profession.js';
-import { Resources, resourcesSchema } from './resources.js';
 import { ActionObject } from '../../actions/types.js';
+import { Resources } from '../../jsonValidators/dataValidator/validateResourceData.js';
+import { resourcesSchema } from './resources.js';
 
 export interface Character {
   _id: Types.ObjectId;

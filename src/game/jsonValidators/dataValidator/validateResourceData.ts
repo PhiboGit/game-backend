@@ -1,6 +1,8 @@
 import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
-import { resourceIds } from "../../models/character/resources.js";
+
+import ResourceDataJSON from "../../data/gameDataJSON/resourceData.json"
+
 
 const bonusTypes = ["con", "int", "str", "dex", "foc",
 "speed_mining", "exp_mining", "luck_mining", "yieldMin_mining", "yieldMax_mining",
@@ -19,7 +21,7 @@ const schemaResource = {
   "definitions": {
     "Resource": {
       "properties": {
-        "id": { "enum": resourceIds },
+        "id": { "type": "string" },
         "displayName": { "type": "string" },
         "description": { "type": "string" },
         "rarity": { enum: rarities },
@@ -39,7 +41,7 @@ const schemaResource = {
 export type ResourceData = JTDDataType<typeof schemaResource>
 const validate = ajv.compile<ResourceData>(schemaResource)
 
-export function validateResourceData (data: any): ResourceData {
+function validateResourceData (data: any): ResourceData {
   if (validate(data)) {
     console.log("ResourceData is valid")
     return data as ResourceData
@@ -48,3 +50,9 @@ export function validateResourceData (data: any): ResourceData {
     throw new Error("Error validating ResourceData");
   }
 }
+export const resourceData = validateResourceData(ResourceDataJSON)
+
+export const resourceIds = Object.keys(resourceData)
+export type ResourceId = typeof resourceIds[number];
+export const isResourceId = (resource: string): resource is ResourceId => resourceIds.includes(resource as ResourceId)
+export type Resources = Record<ResourceId, number>;

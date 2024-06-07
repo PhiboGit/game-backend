@@ -1,7 +1,7 @@
-import { gatheringNodeData } from "../../data/dataLoader.js";
+import { dataLoader } from "../../data/dataLoader.js";
+import { Resources, ResourceId } from "../../jsonValidators/dataValidator/validateResourceData.js";
 import { GatheringMsg } from "../../jsonValidators/messageValidator/validateGatheringMsg.js";
 import CharacterClass from "../../models/character/CharacterClass.js";
-import { ResourceId, Resources } from "../../models/character/resources.js";
 import { getCharacter, updateCharacter } from "../../services/characterService.js";
 import { parseLootTable } from "../../utils/lootTable.js";
 import { rollRange } from "../../utils/randomDice.js";
@@ -15,7 +15,7 @@ export default class GatheringAction implements IAction {
   async validateAction(characterName: string, actionObject: GatheringActionObject): Promise<void> {
     return new Promise(async (resolve, reject) => {
       // Validate inputs
-      const nodeData = gatheringNodeData[actionObject.actionMsg.args.node];
+      const nodeData = dataLoader.gatheringNodeData[actionObject.actionMsg.args.node];
       if(!nodeData) return reject('Invalid node!');
       const character = await getCharacter(characterName);
       if(!character) return reject('Character not found!');
@@ -51,7 +51,7 @@ export default class GatheringAction implements IAction {
 
   // Use the same character the action was started with. This would prevent hot swapping item/stats
   private async finishedAction(character: CharacterClass, actionObject: GatheringActionObject) {
-    const nodeData = gatheringNodeData[actionObject.actionMsg.args.node];
+    const nodeData = dataLoader.gatheringNodeData[actionObject.actionMsg.args.node];
     const professionStats = character!.getProfessionStats(nodeData.profession)
 
 

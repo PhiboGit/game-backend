@@ -1,6 +1,8 @@
 {
   "itemRecipe_pickaxeT1":{
     "id": "itemRecipe_pickaxeT1",
+    "displayName": "",
+    "description": "",
     "profession": "toolsmith",
     "level": 0,
     "time": 20000,
@@ -9,9 +11,11 @@
 
     "equipmentSlot": "tool",
     "equipmentProfessions": ["mining"],
-    "availableBoni": ["speed_mining", "luck_mining", "exp_mining", "yieldMax_mining", "str"],
     "tier": 1,
     "equipLevel": 0,
+
+    "baseGearScore": 100,
+    "availableBoni": ["speed_mining", "luck_mining", "exp_mining", "yieldMax_mining", "str"],
     "ingredients": [
       {"required": true,
       "slot": [

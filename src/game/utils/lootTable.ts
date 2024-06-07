@@ -1,5 +1,5 @@
 import {rollDice, rollRange, weightedChoice} from './randomDice.js'
-import { lootTableData } from '../data/dataLoader.js'
+import { dataLoader } from '../data/dataLoader.js'
 import { LootTable, LootTableRoll, LootTableWeight } from '../jsonValidators/dataValidator/validateLootTableData.js'
 
 export type LootFromTable = {
@@ -59,7 +59,7 @@ export function parseLootTable(tableName: string, size: number = 1, luck: number
       for (const roll of rolls) {
         // if it is another table, start recursion
         if (roll.resource.startsWith("[LTID]")) {
-          const subTable = lootTableData[roll.resource.substring(6)];
+          const subTable = dataLoader.lootTableData[roll.resource.substring(6)];
           if (subTable) {
             parseTable(subTable, roll.amount, luck);
           }
@@ -76,7 +76,7 @@ export function parseLootTable(tableName: string, size: number = 1, luck: number
       for (const roll of rolls) {
         // if it is another table, start recursion
         if (roll.resource.startsWith("[LTID]")) {
-          const subTable = lootTableData[roll.resource.substring(6)];
+          const subTable = dataLoader.lootTableData[roll.resource.substring(6)];
           if (subTable) {
             parseTable(subTable, roll.amount, luck);
           }
@@ -89,7 +89,7 @@ export function parseLootTable(tableName: string, size: number = 1, luck: number
   }
 
   // table is in the defined lootTable json
-  const table: LootTable = lootTableData[tableName]
+  const table: LootTable = dataLoader.lootTableData[tableName]
   if (!table) {
     console.error(`Couldn't find table: ${tableName}`)
     return results

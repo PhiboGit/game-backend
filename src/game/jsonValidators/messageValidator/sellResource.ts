@@ -1,6 +1,6 @@
 import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
-import { resourceIds } from "../../models/character/resources.js";
+import { resourceIds } from "../dataValidator/validateResourceData.js";
 
 const schemaSellResource = {
   properties: {

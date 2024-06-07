@@ -1,7 +1,7 @@
-import { resourceRecipeData } from "../../data/dataLoader.js";
+import { dataLoader } from "../../data/dataLoader.js";
+import { ResourceId, Resources } from "../../jsonValidators/dataValidator/validateResourceData.js";
 import { CraftingMsg } from "../../jsonValidators/messageValidator/validateCraftingMsg.js";
 import CharacterClass from "../../models/character/CharacterClass.js";
-import { ResourceId, Resources } from "../../models/character/resources.js";
 import { getCharacter, updateCharacter } from "../../services/characterService.js";
 import IAction from "../IAction.js";
 import { getActionTime } from "../actionUtils.js";
@@ -20,7 +20,7 @@ export default class CraftingAction implements IAction{
         return reject(error)
       }
 
-      const recipe = resourceRecipeData[actionObject.actionMsg.args.recipe];
+      const recipe = dataLoader.resourceRecipeData[actionObject.actionMsg.args.recipe];
       const professionStats = character.getProfessionStats(recipe.profession)
       if(!recipe) return reject('Invalid recipe!');
 
@@ -33,7 +33,7 @@ export default class CraftingAction implements IAction{
   private validateRecipe(character: CharacterClass, selectedIngredients:ResourceId[], recipeId: string): Promise<void> {
     return new Promise(async (resolve, reject) => {
       // Validate inputs
-      const recipe = resourceRecipeData[recipeId];
+      const recipe = dataLoader.resourceRecipeData[recipeId];
       if(!recipe) return reject('Invalid recipe!');
       const professionStats = character.getProfessionStats(recipe.profession)
       if(professionStats.level < recipe.level) return reject('Not high enough level!')
@@ -97,7 +97,7 @@ export default class CraftingAction implements IAction{
 
   private async finishedAction(character: CharacterClass, actionObject: CraftingActionObject) {
     return new Promise<void>(async (resolve, reject) => {
-      const recipe = resourceRecipeData[actionObject.actionMsg.args.recipe];
+      const recipe = dataLoader.resourceRecipeData[actionObject.actionMsg.args.recipe];
       const professionStats = character.getProfessionStats(recipe.profession)
   
       const resourcesUpdate: Partial<Resources> = {}

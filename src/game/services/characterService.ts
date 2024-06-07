@@ -1,10 +1,10 @@
 import { connectionManager } from "../../app/websocket/WsConnectionManager.js"
 import { ActionObject } from "../actions/types.js"
+import { Resources, ResourceId } from "../jsonValidators/dataValidator/validateResourceData.js"
 import CharacterClass from "../models/character/CharacterClass.js"
 import CharacterModel from "../models/character/character.js"
 import { Currency, CurrencyId } from "../models/character/currency.js"
 import { ProfessionId } from "../models/character/profession.js"
-import { ResourceId, Resources } from "../models/character/resources.js"
 import ItemModel from "../models/item/item.js"
 
 

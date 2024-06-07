@@ -1,7 +1,7 @@
 import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
-import { resourceRecipeData } from "../../data/dataLoader.js";
-import { resourceIds } from "../../models/character/resources.js";
+import { dataLoader } from "../../data/dataLoader.js";
+import { resourceIds } from "../dataValidator/validateResourceData.js";
 
 const schemaCrafting = {
   properties: {
@@ -22,7 +22,7 @@ export type CraftingMsg = JTDDataType<typeof schemaCrafting>
 const validate = ajv.compile<CraftingMsg>(schemaCrafting)
 // type inference is not supported for JTDDataType yet
 export function validateCraftingMsg(data: any): CraftingMsg | null {
-  if(validate(data) && resourceRecipeData[data.args.recipe]) {
+  if(validate(data) && dataLoader.resourceRecipeData[data.args.recipe]) {
     console.log("CraftingMsg is valid")
     return data as CraftingMsg
   }else{

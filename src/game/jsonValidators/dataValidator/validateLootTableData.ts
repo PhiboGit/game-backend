@@ -1,6 +1,8 @@
 import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
 
+import LootTableDataJSON from "../../data/gameDataJSON/lootTableData.json"
+
 const schemaLootTable = {
   "values": { "ref": "LootTable" },
 
@@ -50,7 +52,7 @@ export type LootTableRoll = JTDDataType<typeof schemaLootTable.definitions.LootT
 export type LootTableWeight = JTDDataType<typeof schemaLootTable.definitions.LootTable.mapping.WEIGHT>
 const validate = ajv.compile<LootTableData>(schemaLootTable)
 
-export function validateLootTableData (data: any): LootTableData {
+function validateLootTableData (data: any): LootTableData {
 
   if (validate(data)) {
     console.log("LootTableData is valid")
@@ -60,3 +62,5 @@ export function validateLootTableData (data: any): LootTableData {
     throw new Error("Error validating LootTableData");
   }
 }
+
+export const lootTableData = validateLootTableData(LootTableDataJSON)

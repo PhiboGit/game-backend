@@ -1,6 +1,6 @@
 import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
-import { gatheringNodeData } from "../../data/dataLoader.js";
+import { dataLoader } from "../../data/dataLoader.js";
 
 const schemaGathering = {
   properties: {
@@ -19,7 +19,7 @@ export type GatheringMsg = JTDDataType<typeof schemaGathering>
 const validate = ajv.compile<GatheringMsg>(schemaGathering)
 // type inference is not supported for JTDDataType yet
 export function validateGatheringMsg(data: any): GatheringMsg | null{
-  if(validate(data) && gatheringNodeData[data.args.node]) {
+  if(validate(data) && dataLoader.gatheringNodeData[data.args.node]) {
     console.log("GatheringMsg is valid")
     return data as GatheringMsg
   }else{

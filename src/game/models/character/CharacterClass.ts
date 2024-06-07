@@ -1,11 +1,11 @@
 import { Types } from "mongoose";
 import { Character } from "./character.js";
 import { Currency } from "./currency.js";
-import { Resources } from "./resources.js";
 import { Item } from "../item/item.js";
 import { getLevel } from "../../utils/expTable.js";
 import { Professions } from "./profession.js";
 import { ActionObject } from "../../actions/types.js";
+import { Resources } from "../../jsonValidators/dataValidator/validateResourceData.js";
 
 export default class CharacterClass implements Character {
   _id: Types.ObjectId;

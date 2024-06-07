@@ -1,5 +1,5 @@
 import { connectionManager } from "../../app/websocket/WsConnectionManager.js";
-import { gatheringNodeData, resourceData } from "../data/dataLoader.js";
+import { dataLoader} from "../data/dataLoader.js";
 import { getCharacter } from "../services/characterService.js";
 
 import { InitCharacterMessage } from "./messageTypes.js";
@@ -52,8 +52,8 @@ async function sendInitGameData(characterName: string) {
     const message = {
       type: 'init_game_data',
 
-      gatheringNodeData: gatheringNodeData,
-      resourceData: resourceData
+      gatheringNodeData: dataLoader.gatheringNodeData,
+      resourceData: dataLoader.resourceData
     };
 
     connectionManager.sendMessage(characterName, JSON.stringify(message));

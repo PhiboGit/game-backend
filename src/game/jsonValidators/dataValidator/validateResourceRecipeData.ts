@@ -1,6 +1,7 @@
 import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
-import { resourceIds } from "../../models/character/resources.js";
+import { resourceIds } from "./validateResourceData.js";
+import ResourceRecipeDataJSON from "../../data/gameDataJSON/resourceRecipeData.json";
 
 const schemaResourceRecipe = {
   "values": { "ref": "ResourceRecipe" },
@@ -51,7 +52,7 @@ const schemaResourceRecipe = {
 export type ResourceRecipeData = JTDDataType<typeof schemaResourceRecipe>
 const validate = ajv.compile<ResourceRecipeData>(schemaResourceRecipe)
 
-export function validateResourceRecipeData (data: any): ResourceRecipeData {
+function validateResourceRecipeData (data: any): ResourceRecipeData {
   if (validate(data)) {
     console.log("ResourceRecipeData is valid")
     return data as ResourceRecipeData
@@ -60,3 +61,5 @@ export function validateResourceRecipeData (data: any): ResourceRecipeData {
     throw new Error("Error validating ResourceRecipeData");
   }
 }
+
+export const resourceRecipeData = validateResourceRecipeData(ResourceRecipeDataJSON)

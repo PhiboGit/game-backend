@@ -1,0 +1,34 @@
+{
+  "craftingMaterialRecipe_shortHandleT1":{
+    "id": "craftingMaterialRecipe_shortHandleT1",
+    "profession": "weaving",
+    "displayName": "",
+    "description": "",
+    
+    "resource_prefix": "shortHandleT1",
+    "amount": 1,
+    "level": 0,
+    "time": 20000,
+    "exp": 10,
+    "expChar": 5,
+    "ingredients": [
+      {"required": true,
+      "slot": [
+        {"resource": "plankT1", "amount": 5},
+        {"resource": "stickT1", "amount": 5}
+        ]},
+
+      {"required": true,
+      "slot": [
+        {"resource": "textileT1", "amount": 3},
+        {"resource": "textileT1", "amount": 3}
+        ]},
+
+      {"required": true,
+      "slot": [
+        {"resource": "ingotT1", "amount": 1},
+        {"resource": "ingotT1", "amount": 1}
+        ]}
+    ]
+  }
+}
