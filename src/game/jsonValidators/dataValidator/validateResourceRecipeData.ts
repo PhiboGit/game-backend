@@ -1,6 +1,6 @@
 import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
-import { resourceIds } from "./validateResourceData.js";
+import { ResourceId, resourceIds } from "./validateResourceData.js";
 import ResourceRecipeDataJSON from "../../data/gameDataJSON/resourceRecipeData.json";
 
 const schemaResourceRecipe = {
@@ -49,7 +49,27 @@ const schemaResourceRecipe = {
   }
 } as const
 
-export type ResourceRecipeData = JTDDataType<typeof schemaResourceRecipe>
+export type ResourceRecipe = {
+  id: string
+  displayName: string
+  description: string
+  profession: "weaving" | "smelting" | "woodworking"
+  resource: ResourceId
+  amount: number
+  level: number
+  time: number
+  exp: number
+  expChar: number
+  ingredients: {
+    required: boolean
+    slot: {
+      resource: ResourceId
+      amount: number
+    }[]
+  }[]
+}
+
+export type ResourceRecipeData = Record<string, ResourceRecipe>
 const validate = ajv.compile<ResourceRecipeData>(schemaResourceRecipe)
 
 function validateResourceRecipeData (data: any): ResourceRecipeData {

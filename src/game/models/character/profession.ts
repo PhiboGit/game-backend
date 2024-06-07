@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-export const professionIds = ["woodcutting", "mining", "harvesting", "weaving", "smelting", "woodworking"]
+export const professionIds = ["woodcutting", "mining", "harvesting", "weaving", "smelting", "woodworking", "smith", "engineer", "artificer"] as const
 export type ProfessionId = typeof professionIds[number]
 export interface Equipment {
   tool: Types.ObjectId | null;

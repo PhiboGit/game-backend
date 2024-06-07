@@ -5,7 +5,7 @@ import { resourceIds } from "../dataValidator/validateResourceData.js";
 
 const schemaCrafting = {
   properties: {
-    type: {enum: ['crafting']},
+    type: {enum: ['crafting_resource', 'crafting_rarityResource', 'crafting_item']},
     limit: {type: "boolean"},
     iterations: {type: 'uint32'},
 
@@ -22,7 +22,7 @@ export type CraftingMsg = JTDDataType<typeof schemaCrafting>
 const validate = ajv.compile<CraftingMsg>(schemaCrafting)
 // type inference is not supported for JTDDataType yet
 export function validateCraftingMsg(data: any): CraftingMsg | null {
-  if(validate(data) && dataLoader.resourceRecipeData[data.args.recipe]) {
+  if(validate(data) && (dataLoader.resourceRecipeData[data.args.recipe] || dataLoader.rarityResourceRecipeData[data.args.recipe])) {
     console.log("CraftingMsg is valid")
     return data as CraftingMsg
   }else{

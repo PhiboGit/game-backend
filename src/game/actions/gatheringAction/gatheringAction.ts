@@ -1,7 +1,6 @@
 import { dataLoader } from "../../data/dataLoader.js";
 import { Resources, ResourceId } from "../../jsonValidators/dataValidator/validateResourceData.js";
 import { GatheringMsg } from "../../jsonValidators/messageValidator/validateGatheringMsg.js";
-import CharacterClass from "../../models/character/CharacterClass.js";
 import { getCharacter, updateCharacter } from "../../services/characterService.js";
 import { parseLootTable } from "../../utils/lootTable.js";
 import { rollRange } from "../../utils/randomDice.js";
@@ -32,11 +31,10 @@ export default class GatheringAction implements IAction {
     return new Promise<void>(async (resolve, reject) => {
       // Validate inputs
       if(!actionObject.actionTime || actionObject.actionTime <= 0) return reject('Invalid actionTime passed to action!');
-      const character = await getCharacter(characterName);
 
       const timeout = setTimeout(async() => {
         console.log('%s: timeout complete %s! Getting loot...', characterName, actionObject.actionMsg.args.node);
-        await this.finishedAction(character!, actionObject);
+        await this.finishedAction(characterName, actionObject);
         console.log('%s: Action done!', characterName);
         resolve();
       }, actionObject.actionTime);
@@ -50,7 +48,8 @@ export default class GatheringAction implements IAction {
   }
 
   // Use the same character the action was started with. This would prevent hot swapping item/stats
-  private async finishedAction(character: CharacterClass, actionObject: GatheringActionObject) {
+  private async finishedAction(characterName: string, actionObject: GatheringActionObject) {
+    const character = await getCharacter(characterName);
     const nodeData = dataLoader.gatheringNodeData[actionObject.actionMsg.args.node];
     const professionStats = character!.getProfessionStats(nodeData.profession)
 
@@ -70,6 +69,6 @@ export default class GatheringAction implements IAction {
 
     const expChar = nodeData.expChar
 
-    await updateCharacter({characterName: character.characterName, resources, experiences, expChar})
+    await updateCharacter({characterName: character!.characterName, resources, experiences, expChar})
   }
 }

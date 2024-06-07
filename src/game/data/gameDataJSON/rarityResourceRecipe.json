@@ -1,0 +1,226 @@
+{
+  "rarityResourceRecipe_shortHandleT1":{
+    "id": "rarityResourceRecipe_shortHandleT1",
+    "profession": "engineer",
+    "displayName": "",
+    "description": "",
+    
+    "resource_rarity": {
+      "common": "shortHandleT1_common",
+      "uncommon": "shortHandleT1_uncommon",
+      "rare": "shortHandleT1_rare",
+      "epic": "shortHandleT1_epic",
+      "legendary": "shortHandleT1_legendary"
+    },
+
+    "maxRoll": 100000,
+    "rarityRoll": [
+      { "value": 0, "rarity": "common"},
+      { "value": 97500, "rarity": "uncommon"},
+      { "value": 99000, "rarity": "rare"},
+      { "value": 99700, "rarity": "epic"},
+      { "value": 99900, "rarity": "legendary"}
+    ],
+    "amount": 1,
+    "level": 0,
+    "time": 20000,
+    "exp": 10,
+    "expChar": 5,
+    "ingredients": [
+      {"required": true,
+      "slot": [
+        {"resource": "plankT1", "amount": 5}
+        ]},
+
+      {"required": true,
+      "slot": [
+        {"resource": "textileT1", "amount": 3}
+        ]},
+
+      {"required": true,
+      "slot": [
+        {"resource": "ingotT1", "amount": 1}
+        ]}
+    ]
+  },
+
+  "rarityResourceRecipe_longHandleT1":{
+    "id": "rarityResourceRecipe_longHandleT1",
+    "profession": "engineer",
+    "displayName": "",
+    "description": "",
+    
+    "resource_rarity": {
+      "common": "longHandleT1_common",
+      "uncommon": "longHandleT1_uncommon",
+      "rare": "longHandleT1_rare",
+      "epic": "longHandleT1_epic",
+      "legendary": "longHandleT1_legendary"
+    },
+
+    "maxRoll": 100000,
+    "rarityRoll": [
+      { "value": 0, "rarity": "common"},
+      { "value": 97500, "rarity": "uncommon"},
+      { "value": 99000, "rarity": "rare"},
+      { "value": 99700, "rarity": "epic"},
+      { "value": 99900, "rarity": "legendary"}
+    ],
+    "amount": 1,
+    "level": 0,
+    "time": 20000,
+    "exp": 10,
+    "expChar": 5,
+    "ingredients": [
+      {"required": true,
+      "slot": [
+        {"resource": "plankT1", "amount": 10}
+        ]},
+
+      {"required": true,
+      "slot": [
+        {"resource": "textileT1", "amount": 5}
+        ]},
+
+      {"required": true,
+      "slot": [
+        {"resource": "ingotT1", "amount": 2}
+        ]}
+    ]
+  },
+
+  "rarityResourceRecipe_knopT1":{
+    "id": "rarityResourceRecipe_knopT1",
+    "profession": "artificer",
+    "displayName": "",
+    "description": "",
+    
+    "resource_rarity": {
+      "common": "knopT1_common",
+      "uncommon": "knopT1_uncommon",
+      "rare": "knopT1_rare",
+      "epic": "knopT1_epic",
+      "legendary": "knopT1_legendary"
+    },
+
+    "maxRoll": 100000,
+    "rarityRoll": [
+      { "value": 0, "rarity": "common"},
+      { "value": 97500, "rarity": "uncommon"},
+      { "value": 99000, "rarity": "rare"},
+      { "value": 99700, "rarity": "epic"},
+      { "value": 99900, "rarity": "legendary"}
+    ],
+    "amount": 1,
+    "level": 0,
+    "time": 20000,
+    "exp": 10,
+    "expChar": 5,
+    "ingredients": [
+      {"required": true,
+      "slot": [
+        {"resource": "plankT1", "amount": 10}
+        ]},
+
+      {"required": true,
+      "slot": [
+        {"resource": "textileT1", "amount": 5}
+        ]},
+
+      {"required": true,
+      "slot": [
+        {"resource": "ingotT1", "amount": 2}
+        ]}
+    ]
+  },
+
+  "rarityResourceRecipe_smallBladeT1":{
+    "id": "rarityResourceRecipe_smallBladeT1",
+    "profession": "smith",
+    "displayName": "",
+    "description": "",
+    
+    "resource_rarity": {
+      "common": "smallBladeT1_common",
+      "uncommon": "smallBladeT1_uncommon",
+      "rare": "smallBladeT1_rare",
+      "epic": "smallBladeT1_epic",
+      "legendary": "smallBladeT1_legendary"
+    },
+
+    "maxRoll": 100000,
+    "rarityRoll": [
+      { "value": 0, "rarity": "common"},
+      { "value": 97500, "rarity": "uncommon"},
+      { "value": 99000, "rarity": "rare"},
+      { "value": 99700, "rarity": "epic"},
+      { "value": 99900, "rarity": "legendary"}
+    ],
+    "amount": 1,
+    "level": 0,
+    "time": 20000,
+    "exp": 10,
+    "expChar": 5,
+    "ingredients": [
+      {"required": true,
+      "slot": [
+        {"resource": "plankT1", "amount": 10}
+        ]},
+
+      {"required": true,
+      "slot": [
+        {"resource": "textileT1", "amount": 5}
+        ]},
+
+      {"required": true,
+      "slot": [
+        {"resource": "ingotT1", "amount": 2}
+        ]}
+    ]
+  },
+
+  "rarityResourceRecipe_metalHeadT1":{
+    "id": "rarityResourceRecipe_metalHeadT1",
+    "profession": "smith",
+    "displayName": "",
+    "description": "",
+    
+    "resource_rarity": {
+      "common": "metalHeadT1_common",
+      "uncommon": "metalHeadT1_uncommon",
+      "rare": "metalHeadT1_rare",
+      "epic": "metalHeadT1_epic",
+      "legendary": "metalHeadT1_legendary"
+    },
+
+    "maxRoll": 100000,
+    "rarityRoll": [
+      { "value": 0, "rarity": "common"},
+      { "value": 97500, "rarity": "uncommon"},
+      { "value": 99000, "rarity": "rare"},
+      { "value": 99700, "rarity": "epic"},
+      { "value": 99900, "rarity": "legendary"}
+    ],
+    "amount": 1,
+    "level": 0,
+    "time": 20000,
+    "exp": 10,
+    "expChar": 5,
+    "ingredients": [
+      {"required": true,
+      "slot": [
+        {"resource": "plankT1", "amount": 10}
+        ]},
+
+      {"required": true,
+      "slot": [
+        {"resource": "textileT1", "amount": 5}
+        ]},
+
+      {"required": true,
+      "slot": [
+        {"resource": "ingotT1", "amount": 2}
+        ]}
+    ]
+  }
+}
