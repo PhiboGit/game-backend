@@ -1,5 +1,6 @@
 import { getAllCharacters, updateCharacter } from "../services/characterService.js";
 import IAction from "./IAction.js";
+import CraftingRarityResourceAction from "./crafting/craftingRarityResourceAction.js";
 import CraftingResourceAction from "./crafting/craftingResourceAction.js";
 import GatheringAction from "./gatheringAction/gatheringAction.js";
 import { ActionMsg, ActionObject } from "./types.js"
@@ -46,6 +47,8 @@ class ActionManager {
     switch(type) {
       case 'crafting_resource':
         return new CraftingResourceAction();
+      case 'crafting_rarityResource':
+        return new CraftingRarityResourceAction();
       case 'gathering':
         return new GatheringAction();
       default:

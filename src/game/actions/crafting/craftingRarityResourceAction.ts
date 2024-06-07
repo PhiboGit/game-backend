@@ -3,14 +3,14 @@ import { RarityType, ResourceId, Resources } from "../../jsonValidators/dataVali
 import { CraftingMsg } from "../../jsonValidators/messageValidator/validateCraftingMsg.js";
 import CharacterClass from "../../models/character/CharacterClass.js";
 import { getCharacter, updateCharacter } from "../../services/characterService.js";
-import { rollRange } from "../../utils/randomDice.js";
+import { rollDice } from "../../utils/randomDice.js";
 import IAction from "../IAction.js";
 import { getActionTime } from "../actionUtils.js";
 import { ActionObject } from "../types.js";
 import { deductResourceIngredients, validateIngredients } from "./craftingUtils.js";
 
 export type CraftingActionObject = Omit<ActionObject, 'actionMsg'> & { actionMsg: CraftingMsg };
-export default class CraftingAction implements IAction{
+export default class CraftingRarityResourceAction implements IAction{
   validateAction(characterName: string, actionObject: CraftingActionObject): Promise<void> {
     return new Promise(async(resolve, reject) => {
       const character = await getCharacter(characterName);
@@ -95,10 +95,17 @@ export default class CraftingAction implements IAction{
 
   private getRartiy(character: CharacterClass, recipeId: string, selectedIngredients: ResourceId[]): RarityType {
     const recipe = dataLoader.rarityResourceRecipeData[recipeId]
-    const rolledValue = rollRange(0, recipe.maxRoll)
+    const events = recipe.rarityRoll
+    const rolledValue = rollDice(recipe.maxRoll)
     // add value to the rolledValue based on selected ingredients and level
-
-    return 'common'
+    let rarity: RarityType = 'none'
+    for( const event of events) {
+      if(rolledValue >= event.value ){
+        rarity = event.rarity
+      }
+    }
+    console.log('%s: Crafting rolled %d rarity: %s', character.characterName, rolledValue, rarity)
+    return rarity
   }
 
 }

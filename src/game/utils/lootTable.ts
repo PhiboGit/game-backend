@@ -9,12 +9,11 @@ export type LootFromTable = {
 
 function rollTable(table: LootTableRoll, luck: number): LootFromTable[] {
 
-  const roll = rollDice(table.maxRoll) + (table.luck ? luck : 0)
-  console.log('rollTable: you rolled a: %d / %d', roll, table.maxRoll + (table.luck ? luck : 0))
-
+  
   const re: LootFromTable[] = []
   for (const loot of table.loot){
-    console.log('rollTable: you need a: ', loot.value)
+    const roll = rollDice(table.maxRoll) + (table.luck ? luck : 0)
+    console.log('rollTable: you rolled a: %d / %d and needed: %d', roll, table.maxRoll + (table.luck ? luck : 0), loot.value)
     if (roll >= loot.value){
       re.push({"resource": loot.resource, "amount": rollRange(loot.min, loot.max)})
     }
