@@ -2,6 +2,7 @@ import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
 import { resourceIds } from "./validateResourceData.js";
 import GatheringNodeDataJSON from "../../data/gameDataJSON/gatheringNodeData.json";
+import { professionIds } from "../../models/character/profession.js";
 
 const schemaGatheringNode = {
   "values": { "ref": "GatheringNode" },
@@ -12,7 +13,7 @@ const schemaGatheringNode = {
         "id": { "type": "string" },
         "displayName": { "type": "string" },
         "description": { "type": "string" },
-        "profession": { "enum": ["woodcutting", "mining", "harvesting"] },
+        "profession": { enum: professionIds },
         "tier": { "type": "uint32" },
         "level": { "type": "uint32" },
         "time": { "type": "uint32" },

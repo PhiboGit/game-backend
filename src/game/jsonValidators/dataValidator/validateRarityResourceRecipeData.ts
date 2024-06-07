@@ -2,6 +2,7 @@ import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
 import { RarityType, ResourceId, rarities, resourceIds } from "./validateResourceData.js";
 import RarityResourceRecipeDataJSON from "../../data/gameDataJSON/rarityResourceRecipe.json";
+import { ProfessionId, professionIds } from "../../models/character/profession.js";
 
 const schemaRarityResourceRecipe = {
   "values": { "ref": "RarityResourceRecipe" },
@@ -10,7 +11,7 @@ const schemaRarityResourceRecipe = {
     "RarityResourceRecipe": {
       "properties": {
         "id": { "type": "string" },
-        "profession": { "enum": ["weaving", "smelting", "woodworking", "engineer", "smith", "artificer"] },
+        "profession": { enum: professionIds },
         "displayName": { "type": "string" },
         "description": { "type": "string" },
 
@@ -74,7 +75,7 @@ export type RarityResourceRecipe = {
   id: string
   displayName: string
   description: string
-  profession: "weaving" | "smelting" | "woodworking"
+  profession: ProfessionId
   resource_rarity: {
     none?: ResourceId
     common?: ResourceId

@@ -2,6 +2,7 @@ import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
 import { ResourceId, resourceIds } from "./validateResourceData.js";
 import ResourceRecipeDataJSON from "../../data/gameDataJSON/resourceRecipeData.json";
+import { ProfessionId, professionIds } from "../../models/character/profession.js";
 
 const schemaResourceRecipe = {
   "values": { "ref": "ResourceRecipe" },
@@ -13,7 +14,7 @@ const schemaResourceRecipe = {
         "displayName": { "type": "string" },
         "description": { "type": "string" },
 
-        "profession": { "enum": ["weaving", "smelting", "woodworking"] },
+        "profession": { enum: professionIds },
 
         "resource": { enum: resourceIds },
         "amount": { "type": "uint32" },
@@ -53,7 +54,7 @@ export type ResourceRecipe = {
   id: string
   displayName: string
   description: string
-  profession: "weaving" | "smelting" | "woodworking"
+  profession: ProfessionId
   resource: ResourceId
   amount: number
   level: number
