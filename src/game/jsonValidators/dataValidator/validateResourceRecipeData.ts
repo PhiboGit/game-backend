@@ -1,4 +1,3 @@
-import { JTDDataType } from "ajv/dist/jtd.js";
 import { ajv } from "../ajvInstance.js";
 import { ResourceId, resourceIds } from "./validateResourceData.js";
 import ResourceRecipeDataJSON from "../../data/gameDataJSON/resourceRecipeData.json";
