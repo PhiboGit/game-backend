@@ -42,6 +42,9 @@ const characterSchema = new Schema<Character>({
     weaving: { type: professionSchema, default: { exp: 0, equipment: {} } },
     smelting: { type: professionSchema, default: { exp: 0, equipment: {} } },
     woodworking: { type: professionSchema, default: { exp: 0, equipment: {} } },
+    smith: { type: professionSchema, default: { exp: 0, equipment: {} } },
+    engineer: { type: professionSchema, default: { exp: 0, equipment: {} } },
+    artificer: { type: professionSchema, default: { exp: 0, equipment: {} } },
   },
   resources: { type: resourcesSchema, default: {} },
 }, {
