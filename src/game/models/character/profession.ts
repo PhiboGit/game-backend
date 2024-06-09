@@ -2,15 +2,10 @@ import mongoose, { Schema, Types } from "mongoose";
 
 export const professionIds = ["woodcutting", "mining", "harvesting", "weaving", "smelting", "woodworking", "smith", "engineer", "artificer"] as const
 export type ProfessionId = typeof professionIds[number]
-export interface Equipment {
-  tool: Types.ObjectId | null;
-  head: Types.ObjectId | null;
-  chest: Types.ObjectId | null;
-  legs: Types.ObjectId | null;
-  feet: Types.ObjectId | null;
-  hands: Types.ObjectId | null;
-}
-export interface Profession {
+export const equipmentSlots = ["tool", "head", "chest", "legs", "feet", "hands"] as const
+export type EquipmentSlot = typeof equipmentSlots[number]
+export type Equipment = Record<EquipmentSlot, Types.ObjectId | null>
+export type Profession = {
   exp: number;
   equipment: Equipment;
 }

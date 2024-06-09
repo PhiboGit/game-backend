@@ -1,5 +1,9 @@
 import { ResourceId, Resources } from "../../jsonValidators/dataValidator/validateResourceData.js";
+import { CraftingMsg } from "../../jsonValidators/messageValidator/validateCraftingMsg.js";
 import CharacterClass from "../../models/character/CharacterClass.js";
+import { ActionObject } from "../types.js";
+
+export type CraftingActionObject = Omit<ActionObject, 'actionMsg'> & { actionMsg: CraftingMsg };
 
 export function deductResourceIngredients(
   character: CharacterClass,

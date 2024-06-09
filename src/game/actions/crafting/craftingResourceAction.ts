@@ -1,13 +1,11 @@
 import { dataLoader } from "../../data/dataLoader.js";
 import { ResourceId, Resources } from "../../jsonValidators/dataValidator/validateResourceData.js";
-import { CraftingMsg } from "../../jsonValidators/messageValidator/validateCraftingMsg.js";
 import { getCharacter, updateCharacter } from "../../services/characterService.js";
 import IAction from "../IAction.js";
 import { getActionTime } from "../actionUtils.js";
-import { ActionObject } from "../types.js";
-import { deductResourceIngredients, validateIngredients } from "./craftingUtils.js";
+import { CraftingActionObject, deductResourceIngredients, validateIngredients } from "./craftingUtils.js";
 
-export type CraftingActionObject = Omit<ActionObject, 'actionMsg'> & { actionMsg: CraftingMsg };
+
 export default class CraftingResourceAction implements IAction{
   validateAction(characterName: string, actionObject: CraftingActionObject): Promise<void> {
     return new Promise(async(resolve, reject) => {

@@ -1,5 +1,6 @@
 import { expTableData } from "../jsonValidators/dataValidator/validateExpTableData.js";
 import { gatheringNodeData } from "../jsonValidators/dataValidator/validateGatheringNodeData.js";
+import { itemRecipeData } from "../jsonValidators/dataValidator/validateItemRecipeData.js";
 import { lootTableData } from "../jsonValidators/dataValidator/validateLootTableData.js";
 import { rarityResourceRecipeData } from "../jsonValidators/dataValidator/validateRarityResourceRecipeData.js";
 import { resourceData } from "../jsonValidators/dataValidator/validateResourceData.js";
@@ -12,6 +13,7 @@ class DataLoader {
   expTableData = expTableData
   lootTableData = lootTableData
   rarityResourceRecipeData = rarityResourceRecipeData
+  itemRecipeData = itemRecipeData
 }
 
 export const dataLoader = new DataLoader()

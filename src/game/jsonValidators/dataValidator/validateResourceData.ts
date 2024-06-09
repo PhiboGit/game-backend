@@ -53,7 +53,7 @@ export const isResourceId = (resource: string): resource is ResourceId => resour
 export type Resources = Record<ResourceId, number>;
 
 
-const bonusTypes = ["con", "int", "str", "dex", "foc",
+export const bonusTypes = ["con", "int", "str", "dex", "foc",
 "speed_mining", "exp_mining", "luck_mining", "yieldMin_mining", "yieldMax_mining",
 "speed_harvesting", "exp_harvesting", "luck_harvesting", "yieldMin_harvesting", "yieldMax_harvesting",
 "speed_woodcutting", "exp_woodcutting", "luck_woodcutting", "yieldMin_woodcutting", "yieldMax_woodcutting",

@@ -7,7 +7,8 @@ import IAction from "../IAction.js";
 import { getActionTime } from "../actionUtils.js";
 import { CraftingActionObject, deductResourceIngredients, validateIngredients } from "./craftingUtils.js";
 
-export default class CraftingRarityResourceAction implements IAction{
+
+export default class CraftingItemAction implements IAction{
   validateAction(characterName: string, actionObject: CraftingActionObject): Promise<void> {
     return new Promise(async(resolve, reject) => {
       const character = await getCharacter(characterName);
