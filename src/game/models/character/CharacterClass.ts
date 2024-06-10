@@ -17,7 +17,7 @@ export default class CharacterClass implements Character {
   actionQueue: ActionObject[]
   professions: Professions
   resources: Resources
-  itemMap: Map<Types.ObjectId, Item> = new Map()
+  itemMap: Record<string, Item> = {}
   
 
   constructor(character: Character, itemObjects: Item[]) {
@@ -32,7 +32,7 @@ export default class CharacterClass implements Character {
     this.resources = character.resources
     
     itemObjects.forEach((item) => {
-      this.itemMap.set(item._id, item)
+      this.itemMap[item._id as unknown as string] =  item
     })
   }
 

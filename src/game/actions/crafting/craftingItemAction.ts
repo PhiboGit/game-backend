@@ -1,11 +1,10 @@
 import { dataLoader } from "../../data/dataLoader.js";
-import { RarityType, ResourceId, Resources } from "../../jsonValidators/dataValidator/validateResourceData.js";
-import CharacterClass from "../../models/character/CharacterClass.js";
+import { ResourceId, Resources } from "../../jsonValidators/dataValidator/validateResourceData.js";
 import { getCharacter, updateCharacter } from "../../services/characterService.js";
-import { rollDice } from "../../utils/randomDice.js";
 import IAction from "../IAction.js";
 import { getActionTime } from "../actionUtils.js";
 import { CraftingActionObject, deductResourceIngredients, validateIngredients } from "./craftingUtils.js";
+import { craftItem } from "./craftingItem.js";
 
 
 export default class CraftingItemAction implements IAction{
@@ -13,7 +12,7 @@ export default class CraftingItemAction implements IAction{
     return new Promise(async(resolve, reject) => {
       const character = await getCharacter(characterName);
       if(!character) return reject('Character not found!');
-      const recipe = dataLoader.rarityResourceRecipeData[actionObject.actionMsg.args.recipe]
+      const recipe = dataLoader.itemRecipeData[actionObject.actionMsg.args.recipe]
       if(!recipe) return reject('Invalid recipe!');
       // Validate inputs
       const professionStats = character.getProfessionStats(recipe.profession)
@@ -61,7 +60,7 @@ export default class CraftingItemAction implements IAction{
       if(!character) return reject('Character not found!');
       const recipeId = actionObject.actionMsg.args.recipe
       const selectedIngredients:ResourceId[] = actionObject.actionMsg.args.ingredients
-      const recipe = dataLoader.rarityResourceRecipeData[recipeId]
+      const recipe = dataLoader.itemRecipeData[recipeId]
       const professionStats = character.getProfessionStats(recipe.profession)
   
       // Update character with new values. mostly the increments   
@@ -75,35 +74,25 @@ export default class CraftingItemAction implements IAction{
         return reject(error)
       }
 
-      // and finally the resource that was crafted
-      const rarity = this.getRartiy( character, recipeId, selectedIngredients)
-      const rarityResource = recipe.resource_rarity[rarity]
-      if(!rarityResource) return reject('Invalid rarity!')
-      resourcesUpdate[rarityResource] = recipe.amount
+      // and finally the item that was crafted
+      let itemId = null
+      try {
+        itemId = await craftItem(recipe, character, selectedIngredients)
+
+
+      } catch (error) {
+        return reject(error)
+      }
 
       await updateCharacter({
         characterName: character.characterName, 
         resources: resourcesUpdate, 
         experiences: experiencesUpdate, 
-        expChar: expCharUpdate
+        expChar: expCharUpdate,
+        itemId: itemId
       })
       resolve()
     })
-  }
-
-  private getRartiy(character: CharacterClass, recipeId: string, selectedIngredients: ResourceId[]): RarityType {
-    const recipe = dataLoader.rarityResourceRecipeData[recipeId]
-    const events = recipe.rarityRoll
-    const rolledValue = rollDice(recipe.maxRoll)
-    // add value to the rolledValue based on selected ingredients and level
-    let rarity: RarityType = 'none'
-    for( const event of events) {
-      if(rolledValue >= event.value ){
-        rarity = event.rarity
-      }
-    }
-    console.log('%s: Crafting rolled %d rarity: %s', character.characterName, rolledValue, rarity)
-    return rarity
   }
 
 }

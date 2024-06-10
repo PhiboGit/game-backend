@@ -1,3 +1,4 @@
+import { Types } from "mongoose"
 import { connectionManager } from "../../app/websocket/WsConnectionManager.js"
 import { ActionObject } from "../actions/types.js"
 import { Resources, ResourceId } from "../jsonValidators/dataValidator/validateResourceData.js"
@@ -6,6 +7,7 @@ import CharacterModel from "../models/character/character.js"
 import { Currency, CurrencyId } from "../models/character/currency.js"
 import { ProfessionId } from "../models/character/profession.js"
 import ItemModel from "../models/item/item.js"
+import { getItem } from "./itemService.js"
 
 
 export async function createCharacter(characterName: string){
@@ -44,12 +46,12 @@ type UpdateParameters = {
   currency?: Partial<Currency>
   activeAction?: ActionObject | null,
   actionQueue?: ActionObject[]
-  
+  itemId?: Types.ObjectId
 }
 export async function updateCharacter(
   updateParameters: UpdateParameters
 ): Promise<void> {
-  const {characterName, resources, experiences, expChar, currency, activeAction, actionQueue} = updateParameters
+  const {characterName, resources, experiences, expChar, currency, activeAction, actionQueue, itemId} = updateParameters
 
   // increments
   const $inc: any = {}
@@ -80,6 +82,7 @@ export async function updateCharacter(
 
   // push
   const $push: any = {}
+  if(itemId) $push['items'] = itemId
 
   // pull
   const $pull: any = {}
@@ -99,6 +102,11 @@ export async function updateCharacter(
       update 
       )
     connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_character', update}))
+
+    if(itemId) {
+      const item = await getItem(itemId)
+      if(item) connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_item', update: {itemId: item}}))
+    }
   } catch (error) {
     
   }

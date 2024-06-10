@@ -22,7 +22,11 @@ export type CraftingMsg = JTDDataType<typeof schemaCrafting>
 const validate = ajv.compile<CraftingMsg>(schemaCrafting)
 // type inference is not supported for JTDDataType yet
 export function validateCraftingMsg(data: any): CraftingMsg | null {
-  if(validate(data) && (dataLoader.resourceRecipeData[data.args.recipe] || dataLoader.rarityResourceRecipeData[data.args.recipe])) {
+  if(validate(data) && (
+    dataLoader.resourceRecipeData[data.args.recipe] || 
+    dataLoader.rarityResourceRecipeData[data.args.recipe] ||
+    dataLoader.itemRecipeData[data.args.recipe]
+  )) {
     console.log("CraftingMsg is valid")
     return data as CraftingMsg
   }else{

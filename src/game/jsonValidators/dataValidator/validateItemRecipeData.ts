@@ -19,6 +19,12 @@ export type ItemRecipe = {
   equipLevel: number
 
   baseGearScore: number
+  baseStats: {
+    speed?: number
+    armor?: number
+    attack?: number
+    attackSpeed?: number
+  }
   availableBoni: BonusType[]
   ingredients: {
     required: boolean
@@ -48,6 +54,14 @@ const schemaItemRecipe= {
       tier: { type: "uint32" },
       equipLevel: { type: "uint32" },
       baseGearScore: { type: "uint32" },
+      baseStats: {
+        optionalProperties: {
+          speed: { type: "uint32" },
+          armor: { type: "uint32" },
+          attack: { type: "uint32" },
+          attackSpeed: { type: "uint32" },
+        }
+      },
       availableBoni: {
         elements: { enum: bonusTypes }
       },

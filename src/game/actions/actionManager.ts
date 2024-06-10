@@ -1,5 +1,6 @@
 import { getAllCharacters, updateCharacter } from "../services/characterService.js";
 import IAction from "./IAction.js";
+import CraftingItemAction from "./crafting/craftingItemAction.js";
 import CraftingRarityResourceAction from "./crafting/craftingRarityResourceAction.js";
 import CraftingResourceAction from "./crafting/craftingResourceAction.js";
 import GatheringAction from "./gatheringAction/gatheringAction.js";
@@ -49,6 +50,8 @@ class ActionManager {
         return new CraftingResourceAction();
       case 'crafting_rarityResource':
         return new CraftingRarityResourceAction();
+      case 'crafting_item':
+        return new CraftingItemAction();
       case 'gathering':
         return new GatheringAction();
       default:
