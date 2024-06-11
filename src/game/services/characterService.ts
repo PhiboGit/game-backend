@@ -105,7 +105,7 @@ export async function updateCharacter(
 
     if(itemId) {
       const item = await getItem(itemId)
-      if(item) connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_item', update: {itemId: item}}))
+      if(item) connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_item',  item}))
     }
   } catch (error) {
     

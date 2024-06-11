@@ -36,6 +36,10 @@ export default class CharacterClass implements Character {
     })
   }
 
+  getItem(itemId: string): Item | null{
+    if(!this.itemMap[itemId]) return null
+    return this.itemMap[itemId]
+  }
   // TODO: add function: 
   // getProfessionStats(profession: string): {luck: number, speed: number, yieldMin: number, yieldMax: number, expBonus: number} ...
   getProfessionStats(profession: keyof Professions) {
