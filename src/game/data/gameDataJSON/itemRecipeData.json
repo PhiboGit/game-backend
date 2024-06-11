@@ -16,7 +16,14 @@
 
     "baseGearScore": 0,
     "baseStats": {"speed": 0},
-    "availableBoni": ["speed_mining", "luck_mining", "exp_mining", "yieldMin_mining", "yieldMax_mining", "str"],
+    "availableBoni": [
+      {"weight": 100, "bonusType": "str"},
+      {"weight": 100, "bonusType": "speed_mining"},
+      {"weight": 100, "bonusType": "exp_mining"},
+      {"weight": 100, "bonusType": "luck_mining"},
+      {"weight": 100, "bonusType": "yieldMin_mining"},
+      {"weight": 100, "bonusType": "yieldMax_mining"}
+    ],
     "ingredients": [
       {"required": true,
       "slot": [

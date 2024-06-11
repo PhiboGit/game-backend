@@ -25,7 +25,10 @@ export type ItemRecipe = {
     attack?: number
     attackSpeed?: number
   }
-  availableBoni: BonusType[]
+  availableBoni: {
+    weight: number
+    bonusType: BonusType
+  }[]
   ingredients: {
     required: boolean
     slot: {
@@ -63,7 +66,13 @@ const schemaItemRecipe= {
         }
       },
       availableBoni: {
-        elements: { enum: bonusTypes }
+        elements: {
+          properties: {
+            weight: { type: "uint32" },
+            bonusType: { enum: bonusTypes }
+          },
+          additionalProperties: false
+        }
       },
       ingredients: {
         elements: {
