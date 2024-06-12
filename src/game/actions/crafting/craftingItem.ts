@@ -11,11 +11,17 @@ import { Item } from "../../models/item/item.js"
 
 export async function craftItem(recipe: ItemRecipe, character: CharacterClass, selectedIngredients: ResourceId[]): Promise<Types.ObjectId>{
   
-  const rarity = getRarity(selectedIngredients, character, recipe)
-  const bonusTypes = getBonusTypes(selectedIngredients, recipe, rarity)
-  // TODO add gearScore
+  const gearScore = getGearScore(selectedIngredients, character, recipe)
+  const rarity = getRarity(recipe, gearScore)
+  console.log("rarity: ", rarity)
+  const bonusTypes = getBonusTypes(selectedIngredients, recipe, gearScore)
   // TODO add bonusTypes
-  const gearScore = recipe.baseGearScore
+  const bonusValues: Partial<{[key in BonusType]: number}> = {}
+  bonusTypes.every(bonusType => {
+    bonusValues[bonusType]= gearScore
+  })
+
+  console.log("bonusValues: ", bonusValues)
 
   // construct the Item based on the recipe and rolled values
   const itemProperties: Omit<Item, '_id'> = {
@@ -34,7 +40,7 @@ export async function craftItem(recipe: ItemRecipe, character: CharacterClass, s
     },
 
     bonusTypes: {
-      
+      ...bonusValues
     }
   }
   const itemId = await createItem(itemProperties)
@@ -43,29 +49,31 @@ export async function craftItem(recipe: ItemRecipe, character: CharacterClass, s
 
 }
 
-function getRarity(selectedIngredients: ResourceId[], character: CharacterClass, recipe: ItemRecipe): RarityType {
+function getGearScore(selectedIngredients: ResourceId[], character: CharacterClass, recipe: ItemRecipe): number {
   const professionStats = character.getProfessionStats(recipe.profession)
-  const levelRollBonus = professionStats.level * 10
-
-  let rollBonus = levelRollBonus
+  const levelBonus = Math.floor(professionStats.level * 0.1)
+  const baseGearScore = recipe.baseGearScore
+  const rolledBonus = rollDice(100)
+  let ingredientsBonus = 0
   for(const resourceId of selectedIngredients) {
     const craftingBonus = dataLoader.resourceData[resourceId].craftingBonus || 0
-    rollBonus += craftingBonus
+    ingredientsBonus += craftingBonus
   }
-
-  const rolled = rollDice(10000) + rollBonus
-
-  let rolledRarity: RarityType = "common"
-  for(const entry of dataLoader.itemCraftingTableData.rarityTable) {
-    if (rolled >= entry.value) {
-      rolledRarity = entry.event
-    }
-  }
-
-  return rolledRarity
+  const sum = baseGearScore + levelBonus + ingredientsBonus + rolledBonus
+  console.log(`gearScore: ${sum}; base: ${baseGearScore}, level: ${levelBonus}, ingredients: ${ingredientsBonus}, rolled: ${rolledBonus}`)
+  return sum
 }
 
-function getBonusTypes(selectedIngredients: ResourceId[], recipe: ItemRecipe, rarity: RarityType) {
+function getRarity(recipe: ItemRecipe, gearScore: number): RarityType {
+  let gearScoreRarity = (gearScore - recipe.baseGearScore) / 60
+  if (gearScoreRarity < 1) return "common"
+  if (gearScoreRarity < 2) return "uncommon"
+  if (gearScoreRarity < 3) return "rare"
+  if (gearScoreRarity < 4) return "epic"
+  else return "legendary"
+}
+
+function getBonusTypes(selectedIngredients: ResourceId[], recipe: ItemRecipe, gearScore: number): BonusType[] {
   let rollableBonusTypes: {event: BonusType, weight: number}[] = recipe.availableBoni.map(boni => {return {event: boni.bonusType, weight: boni.weight}})
   const rolledBonusTypes: BonusType[] = []
   // filter pre-selected bonusTypes
@@ -82,7 +90,8 @@ function getBonusTypes(selectedIngredients: ResourceId[], recipe: ItemRecipe, ra
     weights.push(entry.weight)
     events.push(entry.event)
   }
-  const numberOfBonusTypes = dataLoader.itemCraftingTableData.bonusTypesPerRarity[rarity]
+  const numberOfBonusTypes = gearScore < 100 ? 0 : gearScore < 250 ? 1 : gearScore < 450 ? 2 : gearScore < 700 ? 3 : 4
+  console.log("bonusTypeDebug: ", numberOfBonusTypes, weights, events)
   const results = weightedChoiceRemoved(events,numberOfBonusTypes - rolledBonusTypes.length, weights)
 
   return [...rolledBonusTypes, ...results]
