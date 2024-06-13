@@ -15,7 +15,7 @@ const JWT_SECRET = process.env.JWT_SECRET as jwt.Secret
  */
 export function authenticate(request: IncomingMessage): Promise<JwtPayload> {
   return new Promise((resolve, reject) => {
-    const token = getTokenFromRequest(request);
+    const token = getTokenFromUrl(request);
     if (!token) {
       return reject(new Error('No token provided'));
     }
@@ -48,6 +48,15 @@ function getTokenFromRequest(request: IncomingMessage): string | null {
   const authHeader = request.headers['authorization'];
   if (authHeader) {
     const token = authHeader
+    return token
+  }
+  return null;
+}
+
+function getTokenFromUrl(request: IncomingMessage): string | null {
+  const url = new URL(request.url as string, `http://${request.headers.host}`);
+  const token = url.searchParams.get('token');
+  if (token) {
     return token
   }
   return null;
