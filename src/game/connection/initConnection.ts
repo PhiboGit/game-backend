@@ -50,7 +50,7 @@ async function sendInitStatus(characterName: string){
 async function sendInitGameData(characterName: string) {
   try {
     const message = {
-      type: 'init_game_data',
+      type: 'init_game',
 
       gatheringNodeData: dataLoader.gatheringNodeData,
       resourceData: dataLoader.resourceData
