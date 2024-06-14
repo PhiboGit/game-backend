@@ -101,7 +101,7 @@ export async function updateCharacter(
       { characterName },
       update 
       )
-    connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_character', update}))
+    connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_character', updateParameters}))
 
     if(itemId) {
       const item = await getItem(itemId)
