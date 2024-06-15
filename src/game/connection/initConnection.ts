@@ -56,7 +56,7 @@ async function sendInitGameData(characterName: string) {
       resourceData: dataLoader.resourceData,
       expTableData: dataLoader.expTableData,
       itemRecipeData: dataLoader.itemRecipeData,
-      resourceRescipeData: dataLoader.resourceRecipeData,
+      resourceRecipeData: dataLoader.resourceRecipeData,
       rarityResourceRecipeData: dataLoader.rarityResourceRecipeData
     };
 
