@@ -44,7 +44,7 @@ function routeMessage(characterName: string, msg: IMessage) {
         actionManager.addAction(characterName, craftingMsg)
       }
       break
-    case 'cancelAction':
+    case 'cancel_action':
       if(validateCancelActionMsg(msg)) {
         console.log('Valid! %s msg: %o', characterName, msg)
         actionManager.cancelAction(characterName, msg.index)

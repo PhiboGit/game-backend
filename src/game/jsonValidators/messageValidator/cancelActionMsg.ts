@@ -3,7 +3,7 @@ import { ajv } from "../ajvInstance.js";
 
 const schemaCancel = {
   properties: {
-    type: {enum: ['cancelAction']},
+    type: {enum: ['cancel_action']},
     index: {type: 'int8'},
   }
 } as const
