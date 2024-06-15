@@ -53,7 +53,11 @@ async function sendInitGameData(characterName: string) {
       type: 'init_game',
 
       gatheringNodeData: dataLoader.gatheringNodeData,
-      resourceData: dataLoader.resourceData
+      resourceData: dataLoader.resourceData,
+      expTableData: dataLoader.expTableData,
+      itemRecipeData: dataLoader.itemRecipeData,
+      resourceRescipeData: dataLoader.resourceRecipeData,
+      rarityResourceRecipeData: dataLoader.rarityResourceRecipeData
     };
 
     connectionManager.sendMessage(characterName, JSON.stringify(message));
