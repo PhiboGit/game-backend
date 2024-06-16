@@ -2,7 +2,7 @@
   "rarityResourceRecipe_shortHandleT1":{
     "id": "rarityResourceRecipe_shortHandleT1",
     "profession": "engineer",
-    "displayName": "",
+    "displayName": "Short Handle T1",
     "description": "",
     
     "resource_rarity": {
@@ -47,7 +47,7 @@
   "rarityResourceRecipe_longHandleT1":{
     "id": "rarityResourceRecipe_longHandleT1",
     "profession": "engineer",
-    "displayName": "",
+    "displayName": "Long Handle T1",
     "description": "",
     
     "resource_rarity": {
@@ -92,7 +92,7 @@
   "rarityResourceRecipe_knopT1":{
     "id": "rarityResourceRecipe_knopT1",
     "profession": "artificer",
-    "displayName": "",
+    "displayName": "Knop T1",
     "description": "",
     
     "resource_rarity": {
@@ -131,7 +131,7 @@
   "rarityResourceRecipe_smallBladeT1":{
     "id": "rarityResourceRecipe_smallBladeT1",
     "profession": "smith",
-    "displayName": "",
+    "displayName": "Small Blade T1",
     "description": "",
     
     "resource_rarity": {
@@ -166,7 +166,7 @@
   "rarityResourceRecipe_metalHeadT1":{
     "id": "rarityResourceRecipe_metalHeadT1",
     "profession": "smith",
-    "displayName": "",
+    "displayName": "Metal Head T1",
     "description": "",
     
     "resource_rarity": {

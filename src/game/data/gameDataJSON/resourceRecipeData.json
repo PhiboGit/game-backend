@@ -2,7 +2,7 @@
   "resourceRecipe_textileT1":{
     "id": "resourceRecipe_textileT1",
     "profession": "weaving",
-    "displayName": "",
+    "displayName": "Hemp Textile",
     "description": "",
     
     "resource": "textileT1",
@@ -21,7 +21,7 @@
   "resourceRecipe_textileT2":{
     "id": "resourceRecipe_textileT2",
     "profession": "weaving",
-    "displayName": "",
+    "displayName": "Cotton Textile",
     "description": "",
 
     "resource": "textileT2",
@@ -44,7 +44,7 @@
   "resourceRecipe_textileT3":{
     "id": "resourceRecipe_textileT3",
     "profession": "weaving",
-    "displayName": "",
+    "displayName": "Jute Textile",
     "description": "",
 
     "resource": "textileT3",
@@ -67,7 +67,7 @@
   "resourceRecipe_textileT4":{
     "id": "resourceRecipe_textileT4",
     "profession": "weaving",
-    "displayName": "",
+    "displayName": "Bamboo Textile",
     "description": "",
 
     "resource": "textileT4",
@@ -90,7 +90,7 @@
   "resourceRecipe_textileT5":{
     "id": "resourceRecipe_textileT5",
     "profession": "weaving",
-    "displayName": "",
+    "displayName": "Linen Textile",
     "description": "",
 
     "resource": "textileT5",
@@ -114,7 +114,7 @@
   "resourceRecipe_plankT1":{
     "id": "resourceRecipe_plankT1",
     "profession": "woodworking",
-    "displayName": "",
+    "displayName": "Brich Plank",
     "description": "",
 
     "resource": "plankT1",
@@ -133,7 +133,7 @@
   "resourceRecipe_plankT2":{
     "id": "resourceRecipe_plankT2",
     "profession": "woodworking",
-    "displayName": "",
+    "displayName": "Oak Plank",
     "description": "",
 
     "resource": "plankT2",
@@ -156,7 +156,7 @@
   "resourceRecipe_plankT3":{
     "id": "resourceRecipe_plankT3",
     "profession": "woodworking",
-    "displayName": "",
+    "displayName": "Elderwood Plank",
     "description": "",
 
     "resource": "plankT3",
@@ -179,7 +179,7 @@
   "resourceRecipe_plankT4":{
     "id": "resourceRecipe_plankT4",
     "profession": "woodworking",
-    "displayName": "",
+    "displayName": "Cypress Plank",
     "description": "",
 
     "resource": "plankT4",
@@ -202,7 +202,7 @@
   "resourceRecipe_plankT5":{
     "id": "resourceRecipe_plankT5",
     "profession": "woodworking",
-    "displayName": "",
+    "displayName": "Willow Plank",
     "description": "",
 
     "resource": "plankT5",
@@ -226,7 +226,7 @@
   "resourceRecipe_coal":{
     "id": "resourceRecipe_coal",
     "profession": "smelting",
-    "displayName": "",
+    "displayName": "Coal",
     "description": "",
 
     "resource": "coal",
@@ -251,7 +251,7 @@
   "resourceRecipe_ingotT1":{
     "id": "resourceRecipe_ingotT1",
     "profession": "smelting",
-    "displayName": "",
+    "displayName": "Copper Ingot",
     "description": "",
 
     "resource": "ingotT1",
@@ -274,7 +274,7 @@
   "resourceRecipe_ingotT2":{
     "id": "resourceRecipe_ingotT2",
     "profession": "smelting",
-    "displayName": "",
+    "displayName": "Iron Ingot",
     "description": "",
 
     "resource": "ingotT2",
@@ -301,7 +301,7 @@
   "resourceRecipe_ingotT3":{
     "id": "resourceRecipe_ingotT3",
     "profession": "smelting",
-    "displayName": "",
+    "displayName": "Gold Ingot",
     "description": "",
 
     "resource": "ingotT3",
@@ -328,7 +328,7 @@
   "resourceRecipe_ingotT4":{
     "id": "resourceRecipe_ingotT4",
     "profession": "smelting",
-    "displayName": "",
+    "displayName": "Mithril Ingot",
     "description": "",
 
     "resource": "ingotT4",
@@ -355,7 +355,7 @@
   "resourceRecipe_ingotT5":{
     "id": "resourceRecipe_ingotT5",
     "profession": "smelting",
-    "displayName": "",
+    "displayName": "Platinum Ingot",
     "description": "",
 
     "resource": "ingotT5",

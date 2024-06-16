@@ -36,7 +36,7 @@
   "textileT2": { "id": "textileT2", "displayName": "Cotton Textile", "description": "", "rarity": "none", "tier": 2, "sellValue": 10 },
   "textileT3": { "id": "textileT3", "displayName": "Jute Textile", "description": "", "rarity": "none", "tier": 3, "sellValue": 10 },
   "textileT4": { "id": "textileT4", "displayName": "Bamboo Textile", "description": "", "rarity": "none", "tier": 4, "sellValue": 10 },
-  "textileT5": { "id": "textileT5", "displayName": "Flax Textile", "description": "", "rarity": "none", "tier": 5, "sellValue": 10 },
+  "textileT5": { "id": "textileT5", "displayName": "Linen Textile", "description": "", "rarity": "none", "tier": 5, "sellValue": 10 },
 
 
   "sapT1": { "id": "sapT1", "displayName": "Birch Sap", "description": "", "rarity": "uncommon", "tier": 1, "sellValue": 10 },
