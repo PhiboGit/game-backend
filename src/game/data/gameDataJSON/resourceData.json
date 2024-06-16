@@ -22,7 +22,7 @@
 
   "ingotT1": { "id": "ingotT1", "displayName": "Copper Ingot", "description": "", "rarity": "none", "tier": 1, "sellValue": 10 },
   "ingotT2": { "id": "ingotT2", "displayName": "Iron Ingot", "description": "", "rarity": "none", "tier": 2, "sellValue": 10 },
-  "ingotT3": { "id": "ingotT3", "displayName": "Gold Ingot", "description": "", "rarity": "rare", "tier": 3, "sellValue": 10 },
+  "ingotT3": { "id": "ingotT3", "displayName": "Gold Ingot", "description": "", "rarity": "none", "tier": 3, "sellValue": 10 },
   "ingotT4": { "id": "ingotT4", "displayName": "Mithril Ingot", "description": "", "rarity": "none", "tier": 4, "sellValue": 10 },
   "ingotT5": { "id": "ingotT5", "displayName": "Platinum Ingot", "description": "", "rarity": "none", "tier": 5, "sellValue": 10 },
 
