@@ -2,7 +2,7 @@ import { dataLoader } from "../../data/dataLoader.js";
 import { RarityType, ResourceId, Resources } from "../../jsonValidators/dataValidator/validateResourceData.js";
 import CharacterClass from "../../models/character/CharacterClass.js";
 import { getCharacter, updateCharacter } from "../../services/characterService.js";
-import { rollDice } from "../../utils/randomDice.js";
+import { rollDice, rollRange } from "../../utils/randomDice.js";
 import IAction from "../IAction.js";
 import { getActionTime } from "../actionUtils.js";
 import { CraftingActionObject, deductResourceIngredients, validateIngredients } from "./craftingUtils.js";
@@ -93,8 +93,9 @@ export default class CraftingRarityResourceAction implements IAction{
   private getRartiy(character: CharacterClass, recipeId: string, selectedIngredients: ResourceId[]): RarityType {
     const recipe = dataLoader.rarityResourceRecipeData[recipeId]
     const events = recipe.rarityRoll
-    const rolledValue = rollDice(recipe.maxRoll)
-    // add value to the rolledValue based on selected ingredients and level
+    let bonus = 0
+    //TODO: add value to the rolledValue based on selected ingredients and level
+    const rolledValue = rollRange(bonus ,recipe.maxRoll)
     let rarity: RarityType = 'none'
     for( const event of events) {
       if(rolledValue >= event.value ){
