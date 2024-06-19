@@ -5,6 +5,7 @@ import { EquipmentSlot, ProfessionId, equipmentSlots, professionIds } from "../.
 
 export type ItemRecipe = {
   id: string
+  item_id: string
   displayName: string
   description: string
   profession: ProfessionId
@@ -43,6 +44,7 @@ const schemaItemRecipe= {
   values: {
     properties: {
       id: { type: "string" },
+      item_id: { type: "string" },
       displayName: { type: "string" },
       description: { type: "string" },
       profession: { enum: professionIds },

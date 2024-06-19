@@ -1,6 +1,7 @@
 {
   "itemRecipe_pickaxeT1":{
     "id": "itemRecipe_pickaxeT1",
+    "item_id": "pickaxeT1",
     "displayName": "Pickaxe T1",
     "description": "",
     "profession": "smith",

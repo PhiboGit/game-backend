@@ -5,6 +5,7 @@ import { BonusType, RarityType } from "../../jsonValidators/dataValidator/valida
 
 export interface Item {
   _id: Types.ObjectId;
+  item_id: string,
   displayName: string;
   equipmentProfessions: ProfessionId[];
   equipmentSlot: EquipmentSlot;
@@ -26,6 +27,7 @@ export interface Item {
 }
 
 const itemSchema = new mongoose.Schema<Item>({
+  item_id: {type: String, default: "no_item_id"},
   displayName: {type: String, default: "item"},
   equipmentProfessions: [{type: String}],
   equipmentSlot: {type: String},
