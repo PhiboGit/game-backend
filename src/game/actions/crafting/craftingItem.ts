@@ -25,7 +25,7 @@ export async function craftItem(recipe: ItemRecipe, character: CharacterClass, s
 
   // construct the Item based on the recipe and rolled values
   const itemProperties: Omit<Item, '_id'> = {
-    name: "Crafted Item Name Placeholder",
+    displayName: "Crafted Item Name Placeholder",
     description: "Crafted Item Description Placeholder",
     level: recipe.equipLevel,
     equipmentProfessions: recipe.equipmentProfessions,

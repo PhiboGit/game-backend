@@ -6,7 +6,7 @@ import CharacterClass from "../models/character/CharacterClass.js"
 import CharacterModel from "../models/character/character.js"
 import { Currency, CurrencyId } from "../models/character/currency.js"
 import { ProfessionId } from "../models/character/profession.js"
-import ItemModel from "../models/item/item.js"
+import ItemModel, { Item } from "../models/item/item.js"
 import { getItem } from "./itemService.js"
 
 
@@ -100,13 +100,15 @@ export async function updateCharacter(
     await CharacterModel.updateOne(
       { characterName },
       update 
-      )
-    connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_character', updateParameters}))
-
+    )
+    // data send to the client
+    const updatedData: Omit<UpdateParameters, 'itemId'> & {item?: Item} = {...updateParameters}
+      
     if(itemId) {
       const item = await getItem(itemId)
-      if(item) connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_item',  item}))
+      if(item) updatedData['item'] = item
     }
+    connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_character', updatedData}))
   } catch (error) {
     
   }
