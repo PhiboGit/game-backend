@@ -7,7 +7,7 @@
 
   "oreT1": { "id": "oreT1", "displayName": "Copper Ore", "description": "", "rarity": "none", "tier": 1, "sellValue": 10 },
   "oreT2": { "id": "oreT2", "displayName": "Iron Ore", "description": "", "rarity": "none", "tier": 2, "sellValue": 10 },
-  "oreT3": { "id": "oreT3", "displayName": "Gold Ore", "description": "", "rarity": "rare", "tier": 3, "sellValue": 10 },
+  "oreT3": { "id": "oreT3", "displayName": "Gold Ore", "description": "", "rarity": "none", "tier": 3, "sellValue": 10 },
   "oreT4": { "id": "oreT4", "displayName": "Mithril Ore", "description": "", "rarity": "none", "tier": 4, "sellValue": 10 },
   "oreT5": { "id": "oreT5", "displayName": "Platinum Ore", "description": "", "rarity": "none", "tier": 5, "sellValue": 10 },
 
