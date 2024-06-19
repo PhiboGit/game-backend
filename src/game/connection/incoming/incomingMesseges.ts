@@ -1,6 +1,6 @@
 import { actionManager } from "../../actions/actionManager.js";
 import { validateCancelActionMsg } from "../../jsonValidators/messageValidator/cancelActionMsg.js";
-import { validateSellResourceMsg } from "../../jsonValidators/messageValidator/sellResource.js";
+import { validateSellResourceMsg } from "../../jsonValidators/messageValidator/sellResourceMsg.js";
 import { validateCraftingMsg } from "../../jsonValidators/messageValidator/validateCraftingMsg.js";
 import { validateGatheringMsg } from "../../jsonValidators/messageValidator/validateGatheringMsg.js";
 import sellResources from "../../marketplace/sellResources.js";
