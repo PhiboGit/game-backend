@@ -5,7 +5,7 @@ import { Resources, ResourceId } from "../jsonValidators/dataValidator/validateR
 import CharacterClass from "../models/character/CharacterClass.js"
 import CharacterModel from "../models/character/character.js"
 import { Currency, CurrencyId } from "../models/character/currency.js"
-import { ProfessionId } from "../models/character/profession.js"
+import { EquipmentSlot, ProfessionId } from "../models/character/profession.js"
 import ItemModel, { Item } from "../models/item/item.js"
 import { getItem } from "./itemService.js"
 
@@ -46,12 +46,18 @@ type UpdateParameters = {
   currency?: Partial<Currency>
   activeAction?: ActionObject | null,
   actionQueue?: ActionObject[]
-  itemId?: Types.ObjectId
+  itemId_push?: Types.ObjectId
+  itemId_pull?: Types.ObjectId
+  equipment?: {
+    profession: ProfessionId
+    equipmentSlot: EquipmentSlot
+    itemId: Types.ObjectId | null
+  }
 }
 export async function updateCharacter(
   updateParameters: UpdateParameters
 ): Promise<void> {
-  const {characterName, resources, experiences, expChar, currency, activeAction, actionQueue, itemId} = updateParameters
+  const {characterName, resources, experiences, expChar, currency, activeAction, actionQueue, itemId_push, itemId_pull, equipment} = updateParameters
 
   // increments
   const $inc: any = {}
@@ -79,13 +85,18 @@ export async function updateCharacter(
   if(activeAction || activeAction === null) $set['activeAction'] = activeAction
   if(actionQueue) $set['actionQueue'] = actionQueue
 
+  if(equipment) {
+    $set[`professions.${equipment.profession}.equipment.${equipment.equipmentSlot}`] = equipment.itemId
+  }
+
 
   // push
   const $push: any = {}
-  if(itemId) $push['items'] = itemId
+  if(itemId_push) $push['items'] = itemId_push
 
   // pull
   const $pull: any = {}
+  if(itemId_pull) $pull['items'] = itemId_pull
 
 
   const update = {
@@ -102,10 +113,10 @@ export async function updateCharacter(
       update 
     )
     // data send to the client
-    const updatedData: Omit<UpdateParameters, 'itemId'> & {item?: Item} = {...updateParameters}
+    const updatedData: Omit<UpdateParameters, 'itemId_push'> & {item?: Item} = {...updateParameters}
       
-    if(itemId) {
-      const item = await getItem(itemId)
+    if(itemId_push) {
+      const item = await getItem(itemId_push)
       if(item) updatedData['item'] = item
     }
     connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_character', updatedData}))

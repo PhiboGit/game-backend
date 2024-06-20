@@ -1,5 +1,7 @@
 import { actionManager } from "../../actions/actionManager.js";
+import { handleEquipItem } from "../../equipment/equipmentHandler.js";
 import { validateCancelActionMsg } from "../../jsonValidators/messageValidator/cancelActionMsg.js";
+import { validateEquipItemMsg } from "../../jsonValidators/messageValidator/equipItemMsg.js";
 import { validateSellResourceMsg } from "../../jsonValidators/messageValidator/sellResourceMsg.js";
 import { validateCraftingMsg } from "../../jsonValidators/messageValidator/validateCraftingMsg.js";
 import { validateGatheringMsg } from "../../jsonValidators/messageValidator/validateGatheringMsg.js";
@@ -57,6 +59,12 @@ function routeMessage(characterName: string, msg: IMessage) {
         sellResources(characterName, sellResourceMsg.resource, sellResourceMsg.amount)
       }
       break
+    case 'equip_item':
+      const equipItemMsg = validateEquipItemMsg(msg)
+      if(equipItemMsg) {
+        console.log('Valid! %s msg: %o', characterName, msg)
+        handleEquipItem(characterName, equipItemMsg)
+      }
     default:
       console.log('unknown message')
   }

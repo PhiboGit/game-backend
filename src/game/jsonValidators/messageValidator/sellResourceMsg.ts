@@ -20,7 +20,6 @@ export function validateSellResourceMsg(data: any): SellResourceMsg | null{
     return data as SellResourceMsg
   }else{
     console.log("SellResourceMsg not valid: ", validate.errors);
-    if(!validate.errors) console.log("SellResourceMsg not valid. 'node' not found! ");
     return null
   }
 }
