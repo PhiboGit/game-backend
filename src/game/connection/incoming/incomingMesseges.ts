@@ -65,6 +65,7 @@ function routeMessage(characterName: string, msg: IMessage) {
         console.log('Valid! %s msg: %o', characterName, msg)
         handleEquipItem(characterName, equipItemMsg)
       }
+      break
     default:
       console.log('unknown message')
   }

@@ -113,7 +113,7 @@ export async function updateCharacter(
       update 
     )
     // data send to the client
-    const updatedData: Omit<UpdateParameters, 'itemId_push'> & {item?: Item} = {...updateParameters}
+    const updatedData: UpdateParameters & {item?: Item} = {...updateParameters}
       
     if(itemId_push) {
       const item = await getItem(itemId_push)
