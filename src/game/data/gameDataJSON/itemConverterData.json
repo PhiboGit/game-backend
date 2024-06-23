@@ -1,0 +1,58 @@
+{
+  "maxGearScoreStat": 1000,
+
+  "gearScoreConverter": {
+    "exp": {
+      "integer/float": "float",
+      "min":0,
+      "max": 2.00
+    },
+    "speed": {
+      "integer/float": "float",
+      "min":0,
+      "max": 2.00
+    },
+    "luck": {
+      "integer/float": "integer",
+      "min":0,
+      "max": 10000
+    },
+    "yieldMin": {
+      "integer/float": "float",
+      "min":0,
+      "max": 2.00
+    },
+    "yieldMax": {
+      "integer/float": "float",
+      "min":0,
+      "max": 2.00
+    },
+
+
+    "str": {
+      "integer/float": "integer",
+      "min":0,
+      "max": 100
+    },
+    "dex": {
+      "integer/float": "integer",
+      "min":0,
+      "max": 100
+    },
+    "int": {
+      "integer/float": "integer",
+      "min":0,
+      "max": 100
+    },
+    "con": {
+      "integer/float": "integer",
+      "min":0,
+      "max": 100
+    },
+    "foc": {
+      "integer/float": "integer",
+      "min":0,
+      "max": 100
+    }
+  }
+}

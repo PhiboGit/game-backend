@@ -89,7 +89,7 @@ export default class CraftingItemAction implements IAction{
         resources: resourcesUpdate, 
         experiences: experiencesUpdate, 
         expChar: expCharUpdate,
-        itemId: itemId
+        itemId_push: itemId
       })
       resolve()
     })

@@ -13,7 +13,7 @@ function rollTable(table: LootTableRoll, luck: number): LootFromTable[] {
   const re: LootFromTable[] = []
   for (const loot of table.loot){
     const roll = rollDice(table.maxRoll) + (table.luck ? luck : 0)
-    console.log('rollTable: you rolled a: %d / %d and needed: %d', roll, table.maxRoll + (table.luck ? luck : 0), loot.value)
+    console.log('rollTable: you rolled a: %d / %d with %d luck and needed: %d', roll, table.maxRoll, (table.luck ? luck : 0), loot.value)
     if (roll >= loot.value){
       re.push({"resource": loot.resource, "amount": rollRange(loot.min, loot.max)})
     }

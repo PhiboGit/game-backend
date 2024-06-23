@@ -59,6 +59,7 @@ export const bonusTypes = ["con", "int", "str", "dex", "foc",
 "speed_woodcutting", "exp_woodcutting", "luck_woodcutting", "yieldMin_woodcutting", "yieldMax_woodcutting",
 ] as const
 export type BonusType = typeof bonusTypes[number]
+export type BonusTypePrefix = 'con' | 'int' | 'str' | 'dex' | 'foc' | 'speed' | 'exp' | 'luck' | 'yieldMin' | 'yieldMax'
 
 export const rarities = ["none", "common", "uncommon", "rare", "epic", "legendary"] as const
 export type RarityType = typeof rarities[number]

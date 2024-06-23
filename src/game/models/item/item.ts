@@ -3,7 +3,7 @@ import { EquipmentSlot, ProfessionId } from "../character/profession.js";
 import { BonusType, RarityType } from "../../jsonValidators/dataValidator/validateResourceData.js";
 
 
-export interface Item {
+export type Item = {
   _id: Types.ObjectId;
   item_id: string,
   displayName: string;
@@ -39,40 +39,36 @@ const itemSchema = new mongoose.Schema<Item>({
   craftedGearScore: {type: Number, default: 0},
 
   baseStats: {
-    
-    speed: {type: Number, default: 0},
-    armor: {type: Number, default: 0},
-    attack: {type: Number, default: 0},
-    attackSpeed: {type: Number, default: 0},
-    
+    speed: {type: Number},
+    armor: {type: Number},
+    attack: {type: Number},
+    attackSpeed: {type: Number},
   },
 
   bonusTypes: {
-   
-    con: {type: Number, default: 0},
-    int: {type: Number, default: 0},
-    str: {type: Number, default: 0},
-    dex: {type: Number, default: 0},
-    foc: {type: Number, default: 0},
+    con: {type: Number},
+    int: {type: Number},
+    str: {type: Number},
+    dex: {type: Number},
+    foc: {type: Number},
 
-    speed_mining: {type: Number, default: 0},
-    exp_mining: {type: Number, default: 0},
-    luck_mining: {type: Number, default: 0},
-    yieldMin_mining: {type: Number, default: 0},
-    yieldMax_mining: {type: Number, default: 0},
+    speed_mining: {type: Number},
+    exp_mining: {type: Number},
+    luck_mining: {type: Number},
+    yieldMin_mining: {type: Number},
+    yieldMax_mining: {type: Number},
 
-    speed_harvesting: {type: Number, default: 0},
-    exp_harvesting: {type: Number, default: 0},
-    luck_harvesting: {type: Number, default: 0},
-    yieldMin_harvesting: {type: Number, default: 0},
-    yieldMax_harvesting: {type: Number, default: 0},
+    speed_harvesting: {type: Number},
+    exp_harvesting: {type: Number},
+    luck_harvesting: {type: Number},
+    yieldMin_harvesting: {type: Number},
+    yieldMax_harvesting: {type: Number},
 
-    speed_woodcutting: {type: Number, default: 0},
-    exp_woodcutting: {type: Number, default: 0},
-    luck_woodcutting: {type: Number, default: 0},
-    yieldMin_woodcutting: {type: Number, default: 0},
-    yieldMax_woodcutting: {type: Number, default: 0},
-    
+    speed_woodcutting: {type: Number},
+    exp_woodcutting: {type: Number},
+    luck_woodcutting: {type: Number},
+    yieldMin_woodcutting: {type: Number},
+    yieldMax_woodcutting: {type: Number},
   },
 },
 { collection: 'items' })

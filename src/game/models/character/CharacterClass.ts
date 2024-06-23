@@ -3,9 +3,10 @@ import { Character } from "./character.js";
 import { Currency } from "./currency.js";
 import { Item } from "../item/item.js";
 import { getLevel } from "../../utils/expTable.js";
-import { Professions } from "./profession.js";
+import { Professions, equipmentSlots } from "./profession.js";
 import { ActionObject } from "../../actions/types.js";
-import { Resources } from "../../jsonValidators/dataValidator/validateResourceData.js";
+import { BonusTypePrefix, Resources } from "../../jsonValidators/dataValidator/validateResourceData.js";
+import { itemConverterData } from "../../jsonValidators/dataValidator/validateItemConverterData.js";
 
 export default class CharacterClass implements Character {
   _id: Types.ObjectId;
@@ -53,6 +54,32 @@ export default class CharacterClass implements Character {
       expBonus: 0
     }
 
+    
+
+    equipmentSlots.forEach((slot) => {
+      const itemId = this.professions[profession].equipment[slot]
+      if(!itemId) return
+      const item = this.getItem(itemId as unknown as string)
+      if(!item) return
+      stats.luck += convertGearScore('luck' , item.bonusTypes.luck_mining ?? 0)
+      stats.speed += convertGearScore('speed' , (item.bonusTypes as any)[`speed_${profession}`] ?? 0) + (item.baseStats.speed || 0)
+      stats.yieldMin += convertGearScore('yieldMin' , (item.bonusTypes as any)[`yieldMin_${profession}`] ?? 0)
+      stats.yieldMax += convertGearScore('yieldMax' , (item.bonusTypes as any)[`yieldMax_${profession}`] ?? 0)
+      stats.expBonus += convertGearScore('exp' , (item.bonusTypes as any)[`exp_${profession}`] ?? 0)
+    })
+    console.log(profession, stats)
     return stats
   }
+}
+
+function convertGearScore(key: BonusTypePrefix, gearScore: number) {
+  const percentage = (gearScore / itemConverterData.maxGearScoreStat)
+  const min = itemConverterData.gearScoreConverter[key].min
+  const max = itemConverterData.gearScoreConverter[key].max
+
+  const value = min + (max - min) * percentage
+  if (itemConverterData.gearScoreConverter[key]["integer/float"] === "integer") {
+    return Math.floor(value)
+  } else 
+    return value
 }
