@@ -41,17 +41,16 @@ export default class CharacterClass implements Character {
     if(!this.itemMap[itemId]) return null
     return this.itemMap[itemId]
   }
-  // TODO: add function: 
-  // getProfessionStats(profession: string): {luck: number, speed: number, yieldMin: number, yieldMax: number, expBonus: number} ...
+  
   getProfessionStats(profession: keyof Professions) {
     const stats = {
       level: getLevel(this.professions[profession].exp),
 
-      luck: 0,
-      speed: 0,
-      yieldMin: 0,
-      yieldMax: 0,
-      expBonus: 0
+      luck: 0, // additive interger value
+      speed: 0, // float multiplier; 0.5 = 50% more speed; time = (actionTime / (1+speed))  
+      yieldMin: 0, // additive yield min 
+      yieldMax: 0, // additive for max
+      expBonus: 0 // multiplier for exp 0.5 = 50% more exp
     }
 
     
@@ -61,8 +60,10 @@ export default class CharacterClass implements Character {
       if(!itemId) return
       const item = this.getItem(itemId as unknown as string)
       if(!item) return
+      stats.speed += item.baseStats?.attackSpeed ?? 0
+      if(!item.bonusTypes) return
       stats.luck += convertGearScore('luck' , item.bonusTypes.luck_mining ?? 0)
-      stats.speed += convertGearScore('speed' , (item.bonusTypes as any)[`speed_${profession}`] ?? 0) + (item.baseStats.speed || 0)
+      stats.speed += convertGearScore('speed' , (item.bonusTypes as any)[`speed_${profession}`] ?? 0)
       stats.yieldMin += convertGearScore('yieldMin' , (item.bonusTypes as any)[`yieldMin_${profession}`] ?? 0)
       stats.yieldMax += convertGearScore('yieldMax' , (item.bonusTypes as any)[`yieldMax_${profession}`] ?? 0)
       stats.expBonus += convertGearScore('exp' , (item.bonusTypes as any)[`exp_${profession}`] ?? 0)

@@ -16,14 +16,14 @@ export type Item = {
   enchantingLevel: number;
   craftedGearScore: number;
 
-  baseStats: {
+  baseStats?: {
     speed?: number;
     armor?: number;
     attack?: number;
     attackSpeed?: number;
   }
 
-  bonusTypes: Partial<{[key in BonusType]: number}>;
+  bonusTypes?: Partial<{[key in BonusType]: number}>;
 }
 
 const itemSchema = new mongoose.Schema<Item>({
