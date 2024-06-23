@@ -57,7 +57,8 @@ async function sendInitGameData(characterName: string) {
       expTableData: dataLoader.expTableData,
       itemRecipeData: dataLoader.itemRecipeData,
       resourceRecipeData: dataLoader.resourceRecipeData,
-      rarityResourceRecipeData: dataLoader.rarityResourceRecipeData
+      rarityResourceRecipeData: dataLoader.rarityResourceRecipeData,
+      itemConverterData: dataLoader.itemConverterData
     };
 
     connectionManager.sendMessage(characterName, JSON.stringify(message));
