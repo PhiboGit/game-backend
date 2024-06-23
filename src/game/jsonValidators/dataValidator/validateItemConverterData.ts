@@ -1,5 +1,4 @@
 import { ajv } from "../ajvInstance.js";
-import { RarityType, rarities } from "./validateResourceData.js";
 import ItemConverterDataJSON from "../../data/gameDataJSON/itemConverterData.json";
 import { JTDSchemaType } from "ajv/dist/jtd.js";
 

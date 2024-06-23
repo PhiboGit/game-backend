@@ -10,7 +10,7 @@
     "speed": {
       "integer/float": "float",
       "min":0,
-      "max": 2.00
+      "max": 5.00
     },
     "luck": {
       "integer/float": "integer",
@@ -25,7 +25,7 @@
     "yieldMax": {
       "integer/float": "float",
       "min":0,
-      "max": 2.00
+      "max": 10.00
     },
 
 
