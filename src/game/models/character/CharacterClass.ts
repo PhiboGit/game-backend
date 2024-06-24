@@ -42,7 +42,9 @@ export default class CharacterClass implements Character {
     return this.itemMap[itemId]
   }
   
-  getProfessionStats(profession: keyof Professions) {
+
+  
+  getProfessionStats(profession: keyof Professions): ProfessionStats {
     const stats = {
       level: getLevel(this.professions[profession].exp),
 
@@ -62,7 +64,7 @@ export default class CharacterClass implements Character {
       if(!item) return
       stats.speed += item.baseStats?.attackSpeed ?? 0
       if(!item.bonusTypes) return
-      stats.luck += convertGearScore('luck' , item.bonusTypes.luck_mining ?? 0)
+      stats.luck += convertGearScore('luck' ,(item.bonusTypes as any)[`luck_${profession}`] ?? 0)
       stats.speed += convertGearScore('speed' , (item.bonusTypes as any)[`speed_${profession}`] ?? 0)
       stats.yieldMin += convertGearScore('yieldMin' , (item.bonusTypes as any)[`yieldMin_${profession}`] ?? 0)
       stats.yieldMax += convertGearScore('yieldMax' , (item.bonusTypes as any)[`yieldMax_${profession}`] ?? 0)
@@ -74,13 +76,30 @@ export default class CharacterClass implements Character {
 }
 
 function convertGearScore(key: BonusTypePrefix, gearScore: number) {
-  const percentage = (gearScore / itemConverterData.maxGearScoreStat)
+  if(gearScore === 0) return 0
+  const maxGearScoreStat = itemConverterData.maxGearScoreStat
   const min = itemConverterData.gearScoreConverter[key].min
   const max = itemConverterData.gearScoreConverter[key].max
+  const absGearScore = Math.abs(gearScore);
+  const sign = Math.sign(gearScore) === -1 ? itemConverterData.negativeMutiplier : 1;
 
-  const value = min + (max - min) * percentage
+  // Normalize absGearScore to a range between 0 and 1
+  const normalizedScore = absGearScore / maxGearScoreStat;
+
+  // Scale it to the desired range and apply the sign
+  const scaledScore = sign * (min + (normalizedScore * (max - min)));
+
   if (itemConverterData.gearScoreConverter[key]["integer/float"] === "integer") {
-    return Math.floor(value)
+    return Math.floor(scaledScore)
   } else 
-    return value
+    return scaledScore
+}
+
+export type ProfessionStats = {
+  level: number,
+  luck: number,
+  speed: number,
+  yieldMin: number,
+  yieldMax: number,
+  expBonus: number
 }

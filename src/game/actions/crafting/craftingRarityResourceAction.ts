@@ -2,9 +2,9 @@ import { dataLoader } from "../../data/dataLoader.js";
 import { RarityType, ResourceId, Resources } from "../../jsonValidators/dataValidator/validateResourceData.js";
 import CharacterClass from "../../models/character/CharacterClass.js";
 import { getCharacter, updateCharacter } from "../../services/characterService.js";
-import { rollDice, rollRange } from "../../utils/randomDice.js";
+import { rollRange } from "../../utils/randomDice.js";
 import IAction from "../IAction.js";
-import { getActionTime } from "../actionUtils.js";
+import { getActionTime, getExp } from "../actionUtils.js";
 import { CraftingActionObject, deductResourceIngredients, validateIngredients } from "./craftingUtils.js";
 
 export default class CraftingRarityResourceAction implements IAction{
@@ -64,7 +64,7 @@ export default class CraftingRarityResourceAction implements IAction{
       const professionStats = character.getProfessionStats(recipe.profession)
   
       // Update character with new values. mostly the increments   
-      const experiencesUpdate = {[recipe.profession]: recipe.exp * (1 + professionStats.expBonus)}
+      const experiencesUpdate = {[recipe.profession]: getExp(recipe.exp, professionStats)}
       const expCharUpdate = recipe.expChar
       let resourcesUpdate: Partial<Resources> = {}
       try {

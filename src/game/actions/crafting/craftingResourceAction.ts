@@ -2,7 +2,7 @@ import { dataLoader } from "../../data/dataLoader.js";
 import { ResourceId, Resources } from "../../jsonValidators/dataValidator/validateResourceData.js";
 import { getCharacter, updateCharacter } from "../../services/characterService.js";
 import IAction from "../IAction.js";
-import { getActionTime } from "../actionUtils.js";
+import { getActionTime, getExp } from "../actionUtils.js";
 import { CraftingActionObject, deductResourceIngredients, validateIngredients } from "./craftingUtils.js";
 
 
@@ -63,7 +63,7 @@ export default class CraftingResourceAction implements IAction{
       const professionStats = character.getProfessionStats(recipe.profession)
   
       // Update character with new values. mostly the increments   
-      const experiencesUpdate = {[recipe.profession]: recipe.exp * (1 + professionStats.expBonus)}
+      const experiencesUpdate = {[recipe.profession]: getExp(recipe.exp, professionStats)}
       const expCharUpdate = recipe.expChar
       let resourcesUpdate: Partial<Resources> = {}
       try {

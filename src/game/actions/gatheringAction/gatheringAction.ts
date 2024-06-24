@@ -3,9 +3,8 @@ import { Resources, ResourceId } from "../../jsonValidators/dataValidator/valida
 import { GatheringMsg } from "../../jsonValidators/messageValidator/validateGatheringMsg.js";
 import { getCharacter, updateCharacter } from "../../services/characterService.js";
 import { parseLootTable } from "../../utils/lootTable.js";
-import { rollRange } from "../../utils/randomDice.js";
 import IAction from "../IAction.js";
-import { getActionTime } from "../actionUtils.js";
+import { getActionTime, getAmount, getExp } from "../actionUtils.js";
 import { ActionObject } from "../types.js";
 
 export type GatheringActionObject = Omit<ActionObject, 'actionMsg'> & { actionMsg: GatheringMsg };
@@ -54,7 +53,7 @@ export default class GatheringAction implements IAction {
     const professionStats = character!.getProfessionStats(nodeData.profession)
 
 
-    const amount = Math.floor(rollRange(nodeData.minAmount + professionStats.yieldMin, nodeData.maxAmount + professionStats.yieldMax))
+    const amount = getAmount(nodeData.minAmount, nodeData.maxAmount, professionStats)
     const lootBag = parseLootTable(nodeData.id, 1, professionStats.luck)
 
     const resources: Partial<Resources> = {}
@@ -64,7 +63,7 @@ export default class GatheringAction implements IAction {
     })
 
     const experiences = {
-      [nodeData.profession]: nodeData.exp * (1 + professionStats.expBonus),
+      [nodeData.profession]: getExp(nodeData.exp, professionStats)
     }
 
     const expChar = nodeData.expChar

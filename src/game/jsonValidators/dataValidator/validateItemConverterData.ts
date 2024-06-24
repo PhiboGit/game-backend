@@ -4,6 +4,7 @@ import { JTDSchemaType } from "ajv/dist/jtd.js";
 
 export type ItemConverterData = {
   maxGearScoreStat: number;
+  negativeMutiplier: number;
   gearScoreConverter: {
     exp: {
       "integer/float": "float",
@@ -62,6 +63,7 @@ export type ItemConverterData = {
 const schemaItemRecipe: JTDSchemaType<ItemConverterData> =  {
   properties:{
     maxGearScoreStat: {type: "int32"},
+    negativeMutiplier: {type: "float32"},
     gearScoreConverter: {
       properties: {
         exp: {
