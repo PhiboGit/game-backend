@@ -51,5 +51,13 @@ export function createWebSocketServer(server: Server) {
       connectionManager.removeConnection(characterName, ws);
       console.log(`User disconnected: ${username}, Character: ${characterName}`);
     });
+
+    ws.on('error', (error) => {
+      console.error('WebSocket error:', error);
+    });
+  });
+
+  wss.on('error', (error) => {
+    console.error('WebSocket server error:', error);
   });
 }
