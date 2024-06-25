@@ -124,3 +124,10 @@ export async function updateCharacter(
     
   }
 }
+
+export async function getProfessionStats(characterName: string, profession: ProfessionId): Promise<void> {
+  const character = await getCharacter(characterName)
+  if(!character) return
+  connectionManager.sendMessage(characterName, JSON.stringify({ type: 'request_professionStats', profession, stats: character.getProfessionStats(profession)}))
+}
+
