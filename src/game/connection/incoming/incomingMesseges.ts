@@ -2,6 +2,7 @@ import { actionManager } from "../../actions/actionManager.js";
 import { handleEquipItem } from "../../equipment/equipmentHandler.js";
 import { validateCancelActionMsg } from "../../jsonValidators/messageValidator/cancelActionMsg.js";
 import { validateEquipItemMsg } from "../../jsonValidators/messageValidator/equipItemMsg.js";
+import { validateMarketplaceResourceSellOrderMsg } from "../../jsonValidators/messageValidator/marketplaceResourceSellOrderMsg.js";
 import { validateRequestProfessionStatsMsg } from "../../jsonValidators/messageValidator/requestProfessionStatsMsg.js";
 import { validateSellResourceMsg } from "../../jsonValidators/messageValidator/sellResourceMsg.js";
 import { validateCraftingMsg } from "../../jsonValidators/messageValidator/validateCraftingMsg.js";
@@ -9,7 +10,7 @@ import { validateGatheringMsg } from "../../jsonValidators/messageValidator/vali
 import sellResources from "../../marketplace/sellResources.js";
 import { getProfessionStats } from "../../services/characterService.js";
 import { IMessage } from "../messageTypes.js";
-
+import resourceMarketplaceManager from "../../marketplace/resourceMarketplace/resourceMarketplaceManager.js";
 
 
 export function incomingMessages(characterName: string, msg: string) {
@@ -73,6 +74,13 @@ function routeMessage(characterName: string, msg: IMessage) {
       if(requestProfessionStatsMsg) {
         console.log('Valid! %s msg: %o', characterName, msg)
         getProfessionStats(characterName, requestProfessionStatsMsg.profession)
+      }
+      break
+    case 'marketplace_resource_sellOrder':
+      const marketplaceResourceSellOrderMsg = validateMarketplaceResourceSellOrderMsg(msg)
+      if(marketplaceResourceSellOrderMsg) {
+        console.log('Valid! %s msg: %o', characterName, msg)
+        resourceMarketplaceManager.createSellOrder(characterName, marketplaceResourceSellOrderMsg)
       }
       break
     default:
