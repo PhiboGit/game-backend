@@ -1,8 +1,6 @@
-import { connectionManager } from "../../app/websocket/WsConnectionManager.js";
-import { dataLoader} from "../data/dataLoader.js";
 import { getCharacter } from "../services/characterService.js";
 
-import { InitCharacterMessage } from "./messageTypes.js";
+import characterNotifyer from "./outgoing/characterNotifyer.js";
 export function initConnection(characterName: string){
   sendInitCharacter(characterName)
   sendInitGameData(characterName)
@@ -17,14 +15,7 @@ async function sendInitCharacter(characterName: string){
       throw new Error('Character not found');
     }
   
-    const message: InitCharacterMessage = {
-      type: 'init_character',
-  
-      character: character
-    }
-  
-    connectionManager.sendMessage(characterName, JSON.stringify(message));
-    
+    characterNotifyer.notifyInitCharacter(characterName, character)
   } catch (error) {
     console.error('Error initializing connection message:', error);
   }
@@ -33,15 +24,7 @@ async function sendInitCharacter(characterName: string){
 
 async function sendInitStatus(characterName: string){
   try {
-    const message ={
-      type: 'init_status',
-
-      active_players: connectionManager.getActivePlayers(),
-      time: new Date()
-    }
-  
-    connectionManager.sendMessage(characterName, JSON.stringify(message));
-    
+    characterNotifyer.notifyInitStatus(characterName)
   } catch (error) {
     console.error('Error initializing connection message:', error);
   }
@@ -49,19 +32,7 @@ async function sendInitStatus(characterName: string){
 
 async function sendInitGameData(characterName: string) {
   try {
-    const message = {
-      type: 'init_game',
-
-      gatheringNodeData: dataLoader.gatheringNodeData,
-      resourceData: dataLoader.resourceData,
-      expTableData: dataLoader.expTableData,
-      itemRecipeData: dataLoader.itemRecipeData,
-      resourceRecipeData: dataLoader.resourceRecipeData,
-      rarityResourceRecipeData: dataLoader.rarityResourceRecipeData,
-      itemConverterData: dataLoader.itemConverterData
-    };
-
-    connectionManager.sendMessage(characterName, JSON.stringify(message));
+    characterNotifyer.notifyInitGameData(characterName)
   } catch (error) {
     console.error('Error initializing connection message:', error);
   }

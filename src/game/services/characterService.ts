@@ -1,13 +1,13 @@
 import { Types } from "mongoose"
-import { connectionManager } from "../../app/websocket/WsConnectionManager.js"
 import { ActionObject } from "../actions/types.js"
 import { Resources, ResourceId } from "../jsonValidators/dataValidator/validateResourceData.js"
 import CharacterClass from "../models/character/CharacterClass.js"
 import CharacterModel from "../models/character/character.js"
 import { Currency, CurrencyId } from "../models/character/currency.js"
 import { EquipmentSlot, ProfessionId } from "../models/character/profession.js"
-import ItemModel, { Item } from "../models/item/item.js"
+import ItemModel from "../models/item/item.js"
 import { getItem } from "./itemService.js"
+import characterNotifyer, { CharacterUpdate } from "../connection/outgoing/characterNotifyer.js"
 
 
 export async function createCharacter(characterName: string){
@@ -113,13 +113,16 @@ export async function updateCharacter(
       update 
     )
     // data send to the client
-    const updatedData: UpdateParameters & {item?: Item} = {...updateParameters}
+    const updatedData: CharacterUpdate = {...updateParameters}
       
     if(itemId_push) {
       const item = await getItem(itemId_push)
-      if(item) updatedData['item'] = item
+      if(item) updatedData['updateItem'] = item
     }
-    connectionManager.sendMessage(characterName, JSON.stringify({type: 'update_character', updatedData}))
+    if(itemId_pull) {
+      updatedData['removeItem'] = itemId_pull
+    }
+    characterNotifyer.notifyCharacterUpdate(characterName, updatedData)
   } catch (error) {
     
   }
@@ -128,6 +131,6 @@ export async function updateCharacter(
 export async function getProfessionStats(characterName: string, profession: ProfessionId): Promise<void> {
   const character = await getCharacter(characterName)
   if(!character) return
-  connectionManager.sendMessage(characterName, JSON.stringify({ type: 'request_professionStats', profession, stats: character.getProfessionStats(profession)}))
+  characterNotifyer.notifyProfessionStats(characterName, profession, character.getProfessionStats(profession))
 }
 
